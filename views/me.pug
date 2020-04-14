@@ -1,0 +1,228 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel='stylesheet' href='css/me.css')
+  title #{title}
+  
+header
+  .logo
+    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #4cac7d;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+.container
+  nav.left-nav
+    ul
+      li
+        a(href='/home')
+          i.fas.fa-home
+          | &nbsp; Home
+      li.is-active
+        a(href='/me')
+          i.fas.fa-user
+          | &nbsp;&nbsp; Profile
+      li
+        a(href='/job-offers')
+          i.fas.fa-users
+          | &nbsp;&nbsp; Job offers
+      li
+        a(href='/bookmarks')
+          i.far.fa-bookmark
+          | &nbsp;&nbsp; Bookmarks
+      li
+        a(href='/chat')
+          i.far.fa-comments
+          | &nbsp; Messages
+  main.main
+    .info
+      img(src=`./img/users/${user.photo}` alt='avatar' id='user-photo')
+      .stats
+        h2 #{user.name}
+        h4 Web Developer
+        .nums
+          p
+            | #{user.posts.length}
+            span(style='font-weight: normal;')  Posts
+            
+          p#followers-btn
+            | #{user.followers.length}
+            span(style='font-weight: normal;')  Followers
+          p#following-btn
+            | #{user.following.length}
+            span(style='font-weight: normal;')  Following
+        .socials(style='width: 100%; display: flex; justify-content: flex-start')
+            - if(user.facebook)
+                a(href=`${user.facebook}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                    i.fab.fa-facebook
+            -if(user.linkedin)
+                a(href=`${user.linkedin}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                    i.fab.fa-linkedin 
+            - if(user.twitter)
+                a(href=`${user.twitter}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                    i.fab.fa-twitter   
+            - if(user.youtube)
+                a(href=`${user.youtube}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                    i.fab.fa-youtube
+            - if(user.dribbble)
+                a(href=`${user.dribbble}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                    i.fab.fa-dribbble
+            - if(user.devto)
+                a(href=`${user.devto}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')  
+                    i.fab.fa-dev  
+            - if(user.github)
+                a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;') 
+                    i.fab.fa-github 
+            - if(user.personal)
+                a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                    i.fas.fa-laptop-code  
+                                                  
+      a.btn(href='/settings') Edit Profile
+    .change-photo(style='display: flex; align-items: center; margin-top: 1rem; margin-left: 0.5rem') 
+        input#photo(type='file' name='photo' style='display: none' )
+        label(for='photo' style='cursor: pointer; color: #4CAC7D; margin-top: 0.5rem; font-size: 19px;') Change Photo 
+        button.btn#save(style='margin: 0 1rem; padding: 0.5rem 2rem;') Save Photo   
+    h2(style='margin: 2rem 0; color: #5be0a0') What&apos;s on your mind ?
+    .create-post
+      textarea#editor(name='' cols='' rows='')
+      .uploads
+        input#post-photo(type='file' name='post-photo' accept='image/*' style='display: none;')
+        input#post-video(type='file' name='post-video' accept='video/*' style='display: none;')
+        .image-upload
+          label(for='post-photo' style='cursor: pointer; color: #5be0a0;  margin-top: 0.5rem; font-size: 22px; font-weight: bold;')
+            i.fas.fa-images
+            |  &nbsp;Add a photo to your
+            |                 post
+        .video-upload
+          label(for='post-video' style='cursor: pointer; color: #5be0a0; margin-top: 0.5rem; font-size: 22px; font-weight: bold;')
+            i.fas.fa-video
+            |  &nbsp; Add a video to your
+            |                 post
+      .tag
+        select#tag 
+            option#option(value='0') Add Tag to your Post
+            option#option(value='web-dev') web-dev
+            option#option(value='mobile-dev') mobile-dev
+            option#option(value='networks') networks
+            option#option(value='ml') ml
+            option#option(value='security') security
+            option#option(value='cloud') cloud
+            option#option(value='game-dev') game-dev
+            option#option(value='js') js
+            option#option(value='python') python
+            option#option(value='html-css') html-css
+            option#option(value='nodejs') nodejs
+            option#option(value='django') django
+            option#option(value='react') react
+            option#option(value='angular') angular
+            option#option(value='vue') vue      
+            option#option(value='mysql') mysql
+            option#option(value='mongodb') mongodb
+            option#option(value='design') design
+            option#option(value='ui/ux') ui/ux
+      button.btn#create-post Submit Post 
+      hr#hr     
+    .feed
+      each post in user.posts
+        .post
+            - if(post.user._id.toString() === user._id.toString())
+                .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+                    i.fas.fa-ellipsis-h(style='color: #4CAC7D; cursor: pointer')
+                .settings(id=`settings-${post._id}`)
+                    a.button(href=`/post/${post._id}` style='text-decoration: none')
+                        i.fas.fa-pen
+                        | &nbsp;&nbsp;Edit Post
+                    button.button(id=`delete-${post._id}` onClick='deletePost(this.id)')
+                        i.fas.fa-trash
+                        | &nbsp;&nbsp;Delete Post
+            .info
+                img(src=`./img/users/${post.user.photo}` alt='avatar' width='50px' height='50px')
+                .name
+                    h3 #{post.user.name}
+                    p #{new Date(post.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+            
+
+            .content#content
+                - if(post.content)
+                    != `${post.content}`
+            - if(post.postType === 'image')  
+                img.post-image(src=`./img/posts/${post.image}` alt='post-image')
+            - if(post.postType === 'video')
+                video.post-video(controls='' preload='metadata')
+                    source(src=`./videos/${post.video}#t=0.5`)    
+            .actions
+                .stats
+                    p(id=`numLikes-${post._id}` style='transition: all 0.1s ease') #{post.numLikes} likes
+                    p(id=`numComments-${post._id}`) #{post.numComments} comments
+                ul.action-buttons
+                    li
+                        - let likeBtnStyle = 'unliked';
+                        - if(post.likes.includes(user._id)) likeBtnStyle = 'liked'
+                        - const id = post._id;
+                            i.fas.fa-heart(style='cursor: pointer; transition: all 0.1s ease' class=`${likeBtnStyle}` id=`${id}` onClick='handleLikeBtnClick(this.id)' data-state=`${likeBtnStyle}`)
+                    li
+                        i.far.fa-comment-dots(style='cursor: pointer; color: #0c0e1c;' id=`${post._id}` onClick='toggleComments(this.id)')
+                    li
+                        - let markBtnStyle = 'unmarked';
+                        - if(user.saved.includes(post._id)) markBtnStyle = 'marked'
+                            i.far.fa-bookmark(style='cursor: pointer;' id=`${post._id}-bookmark` onClick='handleBookmarkClick(this.id)' data-state=`${markBtnStyle}` class=`${markBtnStyle}`)
+            .add-comment
+                input(type='text' placeholder='ADD Comment...' id=`comment-input-${post._id}`)
+                button(id=`addComment-${post._id}` data-user=`${user}` onClick='addComment(this.id)' style='outline: none; cursor: pointer') ADD
+            .comments(id=`comments-${id}` data-state='hidden')
+                each comment in post.comments
+                    .comment
+                        div
+                            img(src=`./img/users/${comment.user.photo}` alt='')
+                            p #{comment.user.name}
+                            p(style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;') #{new Date(comment.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+                        p.comment-content #{comment.text}
+.followersFollowing#following
+        div(style='display: flex; justify-content: space-between; width: 100%; align-items: center;')
+            h2(style='width: 50%') Following
+            i.fas.fa-times#close(style='cursor: pointer')
+        each followingUser in user.following
+            .user
+                img(src=`./img/users/${followingUser.photo}` alt='' height='40px' width='40px' style='border-radius: 50%')
+                a(href=`/profile/${followingUser.slug}` style='text-decoration: none; color: #000; font-size: 20px; margin-left: 1rem;') #{followingUser.name}
+                p(style='margin-left: 3rem; color: #4cac7d;') following
+
+.followersFollowing#followers
+        div(style='display: flex; justify-content: space-between; width: 100%; align-items: center;')
+            h2(style='width: 50%') Followers
+            i.fas.fa-times#close-followers(style='cursor: pointer')
+        each followerUser in user.followers
+            .user
+                img(src=`./img/users/${followerUser.photo}` alt='' height='40px' width='40px' style='border-radius: 50%')
+                a(href=`/users/${followerUser.slug}` style='text-decoration: none; color: #000; font-size: 20px; margin-left: 1rem;') #{followerUser.name}
+                - let f = 'follow';
+                - const arr = user.following.map(x => x._id.toString());
+                - if(arr.includes(followerUser._id.toString())) f = 'following';
+                - let col = '#000';
+                - if(f === 'follow') col = '#4cac7d';
+                    p(id=`${followerUser._id}` onClick=`handleFollowClick(this.id)` style=`cursor: pointer; color: ${col}`) #{f}
+                                     
+                        
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+script(src='https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js')
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(src='js/me.js')
+

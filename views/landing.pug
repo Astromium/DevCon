@@ -1,0 +1,95 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='stylesheet' href='./css/style.css')
+  title DevCon
+header
+  .logo
+    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+  ul
+    li
+      a(href='/startups') For Startups
+    li
+      a(href='/signup' style='color: #4cac7d;') Sign up
+    li
+      a(href='/login' style='color: #4cac7d;') Login
+main.container
+  section.sec1(style='height: 90vh;')
+    .intro-left
+      h1.is-animated
+        | Dev
+        span(style='color: #4CAC7D;') Con
+      p.is-animated A new World is rising. Come to Discover it
+      .cta
+        a.btn.signup.is-animated(href='/signup') Sign Up
+        a.btn.login.is-animated(href='/login' style='color: #4CAC7D;') Login
+    .intro-right.is-animated
+      img(src='./illustrations/illu1.svg' alt='Social Media illustration')
+  section.sec2
+    .sec2-left(data-scroll='')
+      img(src='./illustrations/illu2.svg' alt='women with phone')
+    .sec2-right(data-scroll='')
+      h2 Signup &amp; Go
+      p
+        | Creat your DevCon Account and go to Discover its Features.
+  section.sec1
+    .sec3-left(data-scroll='' style='margin-left: 3rem;')
+      h2 Upload Your CV
+      p
+        | Use DevCon to upload your CV into your Profile. You can add your
+        | Projects as well.
+    .sec3-right(data-scroll='')
+      img(src='./illustrations/illu3.svg' alt='office')
+  section.sec1
+    .sec4-left(data-scroll='')
+      img(src='./illustrations/illu4.svg' alt='deal')
+    .sec4-right(data-scroll='')
+      h2 Get a Job
+      p
+        | Startups &amp; Employers will be able to see your CV and that will help
+        | you get a Job.
+  section.sec1
+    .sec5-left(data-scroll='' style='margin-left: 3rem;')
+      h2 Write an article
+      p
+        | Post Articles on any Subject you&rsquo;re interresting in using DevCon so
+        | that your followers can see.
+    .sec5-right(data-scroll='')
+      img(src='./illustrations/illu5.svg' alt='')
+  section.sec1
+    .sec6-left(data-scroll='')
+      img(src='./illustrations/illu6.svg' alt='' width='500px' height='400px')
+    .sec6-right(data-scroll='')
+      h2 Share what you Like
+      p
+        | With DevCon it&rsquo;s not just Articles but you can Share even Photos and
+        | videos as well as documents.
+  section.sec1
+    .sec7-left(data-scroll='' style='margin-left: 3rem;')
+      h2 Discover More!
+      p
+        | DevCon is where you can find people with similar intrests as you do,
+        | so it&rsquo;s an opertunity to learn more.
+    .sec7-right(data-scroll='')
+      img(src='./illustrations/illu7.svg' alt='' width='500px' height='400px')
+script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js')
+script(src='https://unpkg.com/scroll-out/dist/scroll-out.min.js')
+script.
+  function contentAnimation() {
+  var tl = gsap.timeline();
+  var sm = tl.from('.is-animated', {
+  duration: 1.5,
+  translateY: 10,
+  opacity: 0,
+  stagger: 0.4
+  });
+  }
+  contentAnimation();
+  ScrollOut();

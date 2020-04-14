@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/startups.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+    <title>DevCon For Startups</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a
+          href="landing.html"
+          style="text-decoration: none; color: #fff; font-size: 24px;
+          font-weight: bold;"
+          >Dev<span style="color: #4CAC7D;">Con</span></a
+        >
+      </div>
+      <ul>
+        <li><a href="startups.html">For Startups</a></li>
+        <li><a href="signup.html" style="color: #4cac7d;">Sign up</a></li>
+        <li><a href="login.html" style="color: #4cac7d;">Login</a></li>
+      </ul>
+    </header>
+    <main class="container">
+      <section class="intro">
+        <div class="content">
+          <h2 style="color: #0c0e1c;" class="is-animated">
+            Dev<span style="color: #4CAC7D;">Con</span
+            ><span
+              style="font-size: 32px;margin-top: -1rem; display: block; color: #0c0e1c;"
+              >For <span style="color: #4CAC7D;">Startups</span></span
+            >
+          </h2>
+          <p class="is-animated">
+            DevCon gives startups the chance to look for competetive developers
+            through publishing job offers, viewing our top developers,
+            downloading theire CV's and take a look at theire projects<br /><br />
+            All What you have to do is to
+            <span
+              ><a
+                href="#login-form"
+                style="text-decoration: none; color: #4CAC7D;"
+                >create a startup account</a
+              ></span
+            >
+          </p>
+        </div>
+        <div class="image is-animated">
+          <img src="./illustrations/startup.svg" alt="co-workers" />
+        </div>
+
+        <img src="./illustrations/wave2.svg" alt="wave" class="wave" />
+      </section>
+      <section class="sign-form">
+        <h2
+          style="margin: 0 auto; color: #fff; font-size: 38px; text-align: center;"
+          id="login-form"
+        >
+          Create Your Startup Account
+        </h2>
+        <div class="wrapper">
+          <div class="login-form is-animated">
+            <div class="form__group">
+              <label class="form__label" for="name">Name</label>
+              <input
+                id="startup-name"
+                class="form__input"
+                type="text"
+                placeholder="Jhon Doe"
+                required
+              />
+              <label class="form__label" for="email">Email address</label>
+              <input
+                id="startup-email"
+                class="form__input"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+              <label class="form__label" for="password">Password</label>
+              <input
+                id="startup-password"
+                class="form__input"
+                type="password"
+                required
+                minlength="8"
+                placeholder="••••••••"
+              />
+              <label class="form__label" for="passwordConfirm"
+                >Password Confirm</label
+              >
+              <input
+                id="startup-passwordConfirm"
+                class="form__input"
+                type="password"
+                required
+                minlength="8"
+                placeholder="••••••••"
+              />
+              <button class="btn" id="startup-signup-btn">Sign up</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"
+    ></script>
+
+    <script>
+      function contentAnimation() {
+        var tl = gsap.timeline();
+        var sm = tl.from('.is-animated', {
+          duration: 0.5,
+          translateY: 10,
+          opacity: 0,
+          stagger: 0.4
+        });
+      }
+
+      contentAnimation();
+    </script>
+  </body>
+</html>

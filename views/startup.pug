@@ -1,0 +1,73 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='./css/startups.css')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  title DevCon For Startups
+header
+  .logo
+    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+  ul
+    li
+      a(href='/startup') For Startups
+    li
+      a(href='/signup' style='color: #4cac7d;') Sign up
+    li
+      a(href='/login' style='color: #4cac7d;') Login
+main.container
+  section.intro
+    .content
+      h2.is-animated(style='color: #0c0e1c;')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+        span(style='font-size: 32px;margin-top: -1rem; display: block; color: #0c0e1c;')
+          | For 
+          span(style='color: #4CAC7D;') Startups
+      p.is-animated
+        | DevCon gives startups the chance to look for competetive developers
+        | through publishing job offers, viewing our top developers,
+        | downloading theire CV&apos;s and take a look at theire projects
+        br
+        br
+        |             All What you have to do is to&nbsp;
+        span
+          a(href='#login-form' style='text-decoration: none; color: #4CAC7D;') create a startup account
+    .image.is-animated
+      img(src='./illustrations/startup.svg' alt='co-workers')
+    img.wave(src='./illustrations/wave2.svg' alt='wave')
+  section.sign-form
+    h2#login-form(style='margin: 0 auto; color: #fff; font-size: 38px; text-align: center;')
+      | Create Your Startup Account
+    .wrapper
+      .login-form.is-animated
+        .form__group
+          label.form__label(for='name') Name
+          input#startup-name.form__input(type='text' placeholder='Jhon Doe' required='')
+          label.form__label(for='email') Email address
+          input#startup-email.form__input(type='email' placeholder='you@example.com' required='')
+          label.form__label(for='password') Password
+          input#startup-password.form__input(type='password' required='' minlength='8' placeholder='••••••••')
+          label.form__label(for='passwordConfirm') Password Confirm
+          input#startup-passwordConfirm.form__input(type='password' required='' minlength='8' placeholder='••••••••')
+          button#startup-signup-btn.btn Sign up
+script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous")
+script(src='/js/startup.js' defer)
+script.
+  function contentAnimation() {
+  var tl = gsap.timeline();
+  var sm = tl.from('.is-animated', {
+  duration: 0.5,
+  translateY: 10,
+  opacity: 0,
+  stagger: 0.4
+  });
+  }
+  contentAnimation();

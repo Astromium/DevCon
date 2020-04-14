@@ -1,0 +1,245 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel='stylesheet' href='/css/settings.css')
+  title #{title}
+  
+header
+  .logo
+    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #4cac7d;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+.container
+  nav.left-nav
+    ul
+      li
+        a(href='/home')
+          i.fas.fa-home
+          | &nbsp; Home
+      li
+        a(href='/me')
+          i.fas.fa-user
+          | &nbsp;&nbsp; Profile
+      li
+        a(href='/job-offers')
+          i.fas.fa-users
+          | &nbsp;&nbsp; Job offers
+      li
+        a(href='/bookmarks')
+          i.far.fa-bookmark
+          | &nbsp;&nbsp; Bookmarks
+      li
+        a(href='/chat')
+          i.far.fa-comments
+          | &nbsp; Messages
+  main.main
+      h2 Edit Your Account Informations
+      .login-form
+        label.form__label(for='name') Name
+        input#name.form__input(type='text'  required='' value=`${user.name}`)
+        label.form__label(for='email') Email Adress
+        input#email.form__input(type='email' required='' value=`${user.email}`) 
+        label.form__label(for='occupation') occupation
+        - let oc = '';
+        - if(user.occupation) oc = user.occupation;
+        input#occupation.form__input(type='text' required='' value=`${oc}` placeholder='web developer')
+        label.form__label(for='facebook') Facebook
+        - let fb = '';
+        - if(user.facebook) fb = user.facebook
+        input#facebook.form__input(type='text' required='' value=`${fb}`)
+        label.form__label(for='github') Github
+        - let git = '';
+        - if(user.github) git = user.github
+        input#github.form__input(type='text' required='' value=`${git}`)
+        label.form__label(for='linkedin') Linkedin
+        - let lin = '';
+        - if(user.linkedin) lin = user.linkedin
+        input#linkedin.form__input(type='text' required='' value=`${lin}`)
+        label.form__label(for='devto') Dev.to
+        - let dev = '';
+        - if(user.devto) dev = user.devto
+        input#devto.form__input(type='text' required='' value=`${dev}`)
+        label.form__label(for='youtube') youtube
+        - let yt = '';
+        - if(user.youtube) yt = user.youtube
+        input#youtube.form__input(type='text' required='' value=`${yt}`)
+        label.form__label(for='twitter') twitter
+        - let tw = '';
+        - if(user.twitter) tw = user.twitter
+        input#twitter.form__input(type='text' required='' value=`${tw}`)
+        label.form__label(for='dribbble') dribbble
+        - let dr = '';
+        - if(user.dribbble) dr = user.dribbble
+        input#dribbble.form__input(type='text' required='' value=`${dr}`)
+        label.form__label(for='personal') personal
+        - let pre = '';
+        - if(user.personal) pre = user.personal
+        input#personal.form__input(type='text' required='' value=`${pre}`)
+      br
+      h2 Edit Your Interests
+      .checkboxes
+        label.label
+          - let ch = false;
+          - if(user.interests.includes('web-dev')) ch = true
+          input(type='checkbox' value='web-dev' checked=ch)
+          |             Web Development
+          span.checkmark
+          
+
+        label.label
+          - let a = false;
+          - if(user.interests.includes('mobile-dev')) a = true
+          input(type='checkbox' value='mobile-dev' checked=a)
+          |             Mobile Development
+          span.checkmark
+        label.label
+          - let b = false;
+          - if(user.interests.includes('networks')) b = true
+          input(type='checkbox' value='networks' checked=b)
+          |             Computer Networks
+          span.checkmark
+        label.label
+          - let c = false;
+          - if(user.interests.includes('ml')) c = true
+          input(type='checkbox' value='ml' checked=c)
+          |             Machine Learning
+          span.checkmark
+        label.label
+          - let d = false;
+          - if(user.interests.includes('security')) d = true
+          input(type='checkbox' value='security' checked=d)
+          |             Cyber Security
+          span.checkmark
+        label.label
+          - let e = false;
+          - if(user.interests.includes('cloud')) e = true
+          input(type='checkbox' value='cloud' checked=e)
+          |             Cloud Development
+          span.checkmark
+        label.label
+          - let f = false;
+          - if(user.interests.includes('game-dev')) f = true
+          input(type='checkbox' value='game-dev' checked=f)
+          |             Game Development
+          span.checkmark
+        label.label
+          - let g = false;
+          - if(user.interests.includes('js')) g = true
+          input(type='checkbox' value='js' checked=g)
+          |             Javascript
+          span.checkmark
+        label.label
+          - let h = false;
+          - if(user.interests.includes('python')) h = true
+          input(type='checkbox' value='python' checked=h)
+          |             Python
+          span.checkmark
+        label.label
+          - let i = false;
+          - if(user.interests.includes('html-css')) i = true
+          input(type='checkbox' value='html-css' checked=i)
+          |             Html/Css
+          span.checkmark
+        label.label
+          - let j = false;
+          - if(user.interests.includes('java-c-c++')) j = true
+          input(type='checkbox' value='java-c-c++' checked=j)
+          |             Java/C/C++
+          span.checkmark
+        label.label
+          - let k = false;
+          - if(user.interests.includes('node')) k = true
+          input(type='checkbox' value='node' checked=k)
+          |             Node.js
+          span.checkmark
+        label.label
+          - let l = false;
+          - if(user.interests.includes('django')) l = true
+          input(type='checkbox' value='django' checked=l)
+          |             Django
+          span.checkmark
+        label.label
+          - let m = false;
+          - if(user.interests.includes('react')) m = true
+          input(type='checkbox' value='react' checked=m)
+          |             React.js
+          span.checkmark
+        label.label
+          - let n = false;
+          - if(user.interests.includes('angular')) n = true
+          input(type='checkbox' value='angular' checked=n)
+          |             Angular.js
+          span.checkmark
+        label.label
+          - let o = false;
+          - if(user.interests.includes('vue')) o = true
+          input(type='checkbox' value='vue' checked=o)
+          |             Vue.js
+          span.checkmark
+        label.label
+          - let p = false;
+          - if(user.interests.includes('mysql')) p = true
+          input(type='checkbox' value='mysql' checked=p)
+          |             MySql
+          span.checkmark
+        label.label
+          - let q = false;
+          - if(user.interests.includes('mongodb')) q = true
+          input(type='checkbox' value='mongodb' checked=q)
+          |             MongoDB
+          span.checkmark
+        label.label
+          - let r = false;
+          - if(user.interests.includes('design')) r = true
+          input(type='checkbox' value='design' checked=r)
+          |             Graphic Design
+          span.checkmark
+        label.label
+          - let t = false;
+          - if(user.interests.includes('ui/ux')) t = true
+          input(type='checkbox' value='ui/ux' checked=t)
+          |             UI / UX
+          span.checkmark
+      h2 Change Password 
+      .login-form
+        label.form__label(for='current-password') Current Password 
+        input#password.form__input(type='password'  required='' minlength='8' placeholder='••••••••')
+        label.form__label(for='current-password') New Password 
+        input#new-password.form__input(type='new-password'  required='' minlength='8' placeholder='••••••••')
+        label.form__label(for='new-password-confirm') New Password Confirm
+        input#new-password-confirm.form__input(type='password'  required='' minlength='8' placeholder='••••••••')
+
+      button#save.btn Save Changes  
+        
+        
+        
+     
+    
+
+
+
+                                     
+                        
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(src='js/settings.js')
+

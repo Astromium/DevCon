@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/welcome.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <img
+        src="./illustrations/wave2-dark-short.svg"
+        style="position: absolute; top: 0; left: 0; width: 100%; z-index: -10; transform: rotate(180deg);"
+        alt=""
+      />
+      <div class="logo">
+        <a
+          href="landing.html"
+          style="text-decoration: none; color: #fff; font-size: 24px;
+          font-weight: bold;"
+          >Dev<span style="color: #4CAC7D;">Con</span></a
+        >
+      </div>
+      <ul>
+        <li><a href="/startups">For Startups</a></li>
+        <li><a href="/signup" style="color: #4cac7d;">Sign up</a></li>
+        <li><a href="/login" style="color: #4cac7d;">Login</a></li>
+      </ul>
+    </header>
+    <div class="welcome">
+      <div class="welcome-img is-animated">
+        <img src="./illustrations/welcome.svg" alt="welcome" />
+      </div>
+      <div class="welcome-text">
+        <h2 class="is-animated">
+          Welcome To Dev<span style="color: #4cac7d;">Con</span>
+        </h2>
+        <h3 class="is-animated">Ayoub Belouadah</h3>
+      </div>
+      <img src="./illustrations/wave2.svg" alt="wave" class="wave" />
+    </div>
+    <div class="info">
+      <img src="./illustrations/wave2.svg" alt="wave" class="wave2" />
+      <div class="intro">
+        <p>
+          in order to get the best out of Dev<span style="color: #4CAC7D;"
+            >Con</span
+          >
+          we recommend you to fill a few informations related to your skills and
+          interests
+          <br />
+          <span style="color: #4CAC7D; font-size: 20px;"
+            >So let's get started</span
+          >
+        </p>
+        <div class="img">
+          <img src="./illustrations/welcome3.svg" alt="dreamer" />
+        </div>
+      </div>
+      <div class="wrapper">
+        <h3>Which of these fields are you interested in ?</h3>
+        <div class="checkboxes">
+          <label class="container">
+            <input type="checkbox" value="web-dev" />
+            Web Development
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="mobile-dev" />
+            Mobile Development
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="networks" />
+            Computer Networks
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="ml" />
+            Machine Learning
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="security" />
+            Cyber Security
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="cloud" />
+            Cloud Development
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="game-dev" />
+            Game Development
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="js" />
+            Javascript
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="python" />
+            Python
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="html-css" />
+            Html/Css
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="java-c-c++" />
+            Java/C/C++
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="node" />
+            Node.js
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="django" />
+            Django
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="react" />
+            React.js
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="angular" />
+            Angular.js
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="vue" />
+            Vue.js
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="mysql" />
+            MySql
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container">
+            <input type="checkbox" value="mongodb" />
+            MongoDB
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <h3>Tell us about yourself ( a little resume )</h3>
+        <textarea
+          name=""
+          id="resume"
+          placeholder="eg. your education , current job, experiences ..."
+        ></textarea>
+
+        <h3>
+          What are your soft skills ( please inculde a comma seperated value )
+        </h3>
+        <textarea
+          name=""
+          id="skills"
+          placeholder="eg. HTML,CSS,JS,NODEJS,PYTHON ..."
+        ></textarea>
+
+        <h3>Add your personal social accounts</h3>
+        <div class="socials">
+          <div class="social">
+            <i
+              class="fab fa-facebook"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input
+              type="text"
+              placeholder="Facebook Account Link"
+              id="facebook"
+            />
+          </div>
+
+          <div class="social">
+            <i
+              class="fab fa-linkedin"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input
+              type="text"
+              placeholder="Linkedin Account Link"
+              id="linkedin"
+            />
+          </div>
+
+          <div class="social">
+            <i
+              class="fab fa-twitter"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input
+              type="text"
+              placeholder="Twitter Account Link"
+              id="twitter"
+            />
+          </div>
+
+          <div class="social">
+            <i
+              class="fab fa-youtube"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input
+              type="text"
+              placeholder="Youtube Channel Link"
+              id="youtube"
+            />
+          </div>
+
+          <div class="social">
+            <i
+              class="fab fa-dribbble"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input
+              type="text"
+              placeholder="Dribble Account Link"
+              id="dribble"
+            />
+          </div>
+
+          <div class="social">
+            <i
+              class="fab fa-dev"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input type="text" placeholder="Dev.to Account Link" id="dev.to" />
+          </div>
+          <div class="social">
+            <i
+              class="fab fa-github"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input type="text" placeholder="Github Account Link" id="github" />
+          </div>
+
+          <div class="social">
+            <i
+              class="fas fa-laptop-code"
+              style="font-size: 28px; color: #4CAC7D; margin-right: 1rem;"
+            ></i>
+            <input
+              type="text"
+              placeholder="Your personal website or portfolio"
+              id="personal"
+            />
+          </div>
+        </div>
+        <button class="btn" id="save-btn">Save Changes</button>
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"
+    ></script>
+    <script defer src="./js/welcome.js"></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.8.2/js/all.js"
+    ></script>
+    <script>
+      function contentAnimation() {
+        var tl = gsap.timeline();
+        var sm = tl.from('.is-animated', {
+          duration: 0.5,
+          translateY: 10,
+          opacity: 0,
+          stagger: 0.4
+        });
+      }
+
+      contentAnimation();
+    </script>
+  </body>
+</html>

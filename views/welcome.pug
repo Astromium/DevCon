@@ -1,0 +1,176 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='stylesheet' href='./css/welcome.css')
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  title #{title}
+header
+  img(src='./illustrations/wave2-dark-short.svg' style='position: absolute; top: 0; left: 0; width: 100%; z-index: -10; transform: rotate(180deg);' alt='')
+  .logo
+    a(href='landing.html' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+  ul
+    li
+      a(href='/startups') For Startups
+    li
+      a(href='/signup' style='color: #4cac7d;') Sign up
+    li
+      a(href='/login' style='color: #4cac7d;') Login
+.welcome
+  .welcome-img.is-animated
+    img(src='./illustrations/welcome.svg' alt='welcome')
+  .welcome-text
+    h2.is-animated
+      | Welcome To Dev
+      span(style='color: #4cac7d;') Con
+    h3.is-animated #{user.name}
+  img.wave(src='./illustrations/wave2.svg' alt='wave')
+.info
+  img.wave2(src='./illustrations/wave2.svg' alt='wave')
+  .intro
+    p
+      | in order to get the best out of Dev
+      span(style='color: #4CAC7D;') Con
+      |           we recommend you to fill a few informations related to your skills and
+      |           interests
+      br
+      span(style='color: #4CAC7D; font-size: 20px;') So let&apos;s get started
+    .img
+      img(src='./illustrations/welcome3.svg' alt='dreamer')
+  .wrapper
+    h3 Which of these fields are you interested in ?
+    .checkboxes
+      label.container
+        input(type='checkbox' value='web-dev')
+        |             Web Development
+        span.checkmark
+      label.container
+        input(type='checkbox' value='mobile-dev')
+        |             Mobile Development
+        span.checkmark
+      label.container
+        input(type='checkbox' value='networks')
+        |             Computer Networks
+        span.checkmark
+      label.container
+        input(type='checkbox' value='ml')
+        |             Machine Learning
+        span.checkmark
+      label.container
+        input(type='checkbox' value='security')
+        |             Cyber Security
+        span.checkmark
+      label.container
+        input(type='checkbox' value='cloud')
+        |             Cloud Development
+        span.checkmark
+      label.container
+        input(type='checkbox' value='game-dev')
+        |             Game Development
+        span.checkmark
+      label.container
+        input(type='checkbox' value='js')
+        |             Javascript
+        span.checkmark
+      label.container
+        input(type='checkbox' value='python')
+        |             Python
+        span.checkmark
+      label.container
+        input(type='checkbox' value='html-css')
+        |             Html/Css
+        span.checkmark
+      label.container
+        input(type='checkbox' value='java-c-c++')
+        |             Java/C/C++
+        span.checkmark
+      label.container
+        input(type='checkbox' value='node')
+        |             Node.js
+        span.checkmark
+      label.container
+        input(type='checkbox' value='django')
+        |             Django
+        span.checkmark
+      label.container
+        input(type='checkbox' value='react')
+        |             React.js
+        span.checkmark
+      label.container
+        input(type='checkbox' value='angular')
+        |             Angular.js
+        span.checkmark
+      label.container
+        input(type='checkbox' value='vue')
+        |             Vue.js
+        span.checkmark
+      label.container
+        input(type='checkbox' value='mysql')
+        |             MySql
+        span.checkmark
+      label.container
+        input(type='checkbox' value='mongodb')
+        |             MongoDB
+        span.checkmark
+      label.container
+        input(type='checkbox' value='design')
+        |             Graphic Design
+        span.checkmark
+      label.container
+        input(type='checkbox' value='ui/ux')
+        |             UI / UX
+        span.checkmark    
+    h3 Tell us about yourself ( a little resume )
+    textarea#resume(name='' placeholder='eg. your education , current job, experiences ...')
+    h3
+      | What are your soft skills ( please inculde a comma seperated value )
+    textarea#skills(name='' placeholder='eg. HTML,CSS,JS,NODEJS,PYTHON ...')
+    h3 Add your personal social accounts
+    .socials
+      .social
+        i.fab.fa-facebook(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input#facebook(type='text' placeholder='Facebook Account Link')
+      .social
+        i.fab.fa-linkedin(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input#linkedin(type='text' placeholder='Linkedin Account Link')
+      .social
+        i.fab.fa-twitter(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input#twitter(type='text' placeholder='Twitter Account Link')
+      .social
+        i.fab.fa-youtube(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input#youtube(type='text' placeholder='Youtube Channel Link')
+      .social
+        i.fab.fa-dribbble(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input#dribbble(type='text' placeholder='Dribble Account Link')
+      .social
+        i.fab.fa-dev(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input(type='text' placeholder='Dev.to Account Link' id='dev.to')
+      .social
+        i.fab.fa-github(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input#github(type='text' placeholder='Github Account Link')
+      .social
+        i.fas.fa-laptop-code(style='font-size: 28px; color: #4CAC7D; margin-right: 1rem;')
+        input#personal(type='text' placeholder='Your personal website or portfolio')
+    button#save-btn.btn Save Changes
+script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js')
+script(src='/js/welcome.js')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous")
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script.
+  function contentAnimation() {
+  var tl = gsap.timeline();
+  var sm = tl.from('.is-animated', {
+  duration: 0.5,
+  translateY: 10,
+  opacity: 0,
+  stagger: 0.4
+  });
+  }
+  contentAnimation();

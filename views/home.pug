@@ -1,0 +1,139 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='./css/home.css')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  title DevCon | Home
+header(data-id=`${user._id}` class='header')
+  .logo
+    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #4cac7d;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+.container
+  nav.left-nav
+    ul
+      li.is-active
+        a(href='/home')
+          i.fas.fa-home
+          | &nbsp; Home
+      li
+        a(href='/me')
+          i.fas.fa-user
+          | &nbsp;&nbsp; Profile
+      li
+        a(href='/job-offers')
+          i.fas.fa-users
+          | &nbsp;&nbsp; Job offers
+      li
+        a(href='/bookmarks')
+          i.far.fa-bookmark
+          | &nbsp;&nbsp; Bookmarks
+      li
+        a(href='/chat')
+          i.far.fa-comments
+          | &nbsp; Messages
+  .feed
+    each post in feed
+      .post
+        - if(post.user._id === user._id)
+          .settings-btn
+            i.fas.fa-ellipsis-h(style='color: #4CAC7D;')
+          .settings
+            button
+              i.fas.fa-pen
+              | &nbsp;&nbsp;Edit Post
+            button
+              i.fas.fa-trash
+              | &nbsp;&nbsp;Delete Post
+        .info
+          a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')
+            img(src=`./img/users/${post.user.photo}` alt='avatar' width='50px' height='50px')
+          .name
+            a(href=`/users/${post.user.slug}` style='text-decoration: none')
+              h3(style='cursor: pointer') #{post.user.name}
+            p #{new Date(post.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+        .content
+          - if(post.content)
+            != `${post.content}`
+        - if(post.postType === 'image')  
+          img.post-image(src=`./img/posts/${post.image}` alt='post-image')
+        - if(post.postType === 'video')
+          video.post-video(controls='' preload='metadata')
+            source(src=`./videos/${post.video}#t=0.5`)  
+        .actions
+          .stats
+            p(id=`numLikes-${post._id}` style='transition: all 0.1s ease') #{post.numLikes} likes
+            p(id=`numComments-${post._id}`) #{post.numComments} comments
+          ul.action-buttons
+            li
+              - let likeBtnStyle = 'unliked';
+              - if(post.likes.includes(user._id)) likeBtnStyle = 'liked'
+              - const id = post._id;
+                i.fas.fa-heart(style='cursor: pointer; transition: all 0.1s ease' class=`${likeBtnStyle}` id=`${id}` onClick='handleLikeBtnClick(this.id)' data-state=`${likeBtnStyle}`)
+            li
+              i.far.fa-comment-dots(style='cursor: pointer; color: #0c0e1c;' id=`${post._id}` onClick='toggleComments(this.id)')
+            li
+              - let markBtnStyle = 'unmarked';
+              - if(user.saved.includes(post._id)) markBtnStyle = 'marked'
+              i.far.fa-bookmark(style='cursor: pointer;' id=`${post._id}-bookmark` onClick='handleBookmarkClick(this.id)' data-state=`${markBtnStyle}` class=`${markBtnStyle}`)
+        .add-comment
+          input(type='text' placeholder='ADD Comment...' id=`comment-input-${post._id}`)
+          button(id=`addComment-${post._id}` data-user=`${user}` onClick='addComment(this.id)' style='outline: none; cursor: pointer') ADD
+        .comments(id=`comments-${id}` data-state='hidden')
+          each comment in post.comments
+            .comment
+              div
+                img(src=`./img/users/${comment.user.photo}` alt='')
+                p #{comment.user.name}
+                p(style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;') #{new Date(comment.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+              p.comment-content #{comment.text}
+    
+    
+  nav.right-nav
+    .info
+      img(src=`./img/users/${user.photo}` alt='avatar' width='80px' height='80px')
+      h3 #{user.name}
+      p Web Developer
+    .stats
+      .keys
+        p Following
+        p Followers
+      .values
+        p(id='following-num') #{user.following.length}
+        p(id='followers-num') #{user.followers.length}
+    .suggested
+      h3 Suggested For You
+      each user in suggestions 
+        .user
+          img(src=`./img/users/${user.photo}` alt='' height='40px' width='40px')
+          .desc
+            h4 #{user.name}
+            p Web Developer
+            - const id = `${user._id}`
+          button(id=`${id}` class='follow' onClick=`handleFollowClick(this.id)`) Follow
+      a(href='suggested.html' style='color: #4CAC7D; text-decoration: none;align-self: flex-end;')
+        | See More &nbsp;
+        i.fas.fa-angle-double-right
+
+        
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous")
+script(src='/js/home.js')

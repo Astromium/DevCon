@@ -1,0 +1,337 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+  width: 100%;
+}
+
+body {
+  font-family: 'Baloo 2', cursive;
+  background: #fff;
+  position: relative;
+}
+
+body::-webkit-scrollbar {
+  width: 0.55rem;
+}
+body::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+body::-webkit-scrollbar-thumb {
+  background: #4cac7d;
+  border-radius: 50px;
+}
+
+header {
+  height: 10vh;
+  width: 100%;
+  background: #0c0e1c;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 10;
+}
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header ul {
+  display: flex;
+  list-style: none;
+}
+ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 19px;
+  transition: all 0.3s ease-in-out;
+}
+ul li a:hover {
+  color: #fff;
+}
+ul li {
+  padding: 0 2rem;
+}
+
+.welcome {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  padding: 1rem 2rem;
+  align-items: center;
+  height: 90vh;
+  z-index: 1;
+  position: relative;
+}
+
+.welcome-img {
+  width: 60%;
+  height: 100%;
+}
+
+.welcome-img img {
+  margin-top: 2rem;
+  width: 90%;
+  height: 90%;
+}
+
+.welcome-text {
+  text-align: center;
+  width: 40%;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: -1000;
+}
+
+.welcome-text h2 {
+  font-size: 42px;
+  color: #0c0e1c;
+}
+
+.welcome-text h3 {
+  font-size: 38px;
+  color: #4cac7d;
+}
+
+.info {
+  width: 100%;
+  position: relative;
+  background: #0c0e1c;
+  color: #fff;
+}
+
+.wave2 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: rotate(180deg);
+}
+
+.info .intro {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60vh;
+  margin-top: -10rem;
+}
+
+.intro p {
+  width: 40%;
+  line-height: 1.8;
+  font-size: 24px;
+  margin-left: 5rem;
+}
+
+.intro .img {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.img img {
+  width: 100%;
+  height: 100%;
+}
+
+.info .wrapper {
+  width: 100%;
+  padding: 1rem 2rem;
+}
+
+.wrapper h3 {
+  font-size: 34px;
+  color: #4cac7d;
+}
+
+.wrapper .checkboxes {
+  width: 90%;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.checkboxes .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 5px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a green background */
+.container input:checked ~ .checkmark {
+  background-color: #4cac7d;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#resume {
+  width: 80%;
+  border-radius: 5px;
+  height: 200px;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 22px;
+  resize: none;
+  transition: all 0.2s ease-in-out;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+#resume:focus {
+  outline: none !important;
+  border: 3px solid #4cac7d;
+}
+
+#skills {
+  width: 80%;
+  border-radius: 5px;
+  height: 200px;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 22px;
+  resize: none;
+  transition: all 0.2s ease-in-out;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+#skills:focus {
+  outline: none !important;
+  border: 3px solid #4cac7d;
+}
+
+.socials {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: space-around;
+}
+
+.socials .social {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 18px;
+  margin: 2rem;
+}
+
+.social input {
+  display: block;
+  font-family: inherit;
+  font-size: 1.2rem;
+  color: inherit;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background-color: #fff;
+  background-color: #f2f2f2;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #0c0e1c;
+  width: 90%;
+  transition: all 0.1s ease-in-out;
+  outline: none;
+}
+
+.social input:focus {
+  outline: none;
+  border: 3px solid #55c57a;
+}
+
+.btn {
+  outline: none;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  border-radius: 35px;
+  margin: 2rem auto;
+  background-color: #4cac7d;
+  border: none;
+  box-shadow: 0px 2px 2px #4cac7e41;
+  color: #fff;
+  font-size: 20px;
+  font-family: inherit;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(5px);
+  box-shadow: 0px 4px 6px #4cac7e41;
+}

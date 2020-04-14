@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/me.css" />
+    <title>Document</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a
+          href="/landing"
+          style="text-decoration: none; color: #fff; font-size: 24px;
+            font-weight: bold;"
+          >Dev<span style="color: #4CAC7D;">Con</span></a
+        >
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Search" />
+      </div>
+      <ul>
+        <li>
+          <a href="/settings" style="color: #fff;"
+            ><i class="fas fa-cog"></i>&nbsp;&nbsp;Settings</a
+          >
+        </li>
+        <li>
+          <a href="/landing" style="color: #4cac7d;"
+            ><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a
+          >
+        </li>
+      </ul>
+    </header>
+    <div class="container">
+      <nav class="left-nav">
+        <ul>
+          <li>
+            <a href="/home"><i class="fas fa-home"></i>&nbsp; Home</a>
+          </li>
+          <li class="is-active">
+            <a href="/me"><i class="fas fa-user"></i>&nbsp;&nbsp; Profile</a>
+          </li>
+          <li>
+            <a href="/job-offers"
+              ><i class="fas fa-users"></i>&nbsp;&nbsp; Job offers</a
+            >
+          </li>
+          <li>
+            <a href="/bookmarks"
+              ><i class="far fa-bookmark"></i>&nbsp;&nbsp; Bookmarks</a
+            >
+          </li>
+          <li>
+            <a href="/chat"><i class="far fa-comments"></i>&nbsp; Messages</a>
+          </li>
+        </ul>
+      </nav>
+      <main class="main">
+        <div class="info">
+          <img src="./img/users/default-avatar.svg" alt="avatar" />
+          <div class="stats">
+            <h2>Ayoub Belouadah</h2>
+            <h4>Web Developer</h4>
+            <div class="nums">
+              <p>6<span style="font-weight: normal;"> Posts</span></p>
+              <p>6<span style="font-weight: normal;"> Followers</span></p>
+              <p>6<span style="font-weight: normal;"> Following</span></p>
+            </div>
+            <input
+              type="file"
+              name="photo"
+              id="photo"
+              style="display: none"
+              accept="image/*"
+            />
+            <label
+              for="photo"
+              style="cursor: pointer; color: #4CAC7D; margin-top: 0.5rem; font-size: 19px;"
+              >Change Photo</label
+            >
+          </div>
+          <a href="/settings" class="btn">Edit Profile</a>
+        </div>
+        <h2 style="margin: 2rem 0; color: #4CAC7D">What's on your mind ?</h2>
+        <div class="create-post">
+          <textarea name="" id="editor" cols="" rows=""></textarea>
+          <div class="uploads">
+            <input
+              type="file"
+              name="post-photo"
+              id="post-photo"
+              accept="image/*"
+              style="display: none;"
+            />
+            <input
+              type="file"
+              name="post-video"
+              id="post-video"
+              accept="video/*"
+              style="display: none;"
+            />
+            <div class="image-upload">
+              <label
+                for="post-photo"
+                style="cursor: pointer; color: #4CAC7D; margin-top: 0.5rem; font-size: 22px; font-weight: bold;"
+                ><i class="fas fa-images"></i> &nbsp;Add a photo to your
+                post</label
+              >
+            </div>
+            <div class="video-upload">
+              <label
+                for="post-video"
+                style="cursor: pointer; color: #4CAC7D; margin-top: 0.5rem; font-size: 22px; font-weight: bold;"
+                ><i class="fas fa-video"></i> &nbsp; Add a video to your
+                post</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="followers-following">
+          <div class="user">
+            <img
+              src="./img/users/default-avatar.svg"
+              alt=""
+              height="40px"
+              width="40px"
+            />
+            <a
+              href="#"
+              style="text-decoration: none; color: #000; font-size: 20px; margin-left: 1rem;"
+              >Ayoub Belouadah</a
+            >
+            <p id="follow">Follow</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.8.2/js/all.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"
+      integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      //console.log(document.querySelector('#editor'));
+      const btn = document.querySelector('.btn');
+      const upload = document.getElementById('photo');
+      let editor;
+      ClassicEditor.create(document.querySelector('#editor'))
+        .then(newEditor => {
+          editor = newEditor;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      btn.addEventListener('click', async e => {
+        e.preventDefault();
+        try {
+          const res = await axios({
+            method: 'PATCH',
+            url: 'http://127.0.0.1:3000/api/v1/users/profile',
+            data: {}
+          });
+          if (res.data.status === 200) {
+            console.log(res.data);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>
