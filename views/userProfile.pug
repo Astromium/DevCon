@@ -4,6 +4,7 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
   link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
   link(rel='stylesheet' href='/css/me.css')
   title #{title}
   
@@ -96,7 +97,7 @@ header
       - let arr = [];
       - let idArr = loggedUser.following.map(doc => arr.unshift(doc._id.toString()));
       - if(arr.includes(user._id.toString())) markup = 'following'                
-      button.btn(href='/settings' id=`${user._id}` onClick=`handleFollowClick(this.id)`) #{markup}                                            
+      button.btn(href='/settings' id=`follow-${user._id}` onClick=`handleFollowClick(this.id)`) #{markup}                                            
       
       hr#hr     
     .feed

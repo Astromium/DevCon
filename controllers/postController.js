@@ -48,11 +48,17 @@ exports.uploadPostVideo = uploadVideo.single('video');
 
 exports.resizePostPhoto = (req, res, next) => {
   if (!req.file || !req.file.mimetype.startsWith('image')) return next();
-
-  req.file.filename = `post-${req.user.id}-${Date.now()}.jpeg`;
+  const ext = req.file.mimetype.split('/')[1];
+  let format;
+  if (ext === 'svg') {
+    format = 'svg';
+  } else {
+    format = 'jpeg'
+  }
+  req.file.filename = `post-${req.user.id}-${Date.now()}.${format}`;
 
   sharp(req.file.buffer)
-    .toFormat('jpeg')
+    .toFormat(`${format}`)
     .jpeg({ quality: 90 })
     .toFile(`public/img/posts/${req.file.filename}`);
 

@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please confirm your password'],
     validate: {
       //! This only works on CREATE and SAVE and not on UPDATE
-      validator: function(el) {
+      validator: function (el) {
         return el === this.password;
       },
       message: 'Passwords are not the same!'
@@ -104,12 +104,13 @@ const userSchema = new mongoose.Schema({
       ref: 'Post'
     }
   ],
-  slug: String
+  slug: String,
+  location: String
 });
 
 // document middlewares
 // Password encryption
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   // only run this if the password is modified
   if (!this.isModified('password')) return next();
 
@@ -134,12 +135,12 @@ userSchema.pre('save', async function(next) {
 // });
 
 // Query Middlewares
-userSchema.pre(/^find/, async function(next) {
+userSchema.pre(/^find/, async function (next) {
   this.find({ active: true });
   next();
 });
 
-userSchema.methods.correctPassword = async function(
+userSchema.methods.correctPassword = async function (
   candidatPassword,
   userPassword
 ) {
@@ -147,7 +148,7 @@ userSchema.methods.correctPassword = async function(
   return await bcrypt.compare(candidatPassword, userPassword);
 };
 
-userSchema.methods.passwordChanged = function(jwtTimeStamp) {
+userSchema.methods.passwordChanged = function (jwtTimeStamp) {
   if (this.changedPasswordAt) {
     const changeTimeStamp = parseInt(
       this.changedPasswordAt.getTime() / 1000,
@@ -158,7 +159,7 @@ userSchema.methods.passwordChanged = function(jwtTimeStamp) {
   return false;
 };
 
-userSchema.methods.createResetToken = function() {
+userSchema.methods.createResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');
 
   this.passwordResetToken = crypto
