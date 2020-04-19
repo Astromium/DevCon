@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Baloo 2', cursive;
+}
+
+.container {
+    width: 50%;
+    margin-top: 2rem;
+}
+
+.container h2 {
+    margin: 1rem 0;
+    font-size: 32px;
+    opacity: 0.8;
+}
+
+.container p {
+    font-size: 22px;
+    margin: 1rem 0;
+}
+.container a {
+    color: #4cac7d;
+}
+
+.container .header {
+    display: flex;
+    width: 100%;
+}
+
+.header div {
+    padding: 1rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #4cac7e63;
+    background: rgba(209, 207, 207, 0.733);
+}
+
+.header .left {
+    width: 40%;
+    
+}
+.header .right {
+    width: 60%;
+    
+}
+
+.container .elements {
+    display: flex;
+    width: 100%;
+}
+
+.elements div {
+    padding: 1rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #4cac7e63;
+    
+}
+
+.elements .left {
+    width: 40%;
+    color: #4cac7d;
+    
+}
+.elements .right {
+    width: 60%;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}

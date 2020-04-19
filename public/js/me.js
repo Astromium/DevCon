@@ -12,6 +12,15 @@ const showToast = (message, gr, pos, bgColor) => {
   }).showToast();
 };
 
+// const codes = document.querySelectorAll('.feed .post .content pre');
+// codes.forEach(code => code.classList.add('prettyprint'))
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightBlock(block);
+  });
+});
+
 const saveBtn = document.getElementById('save');
 const upload = document.getElementById('photo');
 const userPhoto = document.getElementById('user-photo');
@@ -20,19 +29,13 @@ const uploadPostVideo = document.getElementById('post-video');
 const submitPost = document.getElementById('create-post');
 const tag = document.getElementById('tag');
 
-let editor;
-ClassicEditor.create(document.querySelector('#editor'))
-  .then((newEditor) => {
-    editor = newEditor;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
 
 submitPost.addEventListener('click', async (e) => {
   e.preventDefault();
   const formData = new FormData();
-  if (editor.getData() !== '') formData.append('content', editor.getData());
+  const markdown = document.getElementById('markdown').value;
+  formData.append('markdown', markdown);
   if (uploadPostImage.files[0] && uploadPostVideo.files[0]) {
     showToast(
       'You cant upload image and video at the same time',
@@ -119,6 +122,7 @@ submitPost.addEventListener('click', async (e) => {
     }
     formData.append('tag', tag.options[tag.selectedIndex].text);
     formData.append('postType', 'article');
+    console.log(formData);
     try {
       const res = await axios({
         method: 'POST',
@@ -302,15 +306,15 @@ const addComment = async (ident) => {
         const comments = document.getElementById(`comments-${id}`);
         const markup = `<div><img src='./img/users/${user.photo}' alt='' /><p>${
           user.name
-        }</p><p style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;'>${new Date().toLocaleString(
-          'en-us',
-          {
-            day: 'numeric',
-            month: 'short',
-            hour: 'numeric',
-            minute: 'numeric',
-          }
-        )}</p></div><p class='comment-content'>${comment}</p>`;
+          }</p><p style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;'>${new Date().toLocaleString(
+            'en-us',
+            {
+              day: 'numeric',
+              month: 'short',
+              hour: 'numeric',
+              minute: 'numeric',
+            }
+          )}</p></div><p class='comment-content'>${comment}</p>`;
 
         el.className = 'comment';
         el.innerHTML = markup;
@@ -418,7 +422,7 @@ const search = document
     e.preventDefault();
     const query = e.target.value;
     const searchContainer = document.getElementById('search-results');
-    searchContainer.addEventListener('click', (e) => {});
+    searchContainer.addEventListener('click', (e) => { });
     while (searchContainer.firstChild) {
       searchContainer.removeChild(searchContainer.lastChild);
     }

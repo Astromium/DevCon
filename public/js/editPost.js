@@ -1,11 +1,4 @@
-let editor;
-ClassicEditor.create(document.querySelector('#editor'))
-  .then((newEditor) => {
-    editor = newEditor;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
 const showToast = (message, gr, pos, bgColor) => {
   Toastify({
     text: message,
@@ -23,14 +16,14 @@ const showToast = (message, gr, pos, bgColor) => {
 const saveBtn = document.getElementById('save');
 
 const editPost = async (ident) => {
-  const content = editor.getData();
+  const markdown = document.getElementById('markdown').value;
   const id = ident.split('-')[1];
   try {
     const res = await axios({
       method: 'PATCH',
       url: `http://127.0.0.1:3000/api/v1/posts/${id}`,
       data: {
-        content,
+        markdown,
       },
     });
     if (res.data.status === 'success') {
@@ -49,7 +42,7 @@ const search = document
     e.preventDefault();
     const query = e.target.value;
     const searchContainer = document.getElementById('search-results');
-    searchContainer.addEventListener('click', (e) => {});
+    searchContainer.addEventListener('click', (e) => { });
     while (searchContainer.firstChild) {
       searchContainer.removeChild(searchContainer.lastChild);
     }

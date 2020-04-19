@@ -111,3 +111,9 @@ exports.welcomeStartup = catchAsync(async (req, res, next) => {
     user
   });
 });
+
+exports.markdown = (req, res) => {
+  res.status(200).render('markdown', {
+    title: 'DevCon | Markdown'
+  })
+}

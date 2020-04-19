@@ -4,6 +4,8 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
   link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/night-owl.min.css")
   link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
   link(rel='stylesheet' href='/css/me.css')
   title #{title}
@@ -115,8 +117,8 @@ header
             
 
             .content#content
-                - if(post.content)
-                    != `${post.content}`
+                - if(post.sanitizedHtml)
+                    != `${post.sanitizedHtml}`
             - if(post.postType === 'image')  
                 img.post-image(src=`/img/posts/${post.image}` alt='post-image')
             - if(post.postType === 'video')
@@ -183,6 +185,7 @@ header
                                      
                         
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js")
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')

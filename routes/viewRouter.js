@@ -11,7 +11,8 @@ const {
   editPost,
   settings,
   userProfile,
-  welcomeStartup
+  welcomeStartup,
+  markdown
 } = require('../controllers/viewController');
 const { protect } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
@@ -27,6 +28,7 @@ router.get('/welcome', protect, welcome);
 router.get('/bookmarks', protect, getSuggestions, bookmarks);
 router.get('/me', protect, me);
 router.get('/settings', protect, settings);
+router.get('/markdown', markdown);
 router.get('/startups/welcome', protect, welcomeStartup);
 router.get('/post/:id', protect, editPost);
 router.get('/users/:slug', protect, userProfile);

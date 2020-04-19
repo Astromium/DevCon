@@ -12,6 +12,12 @@ const showToast = (message, gr, pos, bgColor) => {
   }).showToast();
 };
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightBlock(block);
+  });
+});
+
 const handleFollowClick = async id => {
   const btn = document.getElementById(id);
   const followingBtnValue = document.getElementById('following-num');
@@ -172,15 +178,15 @@ const addComment = async ident => {
         const comments = document.getElementById(`comments-${id}`);
         const markup = `<div><img src='./img/users/${user.photo}' alt='' /><p>${
           user.name
-        }</p><p style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;'>${new Date().toLocaleString(
-          'en-us',
-          {
-            day: 'numeric',
-            month: 'short',
-            hour: 'numeric',
-            minute: 'numeric'
-          }
-        )}</p></div><p class='comment-content'>${comment}</p>`;
+          }</p><p style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;'>${new Date().toLocaleString(
+            'en-us',
+            {
+              day: 'numeric',
+              month: 'short',
+              hour: 'numeric',
+              minute: 'numeric'
+            }
+          )}</p></div><p class='comment-content'>${comment}</p>`;
 
         el.className = 'comment';
         el.innerHTML = markup;
@@ -204,7 +210,7 @@ const search = document
     e.preventDefault();
     const query = e.target.value;
     const searchContainer = document.getElementById('search-results');
-    searchContainer.addEventListener('click', e => {});
+    searchContainer.addEventListener('click', e => { });
     while (searchContainer.firstChild) {
       searchContainer.removeChild(searchContainer.lastChild);
     }

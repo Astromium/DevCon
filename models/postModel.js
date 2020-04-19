@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const User = require('./userModel');
+const marked = require('marked');
+const createDomPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+const domPurify = createDomPurify(new JSDOM().window);
 
 const postSchema = new mongoose.Schema({
   user: {
@@ -11,9 +14,17 @@ const postSchema = new mongoose.Schema({
     required: [true, 'Posts Must have a specific type'],
     enum: ['article', 'image', 'video'],
   },
-  content: {
-    type: String,
+  // content: {
+  //   type: String,
+  // },
+  markdown: {
+    type: String
   },
+
+  sanitizedHtml: {
+    type: String
+  },
+
   image: {
     type: String,
   },
@@ -59,14 +70,16 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-// Query Middleware
-// postSchema.pre(/^find/, function(next) {
-//   this.numLikes = this.likes.length;
-//   this.numComments = this.comments.length;
-//   next();
-// });
+// compiling the body markdown into html
+postSchema.pre('save', function (next) {
+  if (this.markdown) {
+    this.sanitizedHtml = domPurify.sanitize(marked(this.markdown));
+  }
+  next();
 
-postSchema.pre(/^find/, function(next) {
+})
+
+postSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
     select: 'photo name slug notifications',

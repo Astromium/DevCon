@@ -78,7 +78,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
 
 exports.getPost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
-
+  console.log(post.bodyMarkdown);
   res.status(200).json({
     status: 'success',
     data: {
@@ -109,9 +109,9 @@ exports.createImagePost = catchAsync(async (req, res, next) => {
   }
   const postObject = {
     user: req.user.id,
-    content: req.body.content,
     postType: req.body.postType,
     tag: req.body.tag,
+    markdown: req.body.markdown,
     image,
   };
   const newPost = await Post.create(postObject);
@@ -140,9 +140,9 @@ exports.createVideoPost = catchAsync(async (req, res, next) => {
   }
   const postObject = {
     user: req.user.id,
-    content: req.body.content,
     postType: req.body.postType,
     tag: req.body.tag,
+    markdown: req.body.markdown,
     video,
   };
   const newPost = await Post.create(postObject);
@@ -162,7 +162,7 @@ exports.createVideoPost = catchAsync(async (req, res, next) => {
 exports.updatePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   if (post.user._id.toString() === req.user.id.toString()) {
-    post.content = req.body.content;
+    post.markdown = req.body.markdown;
     await post.save({ validateBeforeSave: false });
     res.status(200).json({
       status: 'success',

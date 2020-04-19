@@ -65,9 +65,7 @@ header
             
 
             .content#content
-                - if(post.content)
-                    != `${post.content}`
-                textarea#editor
+                textarea#markdown #{post.markdown}
             - if(post.postType === 'image')  
                 img.post-image(src=`/img/posts/${post.image}` alt='post-image')
             - if(post.postType === 'video')
