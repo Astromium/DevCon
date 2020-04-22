@@ -55,16 +55,70 @@ header(data-id=`${user._id}` class='header')
   .feed
     each post in feed
       .post
-        - if(post.user._id === user._id)
-          .settings-btn
+        - if(post.user._id.toString() === user._id.toString())
+          .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
             i.fas.fa-ellipsis-h(style='color: #4CAC7D;')
-          .settings
-            button
-              i.fas.fa-pen
-              | &nbsp;&nbsp;Edit Post
-            button
-              i.fas.fa-trash
-              | &nbsp;&nbsp;Delete Post
+          .settings(id=`settings-${post._id}`)
+            a.button(href=`/post/${post._id}` style='text-decoration: none')
+                i.fas.fa-pen
+                | &nbsp;&nbsp;Edit Post
+            button.button(id=`delete-${post._id}` onClick='deletePost(this.id)')
+                i.fas.fa-trash
+                | &nbsp;&nbsp;Delete Post
+                
+        - else if(post.user._id.toString() !== user._id.toString())  
+          .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+            i.fas.fa-ellipsis-h(style='color: #4CAC7D;')
+          .settings(id=`settings-${post._id}`)
+            button.button(id=`report-${post._id}` onClick='toggleReportContainer')
+              i.fas.fa-exclamation-triangle(style='font-size: 20px')
+              span(style='font-size: 20px')   Report This Post 
+            .reportContainer#reportContainer
+              h2 Please Select a Problem to continue      
+              .reasons
+                label.checkbox-container
+                  input(type='checkbox' value='Nudity')
+                  |             Nudity
+                  span.checkmark
+
+                label.checkbox-container
+                  input(type='checkbox' value='Violence')
+                  |             Violence
+                  span.checkmark
+
+                label.checkbox-container
+                  input(type='checkbox' value='Harrasment')
+                  |             Harrasment
+                  span.checkmark
+
+                label.checkbox-container
+                  input(type='checkbox' value='Self-injury')
+                  |             Self-injury
+                  span.checkmark
+
+                label.checkbox-container
+                  input(type='checkbox' value='Spam')
+                  |             Spam
+                  span.checkmark
+
+                label.checkbox-container
+                  input(type='checkbox' value='Hate Speech')
+                  |             Hate Speech
+                  span.checkmark
+
+                label.checkbox-container
+                  input(type='checkbox' value='Terrorism')
+                  |             Terrorisme
+                  span.checkmark
+
+                label.checkbox-container
+                  input(type='checkbox' value='Inapropriate Content')
+                  |             Inapropriate Content
+                  span.checkmark
+
+                
+              input(type='text' placeholder='something else ? ...' id='something-else')
+              button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report     
         .info
           a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')
             img(src=`./img/users/${post.user.photo}` alt='avatar' width='50px' height='50px')
@@ -134,6 +188,11 @@ header(data-id=`${user._id}` class='header')
       a(href='suggested.html' style='color: #4CAC7D; text-decoration: none;align-self: flex-end;')
         | See More &nbsp;
         i.fas.fa-angle-double-right
+
+      
+               
+      
+                
 
         
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')

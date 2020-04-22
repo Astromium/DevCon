@@ -105,7 +105,18 @@ const userSchema = new mongoose.Schema({
     }
   ],
   slug: String,
-  location: String
+  // for startups
+  location: String,
+  // for admins
+  reports: [
+    {
+      user: Object,
+      post: {
+        type: mongoose.Schema.ObjectId
+      },
+      reasons: [String]
+    }
+  ]
 });
 
 // document middlewares
@@ -118,6 +129,13 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
   this.slug = slugify(this.name, { lower: true });
+  if (this.role === 'user' || this.role === 'admin') {
+    this.location = undefined
+  }
+  if (this.role === 'user' || this.role === 'startup') {
+    this.reports = undefined;
+  }
+
   next();
 });
 

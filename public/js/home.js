@@ -273,3 +273,71 @@ logoutBtn.addEventListener('click', async e => {
     console.log(err);
   }
 });
+
+const toggleSettings = (ident) => {
+  const id = ident.split('-')[1];
+  const settingsContainer = document.getElementById(`settings-${id}`);
+  settingsContainer.classList.toggle('show');
+};
+
+const deletePost = async (ident) => {
+  const deletePostBtn = document.getElementById(ident);
+  const id = ident.split('-')[1];
+  try {
+    const res = await axios({
+      method: 'DELETE',
+      url: `http://127.0.0.1:3000/api/v1/posts/${id}`,
+    });
+    if (res.data.status === 'success') {
+      showToast('Post Deleted', 'bottom', 'right', '#4cac7d');
+      window.setTimeout(
+        () =>
+          (deletePostBtn.parentElement.parentElement.style.display = 'none'),
+        500
+      );
+    }
+  } catch (err) {
+    console.log(err);
+    showToast('Something went wrong', 'bottom', 'left', '#c0392b');
+  }
+};
+
+// report post
+
+const reportPost = async (ident) => {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const somethingElse = document.getElementById('something-else').value;
+  const postId = ident.split('-')[1];
+  let reasons = [];
+
+  checkboxes.forEach(box => {
+    if (box.checked) reasons.push(box.value)
+  })
+
+
+  if (reasons.length === 0 && somethingElse === '') {
+    return showToast('Please Select a Problem to Continue', 'bottom', 'right', '#c0392b')
+  } else {
+    if (somethingElse !== '') reasons.push(somethingElse);
+    const report = {
+      post: postId,
+      reasons
+    }
+
+    try {
+      const res = await axios({
+        method: 'POST',
+        url: 'http://127.0.0.1:3000/api/v1/posts/report',
+        data: report
+      })
+
+      if (res.data.status === 'success') {
+        showToast(`${res.data.message}`, 'bottom', 'right', '#4cac7d')
+      }
+    } catch (err) {
+      console.log(err);
+      showToast('Something went wrong', 'bottom', 'left', '#c0392b');
+    }
+  }
+
+}

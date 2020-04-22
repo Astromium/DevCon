@@ -296,6 +296,30 @@ exports.unlikePost = catchAsync(async (req, res, next) => {
   });
 });
 
+
+exports.reportPost = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  const admins = await User.find({ role: 'admin' });
+  let report = req.body;
+  const userObj = {
+    id: user._id,
+    name: user.name,
+    photo: user.photo
+  }
+  report.user = userObj;
+  console.log(report);
+  admins.forEach(async admin => {
+    admin.reports.unshift(report);
+    await admin.save({ validateBeforeSave: false })
+  });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Post Reported to the admins'
+  })
+
+})
+
 exports.addComment = catchAsync(async (req, res, next) => {
   const currentPost = await Post.findById(req.params.id).populate('user');
   const user = await User.findById(req.user.id);

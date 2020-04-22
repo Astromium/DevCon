@@ -15,7 +15,8 @@ const {
   uploadPostImage,
   resizePostPhoto,
   uploadPostVideo,
-  createVideoPost
+  createVideoPost,
+  reportPost
 } = require('../controllers/postController');
 const { protect } = require('../controllers/authController');
 
@@ -26,6 +27,7 @@ router
   .get(getAllPosts)
   .post(protect, uploadPostImage, resizePostPhoto, createImagePost);
 router.route('/video').post(protect, uploadPostVideo, createVideoPost);
+router.route('/report').post(protect, reportPost);
 router.get('/:id', getPost);
 
 router
