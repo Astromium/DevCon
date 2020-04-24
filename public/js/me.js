@@ -170,7 +170,7 @@ saveBtn.addEventListener('click', async (e) => {
     }
   } catch (err) {
     console.log(err);
-    showToast('Something went wrong!', 'top', 'right', '#c0392b');
+    showToast(`${err.response.data.message}`, 'top', 'right', '#c0392b');
   }
 });
 

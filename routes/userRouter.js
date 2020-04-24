@@ -19,6 +19,8 @@ const {
   unfollowUser,
   getSuggestions,
   search,
+  uploadCv,
+  uploadUserCv
 } = require('../controllers/userController');
 
 const router = express.Router({ mergeParams: true });
@@ -31,6 +33,7 @@ router
   .route('/profile')
   .get(protect, getMe)
   .patch(protect, uploadUserPhoto, resizeUserPhoto, updateMe);
+router.route('/cv').patch(protect, uploadUserCv, uploadCv);
 router.get('/feed', protect, getFeed);
 router.get('/suggestions', protect, getSuggestions);
 router.get('/follow/:user', protect, followUser);
