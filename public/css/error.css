@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+  font-family: 'Baloo 2', cursive;
+  background: #fafafa;
+}
+
+
+body::-webkit-scrollbar {
+  width: 0.55rem;
+}
+body::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+body::-webkit-scrollbar-thumb {
+  background: #4cac7d;
+  border-radius: 50px;
+}
+
+
+header {
+  top: 0;
+  height: 10vh;
+  width: 100%;
+  background: #0c0e1c;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 10;
+}
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header ul {
+  display: flex;
+  list-style: none;
+}
+
+ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ul li a,
+ul li p {
+  color: #fff;
+  text-decoration: none;
+  font-size: 19px;
+  transition: all 0.3s ease-in-out;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+ul li a:hover {
+  color: #fff;
+}
+ul li {
+  padding: 0 2rem;
+}
+
+header .search {
+  width: 500px;
+  position: relative;
+}
+
+header .search input {
+  background-image: url('../illustrations/search.svg');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 40px;
+  background-size: 15px 15px;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  width: 100%;
+  background: #0c0e1c;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: inherit;
+  color: #fff;
+  font-size: 18px;
+  border-bottom: 3px solid #55c57a;
+}
+
+.search input:focus {
+  outline: none;
+  border-bottom: 3px solid #55c57a;
+}
+
+.search input::placeholder {
+  margin-top: auto;
+  font-family: inherit;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 90vh;
+}
+
+.container .wave {
+  position: absolute;
+  bottom: -5%;
+  right: 0;
+  width: 100%;
+  z-index: -1000;
+}
+
+.container .wave2 {
+  position: absolute;
+  top: -5%;
+  left: 0;
+  width: 100%;
+  z-index: -1000;
+  transform: rotate(180deg);
+}
+
+.container h1 {
+    font-size: 38px;
+    color: #4cac7d;
+}
