@@ -1,20 +1,20 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 body {
   font-family: 'Baloo 2', cursive;
   background: #fafafa;
 }
-
 
 body::-webkit-scrollbar {
   width: 0.55rem;
@@ -26,7 +26,6 @@ body::-webkit-scrollbar-thumb {
   background: #4cac7d;
   border-radius: 50px;
 }
-
 
 header {
   top: 0;
@@ -112,12 +111,14 @@ header .search input {
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 90vh;
+  display: flex;
+  width: 100%;
+  background: #0c0e1c;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 90vh;
 }
 
 .container .wave {
@@ -138,6 +139,6 @@ header .search input {
 }
 
 .container h1 {
-    font-size: 38px;
-    color: #4cac7d;
+  font-size: 38px;
+  color: #4cac7d;
 }
