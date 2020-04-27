@@ -154,18 +154,3 @@ logoutBtn.addEventListener('click', async (e) => {
     console.log(err);
   }
 });
-const logoutBtn = document.getElementById('logout-btn');
-logoutBtn.addEventListener('click', async (e) => {
-  e.preventDefault();
-  try {
-    const res = await axios({
-      method: 'GET',
-      url: 'http://127.0.0.1:3000/api/v1/users/logout',
-    });
-    if (res.data.status === 'success') {
-      window.setTimeout(() => location.assign('/'), 1500);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
