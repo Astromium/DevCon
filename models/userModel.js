@@ -116,7 +116,8 @@ const userSchema = new mongoose.Schema({
       },
       reasons: [String]
     }
-  ]
+  ],
+  cv: String
 });
 
 // document middlewares

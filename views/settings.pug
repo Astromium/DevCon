@@ -95,6 +95,14 @@ header
         - if(user.personal) pre = user.personal
         input#personal.form__input(type='text' required='' value=`${pre}`)
       br
+
+      h2 Upload Your Cv
+      div(style='display: flex; align-items: center')
+        label.file(style='font-size: 20px; padding: 0.5rem 1rem; width: fit-content; cursor: pointer; background: #0c0e1c; color: #fff; border-radius: 5px') Browse Files
+          input#cv(type='file' aria-label='File browser example' style='width: 0')
+        span#file-name(style='font-size: 18px; margin: 0 0 0 1.5rem; color: #4cac7d')
+        
+      br  
       h2 Edit Your Interests
       .checkboxes
         label.label
@@ -227,6 +235,8 @@ header
         input#new-password.form__input(type='new-password'  required='' minlength='8' placeholder='••••••••')
         label.form__label(for='new-password-confirm') New Password Confirm
         input#new-password-confirm.form__input(type='password'  required='' minlength='8' placeholder='••••••••')
+
+        
 
       button#save.btn Save Changes  
         

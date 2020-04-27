@@ -1,0 +1,40 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel='stylesheet' href='/css/error.css')
+  title #{title}
+
+header
+  .logo
+    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #4CAC7D;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #4cac7d;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+main.container 
+    img.wave(src='/illustrations/wave2-dark-404.svg' alt='wave')
+    img.wave2(src='/illustrations/wave2-dark-404.svg' alt='wave')  
+    img#page404(src='/illustrations/404.svg' alt='404 not found' style='width: 800px')
+    h1 OOOPs Looks Like This Page Does not Exist       
+
+
+
+
+
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')        

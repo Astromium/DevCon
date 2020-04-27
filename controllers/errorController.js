@@ -22,17 +22,23 @@ const jwtErrorHandler = () =>
 const expiredTokenHandler = () =>
   new AppError('Your Token has expired. Please log in again', 401);
 
-const sendErrorDev = (err, res) => {
+const sendErrorDev = (err, req, res) => {
   console.log(err);
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-    error: err,
-    stack: err.stack
-  });
+  if (req.originalUrl.startsWith('/api')) {
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message,
+      error: err,
+      stack: err.stack
+    });
+  } else {
+    res.status(err.statusCode).render('error', {
+      title: 'Page Not Found'
+    })
+  }
 };
 
-const sendErrorProd = (err, res) => {
+const sendErrorProd = (err, req, res) => {
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
@@ -51,7 +57,7 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'Error';
   if (process.env.NODE_ENV === 'development') {
-    sendErrorDev(err, res);
+    sendErrorDev(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
     //? Handling cast errors (invalid ID's)
@@ -61,6 +67,6 @@ module.exports = (err, req, res, next) => {
     if (error.name === 'JsonWebTokenError') error = jwtErrorHandler();
     if (error.name === 'TokenExpiredError') error = expiredTokenHandler();
 
-    sendErrorProd(error, res);
+    sendErrorProd(error, req, res);
   }
 };

@@ -100,8 +100,16 @@ header
       - let idArr = loggedUser.following.map(doc => arr.unshift(doc._id.toString()));
       - if(arr.includes(user._id.toString())) markup = 'following'                
       button.btn(href='/settings' id=`follow-${user._id}` onClick=`handleFollowClick(this.id)`) #{markup}                                            
-      
-      hr#hr     
+    br  
+    - if(user.cv)
+      .cv(style='margin: 2rem 0') 
+         
+          a(href=`/documents/${user.cv}` download style='text-decoration: none; font-size: 20px; color: #0e1127; font-weight: bold')  
+            i.fas.fa-download 
+            |&nbsp;&nbsp; Download #{user.name}'s Cv
+    br        
+    hr#hr  
+
     .feed
       - if(user.posts.length === 0)
         h2(style='color: #4cac7d')= `No Posts Yet From ${user.name}`

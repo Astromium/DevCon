@@ -7,17 +7,41 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const slugify = require('slugify');
 
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/users');
-//   },
-//   filename: (req, file, cb) => {
-//     // user-userID-currentTimeStamp-fileExtension
-//     const ext = file.mimetype.split('/')[1];
-//     const name = `user-${req.user.id}-${Date.now()}.${ext}`;
-//     cb(null, name);
-//   }
-// });
+// documents upload
+const multerStorageDocument = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/documents');
+  },
+  filename: (req, file, cb) => {
+    // user-userID-currentTimeStamp-fileExtension
+    const ext = file.originalname.split('.')[1];
+    let name = '';
+    if (ext) {
+
+      name = `userCV-${req.user.id}-${Date.now()}.${ext}`;
+    }
+    else {
+      name = `userCV-${req.user.id}-${Date.now()}`;
+    }
+    cb(null, name);
+  }
+});
+
+// document filter 
+const multerDocumentFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('application')) {
+    cb(null, true)
+  } else {
+    cb(new AppError('Please Upload only .docx or .pptx or .pdf files'), false)
+  }
+}
+
+const documentUpload = multer({
+  storage: multerStorageDocument,
+  fileFilter: multerDocumentFilter
+})
+
+exports.uploadUserCv = documentUpload.single('cv')
 
 const multerStorage = multer.memoryStorage();
 
@@ -26,7 +50,7 @@ const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-    console.log(file.mimetype);
+
     cb(new AppError('Not an image please upload only images', 400), false);
   }
 };
@@ -320,3 +344,18 @@ exports.search = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+
+exports.uploadCv = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  if (req.file) {
+    console.log(req.file);
+    user.cv = req.file.filename;
+  }
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Document Uploaded'
+  })
+})

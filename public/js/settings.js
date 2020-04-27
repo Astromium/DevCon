@@ -13,6 +13,12 @@ const showToast = (message, gr, pos, bgColor) => {
 };
 
 const saveBtn = document.getElementById('save');
+const fileName = document.getElementById('file-name');
+document.getElementById('cv').onchange = (e) => {
+  if (document.getElementById('cv').files[0]) {
+    fileName.innerText = document.getElementById('cv').files[0].name;
+  }
+};
 
 saveBtn.addEventListener('click', async () => {
   const name = document.getElementById('name').value;
@@ -30,6 +36,10 @@ saveBtn.addEventListener('click', async () => {
   const newPassword = document.getElementById('new-password').value;
   const newPasswordConfirm = document.getElementById('new-password-confirm')
     .value;
+
+  const cv = document.getElementById('cv');
+  const cvFile = new FormData();
+  if (cv.files[0]) cvFile.append('cv', cv.files[0]);
 
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   const interests = [];
@@ -75,9 +85,15 @@ saveBtn.addEventListener('click', async () => {
       data: dataObj,
     });
 
-    if (res.data.status === 'success') {
+    const res2 = await axios({
+      method: 'PATCH',
+      url: 'http://127.0.0.1:3000/api/v1/users/cv',
+      data: cvFile,
+    });
+
+    if (res.data.status === 'success' && res2.data.status === 'success') {
       showToast('Profile Updated', 'bottom', 'right', '#4cac7d');
-      window.setTimeout(() => location.assign('/home'), 1500);
+      window.setTimeout(() => location.assign('/me'), 1500);
     }
   } catch (err) {
     console.log(err.response.data.message);
