@@ -31,7 +31,10 @@ main.container
     img.wave(src='/illustrations/wave2-dark-404.svg' alt='wave')
     img.wave2(src='/illustrations/wave2-dark-404.svg' alt='wave')  
     img#page404(src='/illustrations/404.svg' alt='404 not found' style='width: 800px')
-    h1 OOOPs Looks Like This Page Does not Exist       
+    h1 OOOPs Looks Like This Page Does not Exist  
+    - let url = `/`;
+    - if(user) url = '/home'
+      a#login-btn.btn(href=`${url}`) Back Home    
 
 
 

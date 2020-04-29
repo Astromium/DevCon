@@ -142,3 +142,28 @@ header .search input {
   font-size: 38px;
   color: #4cac7d;
 }
+
+.btn {
+  width: 280px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  border-radius: 35px;
+  margin: 2rem auto;
+  background-color: #4cac7d;
+  border: none;
+  box-shadow: 0px 2px 2px #4cac7e41;
+  color: #fff;
+  font-size: 20px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  outline: none;
+}
+
+.btn:hover {
+  transform: translateY(5px);
+  box-shadow: 0px 4px 6px #4cac7e41;
+}

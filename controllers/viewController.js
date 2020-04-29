@@ -117,3 +117,9 @@ exports.markdown = (req, res) => {
     title: 'DevCon | Markdown'
   })
 }
+
+exports.dashboard = (req, res) => {
+  res.status(200).render('dashboard', {
+    title: 'Dashboard'
+  })
+}
