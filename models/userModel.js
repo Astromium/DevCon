@@ -110,6 +110,10 @@ const userSchema = new mongoose.Schema({
   // for admins
   reports: [
     {
+      reportType: {
+        type: 'String',
+        enum: ['post', 'bug']
+      },
       user: Object,
       post: {
         type: mongoose.Schema.ObjectId

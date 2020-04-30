@@ -30,7 +30,7 @@ router.get('/bookmarks', protect, getSuggestions, bookmarks);
 router.get('/me', protect, me);
 router.get('/settings', protect, settings);
 router.get('/markdown', markdown);
-router.get('/dashboard', dashboard);
+router.get('/dashboard', protect, dashboard);
 router.get('/startups/welcome', protect, welcomeStartup);
 router.get('/post/:id', protect, editPost);
 router.get('/users/:slug', protect, userProfile);

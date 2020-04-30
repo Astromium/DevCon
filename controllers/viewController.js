@@ -118,8 +118,10 @@ exports.markdown = (req, res) => {
   })
 }
 
-exports.dashboard = (req, res) => {
+exports.dashboard = catchAsync(async (req, res, next) => {
+  const admin = await User.findById(req.user.id);
   res.status(200).render('dashboard', {
-    title: 'Dashboard'
+    title: 'Dashboard',
+    admin
   })
-}
+})

@@ -323,6 +323,7 @@ const reportPost = async (ident) => {
     if (somethingElse !== '') reasons.push(somethingElse);
     const report = {
       post: postId,
+      reportType: 'post',
       reasons
     }
 

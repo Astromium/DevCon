@@ -359,3 +359,20 @@ exports.uploadCv = catchAsync(async (req, res, next) => {
     message: 'Document Uploaded'
   })
 })
+
+exports.getUsersStats = catchAsync(async (req, res, next) => {
+  const stats = await User.aggregate([
+    {
+      $group: {
+        _id: '$role',
+        num: { $sum: 1 }
+      }
+    }
+  ]);
+  const filteredStats = stats.filter(doc => doc._id !== 'admin');
+
+  res.status(200).json({
+    status: 'success',
+    stats: filteredStats
+  })
+})

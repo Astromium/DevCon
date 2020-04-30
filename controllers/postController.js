@@ -384,3 +384,24 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
     message: 'Comment Deleted',
   });
 });
+
+exports.getPostStats = catchAsync(async (req, res, next) => {
+  const stats = await Post.aggregate([
+    {
+      $group: {
+        _id: '$tag',
+        numPosts: { $sum: 1 }
+      }
+    },
+    {
+      $sort: { numPosts: -1 }
+    },
+    {
+      $limit: 5
+    }])
+
+  res.status(200).json({
+    status: 'success',
+    stats
+  })
+})

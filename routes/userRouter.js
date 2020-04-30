@@ -20,7 +20,8 @@ const {
   getSuggestions,
   search,
   uploadCv,
-  uploadUserCv
+  uploadUserCv,
+  getUsersStats
 } = require('../controllers/userController');
 
 const router = express.Router({ mergeParams: true });
@@ -36,6 +37,7 @@ router
 router.route('/cv').patch(protect, uploadUserCv, uploadCv);
 router.get('/feed', protect, getFeed);
 router.get('/suggestions', protect, getSuggestions);
+router.get('/stats', protect, getUsersStats);
 router.get('/follow/:user', protect, followUser);
 router.get('/search/:query', search);
 router.get('/unfollow/:user', protect, unfollowUser);
