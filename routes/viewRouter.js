@@ -13,9 +13,12 @@ const {
   userProfile,
   welcomeStartup,
   markdown,
-  dashboard
+  dashboard,
+  getAllReports,
+  getPost,
+  allUsers
 } = require('../controllers/viewController');
-const { protect } = require('../controllers/authController');
+const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
 
 const router = express.Router();
@@ -30,9 +33,12 @@ router.get('/bookmarks', protect, getSuggestions, bookmarks);
 router.get('/me', protect, me);
 router.get('/settings', protect, settings);
 router.get('/markdown', markdown);
-router.get('/dashboard', protect, dashboard);
+router.get('/dashboard', protect, restricTo('admin'), dashboard);
+router.get('/dashboard/allReports', protect, restricTo('admin'), getAllReports);
+router.get('/dashboard/allUsers', protect, restricTo('admin'), allUsers);
 router.get('/startups/welcome', protect, welcomeStartup);
 router.get('/post/:id', protect, editPost);
+router.get('/posts/:id', protect, getPost);
 router.get('/users/:slug', protect, userProfile);
 
 module.exports = router;

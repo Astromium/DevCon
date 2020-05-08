@@ -17,7 +17,7 @@ header
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
         | Dev
-        span(style='color: #4CAC7D;') Con
+        span(style='color: #1DA977;') Con
   .search
     input(type='text' placeholder='Search' id='search')
     #search-results
@@ -27,7 +27,7 @@ header
         i.fas.fa-cog
         | &nbsp;&nbsp;Settings
     li
-      p(style='color: #4cac7d;' id='logout-btn')
+      p(style='color: #1DA977;' id='logout-btn')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
 .container
@@ -72,50 +72,50 @@ header
             span(style='font-weight: normal;')  Following
         .socials(style='width: 100%; display: flex; justify-content: flex-start')
             - if(user.facebook)
-                a(href=`${user.facebook}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                a(href=`${user.facebook}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
                     i.fab.fa-facebook
             -if(user.linkedin)
-                a(href=`${user.linkedin}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                a(href=`${user.linkedin}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
                     i.fab.fa-linkedin 
             - if(user.twitter)
-                a(href=`${user.twitter}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                a(href=`${user.twitter}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
                     i.fab.fa-twitter   
             - if(user.youtube)
-                a(href=`${user.youtube}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                a(href=`${user.youtube}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
                     i.fab.fa-youtube
             - if(user.dribbble)
-                a(href=`${user.dribbble}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                a(href=`${user.dribbble}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
                     i.fab.fa-dribbble
             - if(user.devto)
-                a(href=`${user.devto}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')  
+                a(href=`${user.devto}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')  
                     i.fab.fa-dev  
             - if(user.github)
-                a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;') 
+                a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;') 
                     i.fab.fa-github 
             - if(user.personal)
-                a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
                     i.fas.fa-laptop-code  
                                                   
       a.btn(href='/settings') Edit Profile
     .change-photo(style='display: flex; align-items: center; margin-top: 1rem; margin-left: 0.5rem') 
         input#photo(type='file' name='photo' accept='image/*' style='display: none' )
-        label(for='photo' style='cursor: pointer; color: #4CAC7D; margin-top: 0.5rem; font-size: 19px;') Change Photo 
+        label(for='photo' style='cursor: pointer; color: #1DA977; margin-top: 0.5rem; font-size: 19px;') Change Photo 
         button.btn#save(style='margin: 0 1rem; padding: 0.5rem 2rem;') Save Photo   
-    h2(style='margin: 2rem 0; color: #5be0a0') What&apos;s on your mind ?
+    h2(style='margin: 2rem 0; color: #1DA977') What&apos;s on your mind ?
     .create-post
       h3(style='color: #oe1127; opacity: 0.8') don't know Markdown Syntax ? 
-        a(href='/markdown' style='text-decoration: none; color: #3bec97;' target='_blank') check out our quick tutorial
+        a(href='/markdown' style='text-decoration: none; color: #1DA977;' target='_blank') check out our quick tutorial
       textarea#markdown(name='' cols='' rows='' placeholder='Body Markdown')
       .uploads
         input#post-photo(type='file' name='post-photo' accept='image/*' style='display: none;')
         input#post-video(type='file' name='post-video' accept='video/*' style='display: none;')
         .image-upload
-          label(for='post-photo' style='cursor: pointer; color: #5be0a0;  margin-top: 0.5rem; font-size: 22px; font-weight: bold;')
+          label(for='post-photo' style='cursor: pointer; color: #1DA977;  margin-top: 0.5rem; font-size: 22px; font-weight: bold;')
             i.fas.fa-images
             |  &nbsp;Add a photo to your
             |                 post
         .video-upload
-          label(for='post-video' style='cursor: pointer; color: #5be0a0; margin-top: 0.5rem; font-size: 22px; font-weight: bold;')
+          label(for='post-video' style='cursor: pointer; color: #1DA977; margin-top: 0.5rem; font-size: 22px; font-weight: bold;')
             i.fas.fa-video
             |  &nbsp; Add a video to your
             |                 post
@@ -148,7 +148,7 @@ header
         .post
             - if(post.user._id.toString() === user._id.toString())
                 .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
-                    i.fas.fa-ellipsis-h(style='color: #4CAC7D; cursor: pointer')
+                    i.fas.fa-ellipsis-h(style='color: #1DA977; cursor: pointer')
                 .settings(id=`settings-${post._id}`)
                     a.button(href=`/post/${post._id}` style='text-decoration: none')
                         i.fas.fa-pen
@@ -206,7 +206,7 @@ header
             .user
                 img(src=`./img/users/${followingUser.photo}` alt='' height='40px' width='40px' style='border-radius: 50%')
                 a(href=`/profile/${followingUser.slug}` style='text-decoration: none; color: #000; font-size: 20px; margin-left: 1rem;') #{followingUser.name}
-                p(style='margin-left: 3rem; color: #4cac7d;') following
+                p(style='margin-left: 3rem; color: #1DA977;') following
 
 .followersFollowing#followers
         div(style='display: flex; justify-content: space-between; width: 100%; align-items: center;')
@@ -220,7 +220,7 @@ header
                 - const arr = user.following.map(x => x._id.toString());
                 - if(arr.includes(followerUser._id.toString())) f = 'following';
                 - let col = '#000';
-                - if(f === 'follow') col = '#4cac7d';
+                - if(f === 'follow') col = '#1DA977';
                     p(id=`${followerUser._id}` onClick=`handleFollowClick(this.id)` style=`cursor: pointer; color: ${col}`) #{f}
                                      
                         

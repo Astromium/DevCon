@@ -21,7 +21,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 
@@ -102,7 +102,7 @@ ul li {
 }
 
 .login-form h2 {
-  color: #4cac7d;
+  color: #1DA977;
   font-size: 38px;
   margin-bottom: 1rem;
 }
@@ -160,7 +160,7 @@ ul li {
   padding: 0.75rem 2rem;
   border-radius: 35px;
   margin: 2rem auto;
-  background-color: #4cac7d;
+  background-color: #1DA977;
   border: none;
   box-shadow: 0px 2px 2px #4cac7e41;
   color: #fff;
@@ -210,7 +210,7 @@ ul li {
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
 }
 .alert--success {
-  background-color: #4cac7d;
+  background-color: #1DA977;
 }
 .alert--error {
   background-color: #eb4d4b;

@@ -9,7 +9,7 @@ head
 
 header
   .logo
-    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(href='/dashboard' style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/Logo-red.svg' width='35px' height='35px' style='margin-right: 5px')
@@ -20,11 +20,11 @@ header
     #search-results
   ul
     li
-      a(href='/settings' style='color: #DE4760;')
+      a(href='/dashboard/allStartups' style='color: #DE4760;')
         
         | &nbsp;&nbsp;Startups
     li
-      a(href='/settings' style='color: #DE4760;')
+      a(href='/dashboard/allUsers' style='color: #DE4760;')
         
         | &nbsp;&nbsp;Users   
     li
@@ -44,29 +44,30 @@ main.container
     .wrapper
         .reports
             h2 Reports & Activities
-            - let reports = []
-            - 
-                if(admin.reports.length <= 3) reports = [...admin.reports]
-                  else if(admin.reports.length > 3)
-                    reports[0] = admin.reports[0]
-                    reports[1] = admin.reports[1]
-                    reports[2] = admin.reports[2]
+            //- - let reportsArr = []
+            //- - 
+            //-     if(reports.length <= 3) reportsArr = [...reports]
+            //-       else if(reports.length > 3)
+            //-         reportsArr[0] = reports[0]
+            //-         reportsArr[1] = reports[1]
+            //-         reportsArr[2] = reports[2]
              
                
             .report-container
                 each report in reports
+                
                   - let reasons = report.reasons.map(re => ` ${re} `).join(',')
                    
                   .report-card
                       .left
-                          p(style='color: #1DA977; margin-bottom: 1rem') 4-29-2020
+                          p(style='color: #1DA977; margin-bottom: 1rem') #{new Date(report.issuedAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
                           img(src=`/illustrations/post-report-green.svg` width='50px' height='50px')
                       
                       .right 
                           h3.post-type Post Report
                           p.report-body 
                               | #{report.user.name} has reported a 
-                              a(href=`/posts/${report.post}` style='text-decoration: none; color: #1DA876') post 
+                              a(href=`/posts/${report.post}` target='_blank' style='text-decoration: none; color: #1DA876') post 
                               br
                               | Reasons : &nbsp;
                              
@@ -74,7 +75,7 @@ main.container
                
                            
 
-                a(href='/' style='text-decoration: none; color: #1DA976; font-size: 25px; margin: 1rem 0') View All                                    
+                a(href='/dashboard/allReports' style='text-decoration: none; color: #1DA976; font-size: 25px; margin: 1rem 0') View All                                    
         .top
             h2 Top Tags & Users
             canvas#top-tags(height='400px')

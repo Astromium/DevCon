@@ -11,6 +11,7 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const userRouter = require('./routes/userRouter');
 const postRouter = require('./routes/postRouter');
+const reportRouter = require('./routes/reportRouter');
 const viewRouter = require('./routes/viewRouter');
 
 const app = express();
@@ -40,6 +41,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
+app.use('/api/v1/reports', reportRouter);
 
 // handle Undefined Routes
 app.all('*', (req, res, next) => {

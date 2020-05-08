@@ -28,7 +28,7 @@ router
   .get(getAllPosts)
   .post(protect, uploadPostImage, resizePostPhoto, createImagePost);
 router.route('/video').post(protect, uploadPostVideo, createVideoPost);
-router.route('/report').post(protect, reportPost);
+//router.route('/report').post(protect, reportPost);
 router.route('/stats').get(protect, getPostStats);
 router.get('/:id', getPost);
 

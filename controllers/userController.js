@@ -158,7 +158,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
 exports.deleteUser = catchAsync(async (req, res, next) => {
   await User.findByIdAndDelete(req.params.id);
   res.status(200).json({
-    data: null,
+    status: 'success'
   });
 });
 

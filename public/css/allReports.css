@@ -109,53 +109,15 @@ header .search input {
 }
 
 .container {
-    width: 100%;
+    width: 90%;
+    padding: 2rem;
+    display: grid;
+    margin-top: 1.5rem;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
 }
 
-.container .title {
-    display: flex;
-    align-items: center;
-    margin: 1.5rem;
-}
-
-.title h2 {
-    color: #fff;
-    opacity: 0.85;
-    font-weight: normal;
-    margin-left: 1rem;
-}
-
-.container .wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-}
-
-.wrapper div {
-    width: 33%;
-}
-
-.wrapper .reports {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-}
-
-.reports h2 {
-    font-weight: normal;
-    color: #fff;
-    opacity: 0.85;
-    margin-bottom: 1.5rem;
-}
-
-.reports .report-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.report-container .report-card {
-    width: 100%;
+.container .report-card {
     display: flex;
     padding: 1rem;
     background-color: #181C38;
@@ -190,68 +152,3 @@ header .search input {
     color: #C9C9C9;
     font-size: 20px;
 }
-
-.wrapper .top {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-}
-
-.top h2 {
-    font-weight: normal;
-    color: #fff;
-    opacity: 0.85;
-    margin-bottom: 1.5rem;
-}
-
-.top #top-tags {
-    width: 80%;
-    height: 600px;
-}
-
-.top .users-container {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-}
-
-.users-container .user-card {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    background-color: #181C38;
-    border-radius: 11px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
-}
-
-.user-card h3 {
-    margin-top: 0.5rem;
-    color: #fff;
-    opacity: 0.85;
-}
-
-.user-card p {
-    color: #1DA977;
-}
-
-.wrapper .stats {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-}
-
-.stats h2 {
-    font-weight: normal;
-    color: #fff;
-    opacity: 0.85;
-    margin-bottom: 1.5rem;
-}
-
-
-
-

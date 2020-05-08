@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
+const Report = require('../models/reportModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getLandingPage = (req, res, next) => {
@@ -120,8 +121,38 @@ exports.markdown = (req, res) => {
 
 exports.dashboard = catchAsync(async (req, res, next) => {
   const admin = await User.findById(req.user.id);
+  const reports = await Report.find();
   res.status(200).render('dashboard', {
     title: 'Dashboard',
-    admin
+    admin,
+    reports
+  })
+})
+
+exports.getAllReports = catchAsync(async (req, res, next) => {
+  const admin = await User.findById(req.user.id);
+  const reports = admin.reports;
+  console.log(reports);
+  res.status(200).render('allReports', {
+    title: 'All Reports',
+    reports
+  })
+})
+
+exports.getPost = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+
+  res.status(200).render('post', {
+    title: `Post from ${post.user.name}`,
+    post
+  })
+})
+
+exports.allUsers = catchAsync(async (req, res, next) => {
+  const users = await User.find({ role: 'user' });
+
+  res.status(200).render('users', {
+    title: 'All Users',
+    users
   })
 })
