@@ -4,25 +4,25 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.getLandingPage = (req, res, next) => {
   res.status(200).render('landing', {
-    title: 'DevCon'
+    title: 'DevCon',
   });
 };
 
 exports.login = (req, res, next) => {
   res.status(200).render('login', {
-    title: 'DevCon | Login'
+    title: 'DevCon | Login',
   });
 };
 
 exports.signup = (req, res, next) => {
   res.status(200).render('signup', {
-    title: 'DevCon | Sign up'
+    title: 'DevCon | Sign up',
   });
 };
 
 exports.startup = (req, res, next) => {
   res.status(200).render('startup', {
-    title: 'DevCon For Startups'
+    title: 'DevCon For Startups',
   });
 };
 
@@ -34,7 +34,7 @@ exports.home = async (req, res, next) => {
     title: 'DevCon | Home',
     user,
     feed,
-    suggestions
+    suggestions,
   });
 };
 
@@ -43,7 +43,7 @@ exports.welcome = async (req, res, next) => {
 
   res.status(200).render('welcome', {
     title: `Welcome | ${user.name}`,
-    user
+    user,
   });
 };
 
@@ -53,7 +53,7 @@ exports.bookmarks = async (req, res, next) => {
   res.status(200).render('bookmarks', {
     title: 'bookmarks',
     user,
-    suggestions
+    suggestions,
   });
 };
 
@@ -63,7 +63,7 @@ exports.me = async (req, res, next) => {
   );
   res.status(200).render('me', {
     title: `DevCon | ${user.name}`,
-    user
+    user,
   });
 };
 
@@ -73,7 +73,7 @@ exports.editPost = async (req, res, next) => {
   res.status(200).render('editPost', {
     title: 'Edit Post',
     post,
-    user
+    user,
   });
 };
 
@@ -84,7 +84,7 @@ exports.settings = async (req, res, next) => {
 
   res.status(200).render('settings', {
     title: 'DevCon | Settings',
-    user
+    user,
   });
 };
 
@@ -99,7 +99,7 @@ exports.userProfile = catchAsync(async (req, res, next) => {
   res.status(200).render('userProfile', {
     title: `DevCon | ${user.name}`,
     user,
-    loggedUser
+    loggedUser,
   });
 });
 
@@ -108,18 +108,28 @@ exports.welcomeStartup = catchAsync(async (req, res, next) => {
 
   res.status(200).render('startups-welcome', {
     title: `Welcome | ${user.name}`,
-    user
+    user,
   });
 });
 
 exports.markdown = (req, res) => {
   res.status(200).render('markdown', {
-    title: 'DevCon | Markdown'
-  })
-}
+    title: 'DevCon | Markdown',
+  });
+};
 
-exports.dashboard = (req, res) => {
+exports.dashboard = catchAsync(async (req, res) => {
+  const stats = await User.aggregate([
+    {
+      $group: {
+        _id: 'role',
+        num: { $sum: 1 },
+      },
+    },
+  ]);
+  const filteredStats = stats.filter((doc) => doc._id !== 'admin');
+  console.log(filteredStats);
   res.status(200).render('dashboard', {
-    title: 'Dashboard'
-  })
-}
+    title: 'Dashboard',
+  });
+});

@@ -53,7 +53,7 @@ exports.resizePostPhoto = (req, res, next) => {
   if (ext === 'svg') {
     format = 'svg';
   } else {
-    format = 'jpeg'
+    format = 'jpeg';
   }
   req.file.filename = `post-${req.user.id}-${Date.now()}.${format}`;
 
@@ -296,7 +296,6 @@ exports.unlikePost = catchAsync(async (req, res, next) => {
   });
 });
 
-
 exports.reportPost = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   const admins = await User.find({ role: 'admin' });
@@ -304,21 +303,20 @@ exports.reportPost = catchAsync(async (req, res, next) => {
   const userObj = {
     id: user._id,
     name: user.name,
-    photo: user.photo
-  }
+    photo: user.photo,
+  };
   report.user = userObj;
   console.log(report);
-  admins.forEach(async admin => {
+  admins.forEach(async (admin) => {
     admin.reports.unshift(report);
-    await admin.save({ validateBeforeSave: false })
+    await admin.save({ validateBeforeSave: false });
   });
 
   res.status(200).json({
     status: 'success',
-    message: 'Post Reported to the admins'
-  })
-
-})
+    message: 'Post Reported to the admins',
+  });
+});
 
 exports.addComment = catchAsync(async (req, res, next) => {
   const currentPost = await Post.findById(req.params.id).populate('user');
@@ -382,5 +380,28 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     message: 'Comment Deleted',
+  });
+});
+
+exports.getPostStats = catchAsync(async (req, res, next) => {
+  const stats = await Post.aggregate([
+    {
+      $group: {
+        _id: '$tag',
+        numPosts: { $sum: 1 },
+      },
+    },
+    {
+      $sort: {
+        numPosts: -1,
+      },
+    },
+    {
+      $limit: 5,
+    },
+  ]);
+  res.status(200).json({
+    status: 'success',
+    stats,
   });
 });

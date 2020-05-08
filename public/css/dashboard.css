@@ -155,7 +155,7 @@ header .search input {
 }
 
 .report-container .report-card {
-    width: 80%;
+    width: 100%;
     display: flex;
     padding: 1rem;
     background-color: #181C38;
