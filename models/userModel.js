@@ -107,16 +107,7 @@ const userSchema = new mongoose.Schema({
   slug: String,
   // for startups
   location: String,
-  // for admins
-  reports: [
-    {
-      user: Object,
-      post: {
-        type: mongoose.Schema.ObjectId
-      },
-      reasons: [String]
-    }
-  ],
+
   cv: String
 });
 

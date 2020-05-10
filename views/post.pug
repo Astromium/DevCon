@@ -1,0 +1,33 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel='stylesheet' href='/css/post.css')
+  title #{title}
+
+.container
+        .post
+                .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+                    i.fas.fa-trash(style='color: red')  
+                       
+                .info
+                    a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')
+                        img(src=`/img/users/${post.user.photo}` alt='avatar' width='50px' height='50px')
+                    .name
+                        a(href=`/users/${post.user.slug}` style='text-decoration: none')
+                            h3(style='cursor: pointer') #{post.user.name}
+                        p #{new Date(post.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+                .content#content
+                    - if(post.sanitizedHtml)
+                        != `${post.sanitizedHtml}`
+                - if(post.postType === 'image')  
+                    img.post-image(src=`/img/posts/${post.image}` alt='post-image')
+                - if(post.postType === 'video')
+                    video.post-video(controls='' preload='metadata')
+                        source(src=`/videos/${post.video}#t=0.5`)
+
+
+
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')                         

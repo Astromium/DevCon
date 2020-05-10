@@ -32,8 +32,14 @@ const login = async (email, password) => {
         },
       });
       if (res.data.status == 'success') {
-        showAlert('success', 'Logged in succesfully');
-        window.setTimeout(() => location.assign('/home'), 1500);
+
+        if (res.data.data.user.role === 'admin') {
+          showAlert('success', 'Logged in succesfully');
+          window.setTimeout(() => location.assign('/dashboard'), 1500);
+        } else {
+          showAlert('success', 'Logged in succesfully');
+          window.setTimeout(() => location.assign('/home'), 1500);
+        }
       }
     }
   } catch (err) {

@@ -321,13 +321,14 @@ const reportPost = async (ident) => {
     if (somethingElse !== '') reasons.push(somethingElse);
     const report = {
       post: postId,
+      reportType: 'post',
       reasons
     }
 
     try {
       const res = await axios({
         method: 'POST',
-        url: 'http://127.0.0.1:3000/api/v1/posts/report',
+        url: 'http://127.0.0.1:3000/api/v1/reports',
         data: report
       })
 

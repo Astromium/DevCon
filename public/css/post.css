@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+body {
+    font-family: 'Baloo 2', cursive;
+    background: #f0f0f0;
+}
+
+body::-webkit-scrollbar {
+  width: 0.55rem;
+}
+body::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+body::-webkit-scrollbar-thumb {
+  background: #4cac7d;
+  border-radius: 50px;
+}
+
+.container {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.container .post {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    padding: 1rem;
+    position: relative;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15), -2px -2px 6px #fafafae3;
+    position: relative;
+}
+
+.post .settings-btn {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  width: 30px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.post .info {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.post .info img {
+  border-radius: 50%;
+}
+
+.post .info .name {
+  margin-left: 1rem;
+}
+
+.post .info h3 {
+  color: #0c0e1c;
+  margin-top: 1rem;
+}
+
+.post .info p {
+  color: #4cac7d;
+  margin-top: -0.5rem;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.post .content {
+  margin-top: 1rem;
+  width: 100%;
+  color: #0c0e1c;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.content img {
+  margin: 1rem 0;
+  width: 100%;
+  max-height: 700px;
+  display: block;
+}
+
+.content code  {
+   font-size: 18px;
+   font-family: inherit;
+}
+
+.content code::-webkit-scrollbar {
+  width: 0.15rem;
+  height: 0.45rem;
+}
+.content code::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+.content code::-webkit-scrollbar-thumb {
+  background: #4cac7d;
+  border-radius: 10px;
+}
+
+
+#content ul li {
+  width: fit-content;
+}
+
+.post .post-image {
+  max-height: 700px;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.post .post-video {
+  max-height: 500px;
+  margin-top: 1.5rem;
+  width: 100%;
+  cursor: pointer;
+}

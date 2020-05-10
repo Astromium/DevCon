@@ -5,6 +5,7 @@ const {
   login,
   protect,
   logout,
+  restricTo
 } = require('../controllers/authController');
 const {
   getAllUsers,
@@ -20,7 +21,9 @@ const {
   getSuggestions,
   search,
   uploadCv,
-  uploadUserCv
+  uploadUserCv,
+  getUsersStats,
+  deleteUser
 } = require('../controllers/userController');
 
 const router = express.Router({ mergeParams: true });
@@ -36,12 +39,14 @@ router
 router.route('/cv').patch(protect, uploadUserCv, uploadCv);
 router.get('/feed', protect, getFeed);
 router.get('/suggestions', protect, getSuggestions);
+router.get('/stats', protect, getUsersStats);
 router.get('/follow/:user', protect, followUser);
 router.get('/search/:query', search);
 router.get('/unfollow/:user', protect, unfollowUser);
 router
   .route('/:id')
   .get(getUser)
-  .patch(updateUser);
+  .patch(protect, restricTo('admin'), updateUser)
+  .delete(protect, restricTo('admin'), deleteUser)
 
 module.exports = router;
