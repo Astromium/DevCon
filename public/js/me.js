@@ -64,7 +64,7 @@ submitPost.addEventListener('click', async (e) => {
         data: formData,
       });
       if (res.data.status === 'success') {
-        showToast('Post Uploaded Succesfully', 'bottom', 'right', '#4cac7d');
+        showToast('Post Uploaded Succesfully', 'bottom', 'right', '#1DA977');
         window.setTimeout(() => location.assign('/me'), 1500);
       }
     } catch (err) {
@@ -95,10 +95,10 @@ submitPost.addEventListener('click', async (e) => {
         data: formData,
       });
       while (!res.data.status) {
-        showToast('Uploading...', 'bottom', 'right', '#4cac7d');
+        showToast('Uploading...', 'bottom', 'right', '#1DA977');
       }
       if (res.data.status === 'success') {
-        showToast('Post Uploaded Succesfully', 'bottom', 'right', '#4cac7d');
+        showToast('Post Uploaded Succesfully', 'bottom', 'right', '#1DA977');
         window.setTimeout(() => location.assign('/me'), 1500);
       }
     } catch (err) {
@@ -128,7 +128,7 @@ submitPost.addEventListener('click', async (e) => {
         data: formData,
       });
       if (res.data.status === 'success') {
-        showToast('Post Uploaded Succesfully', 'bottom', 'right', '#4cac7d');
+        showToast('Post Uploaded Succesfully', 'bottom', 'right', '#1DA977');
         window.setTimeout(() => location.assign('/me'), 1500);
       }
     } catch (err) {
@@ -153,7 +153,7 @@ saveBtn.addEventListener('click', async (e) => {
       data: formData,
     });
     if (res.data.status === 'success') {
-      showToast('Photo Updated', 'top', 'right', '#4cac7d');
+      showToast('Photo Updated', 'top', 'right', '#1DA977');
       console.log(res.data);
       // the image takes some time to get saved
       // so I had to set a timeout to give the image
@@ -236,7 +236,7 @@ const handleBookmarkClick = async (btnId) => {
         btn.classList.remove('unmarked');
         btn.classList.add('marked');
         btn.setAttribute('data-state', 'marked');
-        showToast('Post Saved to bookmarks', 'bottom', 'right', '#4cac7d');
+        showToast('Post Saved to bookmarks', 'bottom', 'right', '#1DA977');
       }
     } catch (err) {
       console.log(err);
@@ -254,7 +254,7 @@ const handleBookmarkClick = async (btnId) => {
         btn.classList.remove('marked');
         btn.classList.add('unmarked');
         btn.setAttribute('data-state', 'unmarked');
-        showToast('Post Unsaved', 'bottom', 'right', '#4cac7d');
+        showToast('Post Unsaved', 'bottom', 'right', '#1DA977');
       }
     } catch (err) {
       console.log(err);
@@ -304,22 +304,22 @@ const addComment = async (ident) => {
         const comments = document.getElementById(`comments-${id}`);
         const markup = `<div><img src='./img/users/${user.photo}' alt='' /><p>${
           user.name
-        }</p><p style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;'>${new Date().toLocaleString(
-          'en-us',
-          {
-            day: 'numeric',
-            month: 'short',
-            hour: 'numeric',
-            minute: 'numeric',
-          }
-        )}</p></div><p class='comment-content'>${comment}</p>`;
+          }</p><p style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;'>${new Date().toLocaleString(
+            'en-us',
+            {
+              day: 'numeric',
+              month: 'short',
+              hour: 'numeric',
+              minute: 'numeric',
+            }
+          )}</p></div><p class='comment-content'>${comment}</p>`;
 
         el.className = 'comment';
         el.innerHTML = markup;
 
         comments.prepend(el);
         const n = num + 1;
-        showToast('Comment added', 'bottom', 'right', '#4cac7d');
+        showToast('Comment added', 'bottom', 'right', '#1DA977');
         commentsNum.innerText = `${n} comments`;
         document.getElementById(`comment-input-${id}`).value = '';
       }
@@ -375,7 +375,7 @@ const handleFollowClick = async (id) => {
           `You started following ${res.data.data.userName}`,
           'bottom',
           'right',
-          '#4cac7d'
+          '#1DA977'
         );
       }
     } catch (err) {
@@ -401,7 +401,7 @@ const deletePost = async (ident) => {
       url: `http://127.0.0.1:3000/api/v1/posts/${id}`,
     });
     if (res.data.status === 'success') {
-      showToast('Post Deleted', 'bottom', 'right', '#4cac7d');
+      showToast('Post Deleted', 'bottom', 'right', '#1DA977');
       window.setTimeout(
         () =>
           (deletePostBtn.parentElement.parentElement.style.display = 'none'),
@@ -420,7 +420,7 @@ const search = document
     e.preventDefault();
     const query = e.target.value;
     const searchContainer = document.getElementById('search-results');
-    searchContainer.addEventListener('click', (e) => {});
+    searchContainer.addEventListener('click', (e) => { });
     while (searchContainer.firstChild) {
       searchContainer.removeChild(searchContainer.lastChild);
     }

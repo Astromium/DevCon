@@ -92,7 +92,7 @@ saveBtn.addEventListener('click', async () => {
     });
 
     if (res.data.status === 'success' && res2.data.status === 'success') {
-      showToast('Profile Updated', 'bottom', 'right', '#4cac7d');
+      showToast('Profile Updated', 'bottom', 'right', '#1DA977');
       window.setTimeout(() => location.assign('/me'), 1500);
     }
   } catch (err) {
@@ -107,7 +107,7 @@ const search = document
     e.preventDefault();
     const query = e.target.value;
     const searchContainer = document.getElementById('search-results');
-    searchContainer.addEventListener('click', (e) => {});
+    searchContainer.addEventListener('click', (e) => { });
     while (searchContainer.firstChild) {
       searchContainer.removeChild(searchContainer.lastChild);
     }

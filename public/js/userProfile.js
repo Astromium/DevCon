@@ -83,7 +83,7 @@ const handleBookmarkClick = async btnId => {
         btn.classList.remove('unmarked');
         btn.classList.add('marked');
         btn.setAttribute('data-state', 'marked');
-        showToast('Post Saved to bookmarks', 'bottom', 'right', '#4cac7d');
+        showToast('Post Saved to bookmarks', 'bottom', 'right', '#1DA977');
       }
     } catch (err) {
       console.log(err);
@@ -101,7 +101,7 @@ const handleBookmarkClick = async btnId => {
         btn.classList.remove('marked');
         btn.classList.add('unmarked');
         btn.setAttribute('data-state', 'unmarked');
-        showToast('Post Unsaved', 'bottom', 'right', '#4cac7d');
+        showToast('Post Unsaved', 'bottom', 'right', '#1DA977');
       }
     } catch (err) {
       console.log(err);
@@ -163,7 +163,7 @@ const addComment = async ident => {
 
         comments.prepend(el);
         const n = num + 1;
-        showToast('Comment added', 'bottom', 'right', '#4cac7d');
+        showToast('Comment added', 'bottom', 'right', '#1DA977');
         commentsNum.innerText = `${n} comments`;
         document.getElementById(`comment-input-${id}`).value = '';
       }
@@ -219,7 +219,7 @@ const handleFollowClick = async id => {
           `You started following ${res.data.data.userName}`,
           'bottom',
           'right',
-          '#4cac7d'
+          '#1DA977'
         );
       }
     } catch (err) {
@@ -335,7 +335,7 @@ const reportPost = async (ident) => {
       })
 
       if (res.data.status === 'success') {
-        showToast(`${res.data.message}`, 'bottom', 'right', '#4cac7d')
+        showToast(`${res.data.message}`, 'bottom', 'right', '#1DA977')
       }
     } catch (err) {
       console.log(err);

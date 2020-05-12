@@ -122,6 +122,7 @@ exports.markdown = (req, res) => {
 exports.dashboard = catchAsync(async (req, res, next) => {
   const admin = await User.findById(req.user.id);
   const reports = await Report.find();
+  console.log(reports.length);
   res.status(200).render('dashboard', {
     title: 'Dashboard',
     admin,
@@ -131,9 +132,11 @@ exports.dashboard = catchAsync(async (req, res, next) => {
 
 exports.getAllReports = catchAsync(async (req, res, next) => {
   const reports = await Report.find();
+  const admin = await User.findById(req.user.id);
   res.status(200).render('allReports', {
     title: 'All Reports',
     reports,
+    admin
   });
 });
 
@@ -148,9 +151,20 @@ exports.getPost = catchAsync(async (req, res, next) => {
 
 exports.allUsers = catchAsync(async (req, res, next) => {
   const users = await User.find({ role: 'user' });
-
+  const admin = await User.findById(req.user.id);
   res.status(200).render('users', {
     title: 'All Users',
     users,
+    admin
   });
 });
+
+exports.allStartups = catchAsync(async (req, res, next) => {
+  const startups = await User.find({ role: 'startup' });
+  const admin = await User.findById(req.user.id);
+  res.status(200).render('allStartups', {
+    title: 'All Startups',
+    users: startups,
+    admin
+  })
+})

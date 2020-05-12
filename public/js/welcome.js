@@ -56,7 +56,7 @@ saveBtn.addEventListener('click', async e => {
       }
     });
     if (res.data.status === 'success') {
-      showToast('Informations Saved Succesfully', 'bottom', 'right', '#4cac7d');
+      showToast('Informations Saved Succesfully', 'bottom', 'right', '#1DA977');
       window.setTimeout(() => location.assign('/home'), 1500);
     }
   } catch (err) {

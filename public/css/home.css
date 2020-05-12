@@ -22,7 +22,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 
@@ -131,7 +131,7 @@ header .search input {
 }
 
 .left-nav ul li:hover {
-  border-left: 3px solid #4cac7d;
+  border-left: 3px solid #1DA977;
 }
 
 .left-nav ul li a {
@@ -139,7 +139,7 @@ header .search input {
 }
 
 .left-nav ul li a:hover {
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .container .right-nav {
@@ -199,7 +199,7 @@ header .search input {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  color: #4cac7d;
+  color: #1DA977;
   font-size: 20px;
 }
 
@@ -238,11 +238,11 @@ header .search input {
 }
 .desc p {
   font-size: 14px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .is-active {
-  border-left: 3px solid #4cac7d;
+  border-left: 3px solid #1DA977;
 }
 
 .follow {
@@ -250,7 +250,7 @@ header .search input {
   margin-left: 1.5rem;
   background: none;
   border: none;
-  color: #4cac7d;
+  color: #1DA977;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
@@ -311,7 +311,7 @@ header .search input {
   flex-direction: column;
 }
 .reportContainer h2 {
-  color: #4cac7d;
+  color: #1DA977;
   margin: 1.5rem 0;
 }
 
@@ -359,7 +359,7 @@ header .search input {
 
 /* When the checkbox is checked, add a green background */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #4cac7d;
+  background-color: #1DA977;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -407,7 +407,7 @@ header .search input {
   padding: 0.55rem 1.5rem;
   border-radius: 35px;
   margin: 1rem auto;
-  background-color: #4cac7d;
+  background-color: #1DA977;
   border: none;
   box-shadow: 0px 2px 2px #4cac7e41;
   color: #fff;
@@ -446,10 +446,10 @@ header .search input {
   outline: none;
 }
 .post .settings a:hover {
-  color: #4cac7d;
+  color: #1DA977;
 }
 .post .settings .button:hover {
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .post .info {
@@ -473,7 +473,7 @@ header .search input {
 }
 
 .post .info p {
-  color: #4cac7d;
+  color: #1DA977;
   margin-top: -0.5rem;
   font-weight: 800;
   font-size: 14px;
@@ -508,7 +508,7 @@ header .search input {
   background: #0c0e1c;
 }
 .content code::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 10px;
 }
 
@@ -628,7 +628,7 @@ header .search input {
   width: 10%;
   padding: 0.2rem 0.5rem;
   border-radius: 15px;
-  background: #4cac7d;
+  background: #1DA977;
   color: #fff;
   border: none;
   font-family: inherit;
@@ -716,7 +716,7 @@ header .search input {
   background: #0c0e1c;
 }
 #search-results::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 

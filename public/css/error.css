@@ -23,7 +23,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 
@@ -95,12 +95,12 @@ header .search input {
   font-family: inherit;
   color: #fff;
   font-size: 18px;
-  border-bottom: 3px solid #55c57a;
+  border-bottom: 3px solid #1DA977;
 }
 
 .search input:focus {
   outline: none;
-  border-bottom: 3px solid #55c57a;
+  border-bottom: 3px solid #1DA977;
 }
 
 .search input::placeholder {
@@ -140,7 +140,7 @@ header .search input {
 
 .container h1 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .btn {
@@ -152,7 +152,7 @@ header .search input {
   padding: 0.75rem 2rem;
   border-radius: 35px;
   margin: 2rem auto;
-  background-color: #4cac7d;
+  background-color: #1DA977;
   border: none;
   box-shadow: 0px 2px 2px #4cac7e41;
   color: #fff;

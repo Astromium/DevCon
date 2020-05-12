@@ -16,7 +16,8 @@ const {
   dashboard,
   getAllReports,
   getPost,
-  allUsers
+  allUsers,
+  allStartups
 } = require('../controllers/viewController');
 const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
@@ -36,6 +37,7 @@ router.get('/markdown', markdown);
 router.get('/dashboard', protect, restricTo('admin'), dashboard);
 router.get('/dashboard/allReports', protect, restricTo('admin'), getAllReports);
 router.get('/dashboard/allUsers', protect, restricTo('admin'), allUsers);
+router.get('/dashboard/allStartups', protect, restricTo('admin'), allStartups);
 router.get('/startups/welcome', protect, welcomeStartup);
 router.get('/post/:id', protect, editPost);
 router.get('/posts/:id', protect, getPost);

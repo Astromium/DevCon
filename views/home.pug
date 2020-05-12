@@ -16,7 +16,7 @@ header(data-id=`${user._id}` class='header')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
         | Dev
-        span(style='color: #4CAC7D;') Con
+        span(style='color: #1DA977;') Con
   .search
     input(type='text' placeholder='Search' id='search')
     #search-results
@@ -26,7 +26,7 @@ header(data-id=`${user._id}` class='header')
         i.fas.fa-cog
         | &nbsp;&nbsp;Settings
     li
-      p(style='color: #4cac7d;' id='logout-btn')
+      p(style='color: #1DA977;' id='logout-btn')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
 .container
@@ -57,7 +57,7 @@ header(data-id=`${user._id}` class='header')
       .post
         - if(post.user._id.toString() === user._id.toString())
           .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
-            i.fas.fa-ellipsis-h(style='color: #4CAC7D;')
+            i.fas.fa-ellipsis-h(style='color: #1DA977;')
           .settings(id=`settings-${post._id}`)
             a.button(href=`/post/${post._id}` style='text-decoration: none')
                 i.fas.fa-pen
@@ -68,7 +68,7 @@ header(data-id=`${user._id}` class='header')
                 
         - else if(post.user._id.toString() !== user._id.toString())  
           .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
-            i.fas.fa-ellipsis-h(style='color: #4CAC7D;')
+            i.fas.fa-ellipsis-h(style='color: #1DA977;')
           .settings(id=`settings-${post._id}`)
             button.button(id=`report-${post._id}` onClick='toggleReportContainer')
               i.fas.fa-exclamation-triangle(style='font-size: 20px')
@@ -185,7 +185,7 @@ header(data-id=`${user._id}` class='header')
             p Web Developer
             - const id = `${user._id}`
           button(id=`${id}` class='follow' onClick=`handleFollowClick(this.id)`) Follow
-      a(href='suggested.html' style='color: #4CAC7D; text-decoration: none;align-self: flex-end;')
+      a(href='suggested.html' style='color: #1DA977; text-decoration: none;align-self: flex-end;')
         | See More &nbsp;
         i.fas.fa-angle-double-right
 

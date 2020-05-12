@@ -27,7 +27,7 @@ const editPost = async (ident) => {
       },
     });
     if (res.data.status === 'success') {
-      showToast('Post Updated', 'top', 'right', '#4cac7d');
+      showToast('Post Updated', 'top', 'right', '#1DA977');
       window.setTimeout(() => location.assign('/me'), 1500);
     }
   } catch (err) {

@@ -21,7 +21,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 
@@ -74,7 +74,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .post .info p {
-  color: #4cac7d;
+  color: #1DA977;
   margin-top: -0.5rem;
   font-weight: 800;
   font-size: 14px;
@@ -109,7 +109,7 @@ body::-webkit-scrollbar-thumb {
   background: #0c0e1c;
 }
 .content code::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 10px;
 }
 

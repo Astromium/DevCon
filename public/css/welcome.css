@@ -23,7 +23,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 
@@ -103,7 +103,7 @@ ul li {
 
 .welcome-text h3 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .info {
@@ -155,7 +155,7 @@ ul li {
 
 .wrapper h3 {
   font-size: 34px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .wrapper .checkboxes {
@@ -203,7 +203,7 @@ ul li {
 
 /* When the checkbox is checked, add a green background */
 .container input:checked ~ .checkmark {
-  background-color: #4cac7d;
+  background-color: #1DA977;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -246,7 +246,7 @@ ul li {
 
 #resume:focus {
   outline: none !important;
-  border: 3px solid #4cac7d;
+  border: 3px solid #1DA977;
 }
 
 #skills {
@@ -264,7 +264,7 @@ ul li {
 
 #skills:focus {
   outline: none !important;
-  border: 3px solid #4cac7d;
+  border: 3px solid #1DA977;
 }
 
 .socials {
@@ -321,7 +321,7 @@ ul li {
   padding: 0.75rem 2rem;
   border-radius: 35px;
   margin: 2rem auto;
-  background-color: #4cac7d;
+  background-color: #1DA977;
   border: none;
   box-shadow: 0px 2px 2px #4cac7e41;
   color: #fff;

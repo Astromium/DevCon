@@ -17,7 +17,7 @@ header
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
         | Dev
-        span(style='color: #4CAC7D;') Con
+        span(style='color: #1DA977;') Con
   .search
     input(type='text' placeholder='Search' id='search')
     #search-results
@@ -27,7 +27,7 @@ header
         i.fas.fa-cog
         | &nbsp;&nbsp;Settings
     li
-      p(style='color: #4cac7d;' id='logout-btn')
+      p(style='color: #1DA977;' id='logout-btn')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
 .container
@@ -112,12 +112,12 @@ header
 
     .feed
       - if(user.posts.length === 0)
-        h2(style='color: #4cac7d')= `No Posts Yet From ${user.name}`
+        h2(style='color: #1DA977')= `No Posts Yet From ${user.name}`
         img(src='/illustrations/no-posts.svg' width='80%' height='40%')
       each post in user.posts
         .post
             .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
-              i.fas.fa-ellipsis-h(style='color: #4CAC7D;')
+              i.fas.fa-ellipsis-h(style='color: #1DA977;')
             .settings(id=`settings-${post._id}`)
               button.button(id=`report-${post._id}` onClick='toggleReportContainer')
                 i.fas.fa-exclamation-triangle(style='font-size: 20px')
@@ -224,7 +224,7 @@ header
                 - if(followingUser._id.toString() === loggedUser._id.toString()) f = 'You'
                 - if(arr.includes(followingUser._id)) f = 'following';
                 - let col = '#000';
-                - if(f === 'follow') color = '#4cac7d';
+                - if(f === 'follow') color = '#1DA977';
                     p(id=`following-${followingUser._id}` onClick=`handleFollowClick(this.id)` style=`cursor: pointer; color: ${color}`) #{f}
 
 .followersFollowing#followers
@@ -240,7 +240,7 @@ header
                 - if(followerUser._id.toString() === loggedUser._id.toString()) f = 'You'
                 - if(arr.includes(followerUser._id)) f = 'following';
                 - let col = '#000';
-                - if(f === 'follow') col = '#4cac7d';
+                - if(f === 'follow') col = '#1DA977';
                     p(id=`follower-${followerUser._id}` onClick=`handleFollowClick(this.id)` style=`cursor: pointer; color: ${col}`) #{f}
                                      
                         

@@ -35,7 +35,7 @@ saveBtn.addEventListener('click', async e => {
             data: startup
         })
         if (res.data.status === 'success') {
-            showToast('Profile Updated', 'bottom', 'right', '#4cac7d')
+            showToast('Profile Updated', 'bottom', 'right', '#1DA977')
             window.setTimeout(() => window.location.assign('/home'), 1500)
         }
     } catch (err) {

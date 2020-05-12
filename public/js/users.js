@@ -46,7 +46,7 @@ const deleteAccount = async (ident) => {
     });
     if (res.data.status === 'success') {
       showToast('Account Deleted', 'bottom', 'right', '#1DA977');
-      window.setTimeout(() => location.assign('/dashboard/allUsers'), 1500);
+      window.setTimeout(() => location.assign('/dashboard'), 1500);
     }
   } catch (err) {
     console.log(err);

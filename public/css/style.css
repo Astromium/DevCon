@@ -26,7 +26,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 
@@ -113,7 +113,7 @@ ul li {
 
 .intro-left p {
   font-size: 22px;
-  color: #4cac7d;
+  color: #1DA977;
   margin-top: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -136,7 +136,7 @@ ul li {
   padding: 0.75rem 2rem;
   border-radius: 35px;
   margin: 2rem auto;
-  background-color: #4cac7d;
+  background-color: #1DA977;
   border: none;
   box-shadow: 0px 2px 2px #4cac7e41;
   color: #fff;
@@ -168,7 +168,7 @@ ul li {
 }
 
 .cta .login {
-  border: 4px solid #4cac7d;
+  border: 4px solid #1DA977;
   box-shadow: 0px 2px 2px #4cac7e41;
   transition: all 0.5s ease-in-out;
 }
@@ -189,7 +189,7 @@ ul li {
 
 .sec2-right h2 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .sec2-right p {
@@ -199,7 +199,7 @@ ul li {
 
 .sec3-left h2 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 .sec3-left p {
   font-size: 20px;
@@ -213,7 +213,7 @@ ul li {
 
 .sec4-right h2 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .sec4-right p {
@@ -228,7 +228,7 @@ ul li {
 
 .sec5-left h2 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 .sec5-left p {
   font-size: 20px;
@@ -240,7 +240,7 @@ ul li {
 }
 .sec6-right h2 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .sec6-right p {
@@ -250,7 +250,7 @@ ul li {
 
 .sec7-left h2 {
   font-size: 38px;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .sec7-left p {
@@ -311,7 +311,7 @@ ul li {
 }
 
 .login-form h2 {
-  color: #4cac7d;
+  color: #1DA977;
   font-size: 38px;
   margin-bottom: 0.5rem;
   margin-top: 1rem;

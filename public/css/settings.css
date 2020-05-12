@@ -22,7 +22,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 
@@ -133,14 +133,14 @@ header .search input {
 }
 
 .is-active {
-  border-left: 3px solid #4cac7d;
+  border-left: 3px solid #1DA977;
 }
 
 .is-active a {
-  color: #4cac7d;
+  color: #1DA977;
 }
 .left-nav ul li:hover {
-  border-left: 3px solid #4cac7d;
+  border-left: 3px solid #1DA977;
 }
 
 .left-nav ul li a {
@@ -148,7 +148,7 @@ header .search input {
 }
 
 .left-nav ul li a:hover {
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .main {
@@ -174,7 +174,7 @@ header .search input {
 }
 
 h2 {
-  color: #4cac7d;
+  color: #1DA977;
   font-size: 38px;
   margin-bottom: 1rem;
 }
@@ -222,7 +222,7 @@ h2 {
   font-weight: normal;
   margin-bottom: 0.5rem;
   margin-top: 1.5rem;
-  color: #4cac7d;
+  color: #1DA977;
 }
 
 .btn {
@@ -234,7 +234,7 @@ h2 {
   padding: 0.75rem 2rem;
   border-radius: 35px;
   margin: 2rem auto;
-  background: linear-gradient(to right, #5be0a0, #3bec97);
+  background: #1DA977;
   border: none;
   box-shadow: 0px 2px 2px #4cac7e41;
   color: #fff;
@@ -294,7 +294,7 @@ h2 {
 
 /* When the checkbox is checked, add a green background */
 .label input:checked ~ .checkmark {
-  background-color: #4cac7d;
+  background-color: #1DA977;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -347,7 +347,7 @@ h2 {
   background: #0c0e1c;
 }
 #search-results::-webkit-scrollbar-thumb {
-  background: #4cac7d;
+  background: #1DA977;
   border-radius: 50px;
 }
 

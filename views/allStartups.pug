@@ -46,9 +46,6 @@ main.container
             p #{user.occupation}
             p(style='color: #DE4760') #{user.posts.length} Posts
             .actions
-              p(id=`promote-${user._id}` onclick='promoteToAdmin(this.id)' style='color:#1DA977 ; font-size: 18px; cursor: pointer') 
-                i.fas.fa-user-shield(style='margin-right: 0.5rem')
-                |Promote to admin
               p(id=`delete-${user._id}` onClick='deleteAccount(this.id)' style='color: #DE4760; font-size: 18px; cursor: pointer') 
                 i.fas.fa-trash(style='margin-right: 0.5rem')
                 | Delete account
