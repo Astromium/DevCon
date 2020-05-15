@@ -12,6 +12,7 @@ exports.createReport = catchAsync(async (req, res, next) => {
   reportBody.issuedAt = req.body.issuedAt;
   reportBody.status = req.body.status;
   reportBody.user = user;
+  reportBody.message = req.body.message;
 
   const report = await Report.create(reportBody);
 

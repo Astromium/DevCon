@@ -55,23 +55,36 @@ main.container
                
             .report-container
                 each report in reportsArr
-                
-                  - let reasons = report.reasons.map(re => ` ${re} `).join(',')
+                  
                    
                   .report-card
                       .left
+                          - let reportType = 'post-report-green.svg'
+                          - if(report.reportType === 'bug') reportType = 'bug-report-green.svg'
                           p(style='color: #1DA977; margin-bottom: 1rem') #{new Date(report.issuedAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
-                          img(src=`/illustrations/post-report-green.svg` width='50px' height='50px')
+                          img(src=`/illustrations/${reportType}` width='50px' height='50px')
                       
                       .right 
-                          h3.post-type Post Report
-                          p.report-body 
+                          h3.post-type #{report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)} Report
+                          - if(report.reportType === 'post')
+                            - let reasons = report.reasons.map(re => ` ${re} `).join(',')
+                            p.report-body 
                               | #{report.user.name} has reported a 
                               a(href=`/posts/${report.post}` target='_blank' style='text-decoration: none; color: #1DA876') post 
                               br
                               | Reasons : &nbsp;
-                             
-                              span(style='color: #1DA977; font-size: 18px') #{reasons} 
+                                  
+                              span(style='color: #1DA977; font-size: 18px') #{reasons}
+                          - if(report.reportType === 'bug')
+                            p.report-body #{report.message}
+                            
+                            p.report-body(style='font-size: 18px; margin-top: 0.5rem') 
+                              | Submitted by 
+                              span(style='color: #1DA876') #{report.user.name}     
+                            //- else if(report.reportType === 'bug')
+                            //-   p.report-body  #{report.message}
+                            //-   br 
+                            //-   | submitted from #{report.user.name}    
                
                            
 

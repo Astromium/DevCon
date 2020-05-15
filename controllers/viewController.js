@@ -121,7 +121,7 @@ exports.markdown = (req, res) => {
 
 exports.dashboard = catchAsync(async (req, res, next) => {
   const admin = await User.findById(req.user.id);
-  const reports = await Report.find();
+  const reports = await Report.find().sort('-issuedAt');
   console.log(reports.length);
   res.status(200).render('dashboard', {
     title: 'Dashboard',
@@ -131,7 +131,7 @@ exports.dashboard = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllReports = catchAsync(async (req, res, next) => {
-  const reports = await Report.find();
+  const reports = await Report.find().sort('-issuedAt');
   const admin = await User.findById(req.user.id);
   res.status(200).render('allReports', {
     title: 'All Reports',

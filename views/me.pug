@@ -93,7 +93,7 @@ header
                 a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;') 
                     i.fab.fa-github 
             - if(user.personal)
-                a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
+                a(href=`${user.personal}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
                     i.fas.fa-laptop-code  
                                                   
       a.btn(href='/settings') Edit Profile
@@ -132,7 +132,8 @@ header
             option#option(value='js') js
             option#option(value='python') python
             option#option(value='html-css') html-css
-            option#option(value='nodejs') nodejs
+            option#option(value='node') node
+            option#option(value='java-c-c++') java-c-c++
             option#option(value='django') django
             option#option(value='react') react
             option#option(value='angular') angular
