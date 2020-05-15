@@ -18,7 +18,8 @@ const reportSchema = new mongoose.Schema({
     type: String,
     enum: ['reviewed', 'not reviewed'],
     default: 'not reviewed'
-  }
+  },
+  message: String
 });
 
 

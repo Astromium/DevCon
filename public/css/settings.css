@@ -322,6 +322,28 @@ h2 {
   transform: rotate(45deg);
 }
 
+.report-label {
+  display: block;
+  font-size: 22px;
+  margin: 0 0 1rem 0;
+}
+
+.problem {
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            outline: 0;
+            box-shadow: none;
+            border: 1px solid #1DA977;
+            width: 50%;
+            border-radius: 5px;
+            box-sizing: content-box;
+            background-color: transparent;
+            overflow-y: hidden;
+            padding: 0.5rem;
+            font-size: 18px;
+            font-family: inherit;
+            resize: none;
+}
+
 #search-results {
   display: flex;
   flex-direction: column;

@@ -322,7 +322,8 @@ const reportPost = async (ident) => {
     const report = {
       post: postId,
       reportType: 'post',
-      reasons
+      reasons,
+      message: ''
     }
 
     try {

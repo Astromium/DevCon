@@ -235,10 +235,13 @@ header
         input#new-password.form__input(type='new-password'  required='' minlength='8' placeholder='••••••••')
         label.form__label(for='new-password-confirm') New Password Confirm
         input#new-password-confirm.form__input(type='password'  required='' minlength='8' placeholder='••••••••')
-
         
+      button#save.btn Save Changes 
 
-      button#save.btn Save Changes  
+      h2 Report a problem
+      label.report-label(for="report area") Please describe precisely what problem did you encounter
+      textarea#problem.problem(name='report area')  
+      button#submit-report.btn(style='margin: 1rem 0; width: 150px; padding: 0.5rem 1rem') Submit 
         
         
         
