@@ -343,3 +343,9 @@ const reportPost = async (ident) => {
   }
 
 }
+
+const notifToggle = document.getElementById('notification-toggle-btn');
+notifToggle.addEventListener('click', e => {
+  e.preventDefault();
+  const notifPanel = document.getElementById('notif-panel').classList.toggle('show');
+})

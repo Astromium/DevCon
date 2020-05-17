@@ -13,6 +13,8 @@ body {
 body {
   font-family: 'Baloo 2', cursive;
   background: #0c0e1c;
+  position: relative;
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -25,6 +27,8 @@ body::-webkit-scrollbar-thumb {
   background: #1DA977;
   border-radius: 50px;
 }
+
+
 
 header {
   height: 10vh;
@@ -86,12 +90,12 @@ header .search input {
   font-family: inherit;
   color: #fff;
   font-size: 18px;
-  border-bottom: 3px solid #55c57a;
+  border-bottom: 3px solid #1DA977;
 }
 
 .search input:focus {
   outline: none;
-  border-bottom: 3px solid #55c57a;
+  border-bottom: 3px solid #1DA977;
 }
 
 .search input::placeholder {
@@ -726,4 +730,83 @@ header .search input {
   align-items: center;
   margin: 0 auto;
   margin: 1rem 0;
+}
+
+
+#notif-panel {
+  background-color: #fff;
+  position: absolute;
+  top: 10vh;
+  right: 0;
+  z-index: 1000;
+  width: 20%;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  transform: translateX(40%);
+  height: 700px;
+  overflow-y: scroll;
+}
+
+#notif-panel.show {
+  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+#notif-panel .notif-header {
+  width: 100%;
+  background: #1DA977;
+  color: #fff;
+  padding: 1rem;
+  font-size: 20px;
+  
+}
+
+#notif-panel .notif-container {
+  width: 100%;
+}
+
+.notif-container .notif {
+  width: 100%;
+  display: flex;
+  transition: 0.25s ease-in-out;
+}
+
+.notif .img {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.notif .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0 1rem 0.25rem;
+}
+
+.notif:hover {
+  background: #fafafa;
+}
+
+#notif-panel::-webkit-scrollbar {
+  width: 0.35rem;
+}
+#notif-panel::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+#notif-panel::-webkit-scrollbar-thumb {
+  background: #1DA977;
+  border-radius: 50px;
 }

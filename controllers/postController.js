@@ -244,8 +244,11 @@ exports.likePost = catchAsync(async (req, res, next) => {
 
   if (postAuthor._id.toString() !== currentUser._id.toString()) {
     const notification = {
-      user: currentUser.name,
-      message: `${currentUser.name} Liked Your Post`,
+      user: {
+        name: currentUser.name,
+        photo: currentUser.photo
+      },
+      notifType: 'like',
       post: post._id,
     };
     // to prevent the duplicate of the notification
@@ -255,7 +258,7 @@ exports.likePost = catchAsync(async (req, res, next) => {
     postAuthor.notifications.forEach((notif) => {
       const obj = {
         user: notif.user,
-        message: notif.message,
+        notifType: notif.notifType,
         post: notif.post,
       };
       arr.push(obj);
@@ -334,8 +337,11 @@ exports.addComment = catchAsync(async (req, res, next) => {
   };
   if (postAuthor._id.toString() !== user._id.toString()) {
     const notification = {
-      user: user.name,
-      message: `${user.name} Liked Your Post`,
+      user: {
+        name: user.name,
+        photo: user.photo
+      },
+      notifType: 'comment',
       post: currentPost._id,
     };
     postAuthor.notifications.unshift(notification);

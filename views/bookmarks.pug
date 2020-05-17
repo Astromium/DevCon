@@ -29,6 +29,9 @@ header
       p(style='color: #1DA977;' id='logout-btn')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
+    li 
+      p#notification-toggle-btn(style='color: #fff')
+        i.far.fa-bell    
 .container
   nav.left-nav
     ul
@@ -191,6 +194,32 @@ header
       a(href='suggested.html' style='color: #1DA977; text-decoration: none;align-self: flex-end;')
         | See More &nbsp;
         i.fas.fa-angle-double-right
+
+div#notif-panel
+  .notif-header
+    p Notifications
+  .notif-container
+    each notification in user.notifications
+
+      .notif
+        .img 
+          img(src=`/img/users/${notification.user.photo}`)
+        .content 
+          - let message = ''
+          - if(notification.notifType === 'follow') message = 'started following you'
+          - if(notification.notifType === 'like') message = 'liked your'
+          - if(notification.notifType === 'comment') message = 'commented on your'
+          - let url = ''
+          - let display = 'none'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') display = 'inline'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') url = `/me#${notification.post}`
+
+          p 
+            span(style='font-weight: bold') #{notification.user.name}
+            |  #{message}
+            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
+          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
 script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
 script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js")

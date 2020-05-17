@@ -74,8 +74,14 @@ const userSchema = new mongoose.Schema({
   ],
   notifications: [
     {
-      user: String,
-      message: String,
+      notifType: {
+        type: String,
+        enum: ['follow', 'like', 'comment']
+      },
+      user: {
+        name: String,
+        photo: String
+      },
       post: {
         type: mongoose.Schema.ObjectId,
         ref: 'Post'

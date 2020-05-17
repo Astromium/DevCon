@@ -295,6 +295,15 @@ exports.followUser = catchAsync(async (req, res, next) => {
   currentUser.following.unshift(userID);
   const followedUser = await User.findById(req.params.user);
   followedUser.followers.unshift(mongoose.Types.ObjectId(req.user.id));
+  const notification = {
+    user: {
+      name: currentUser.name,
+      photo: currentUser.photo
+    },
+    notifType: 'follow',
+    post: null
+  }
+  followedUser.notifications.unshift(notification);
   await currentUser.save({ validateBeforeSave: false });
   await followedUser.save({ validateBeforeSave: false });
   res.status(200).json({
