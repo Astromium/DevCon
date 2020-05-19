@@ -1,0 +1,51 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel='stylesheet' href='/css/style.css')
+  title #{title}
+
+header.header
+    .logo
+        a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+        font-weight: bold;')
+            div(style='display: flex; justify-content: center')
+                img(src='/illustrations/dark-logo.svg' width='55px' height='55px' style='margin-right: 5px')
+                p(style='color: #fff; font-size: 26px; margin: auto') Dev
+                    span(style='color: #2B303F;') Con
+    .nav
+        ul
+            li
+                a(href='/startups' style='color: #1DA977;')
+                    i.fas.fa-cog
+                    | &nbsp;&nbsp;For Startups
+            li
+               a(href='/login' style='color: #fff;')
+                i.fas.fa-cog
+                | &nbsp;&nbsp;Login
+            li 
+                a(href='/signup' style='color: #fff;')
+                    i.fas.fa-cog
+                    | &nbsp;&nbsp;Sign up  
+
+.container 
+    .content 
+        h1.title DevCon 
+            
+        p.description 
+            | A place where students , developers and startups meet , share and enhance their knowledge and apply for jobs 
+            br 
+            | It connects graduated and undergraduated students from ESI-SBA and helps them to find internships, jobs and a lot more 
+        .actions 
+            a(href='/login') Login
+            a(href='signup') Sign up    
+    .img 
+        img(src='/illustrations/hero.svg') 
+
+.footer 
+    img(src='illustrations/logo2.svg' width='35px' height='35px')
+    p(style='color: #1DA977; margin-left: 0.5rem') DevCon 2020 All Rights Reserved    
+                

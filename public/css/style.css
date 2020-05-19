@@ -1,3 +1,4 @@
+/*
 * {
   margin: 0;
   padding: 0;
@@ -335,7 +336,7 @@ ul li {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   /* Pseudo element (a visible thing that isn't really in the DOM).
-          Also needs -ms- */
+          Also needs -ms- 
 }
 .form__input:focus {
   outline: none;
@@ -369,4 +370,141 @@ ul li {
 [data-scroll='out'] {
   opacity: 0;
   transform: translateX(-20px);
+}
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  background: url('/illustrations/bg2.svg') no-repeat;
+  background-size: cover;
+  font-family: 'Baloo 2', cursive;
+  position: relative;
+}
+
+.header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.nav ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  width: 100%;
+}
+
+ul li {
+  padding: 0 1rem;
+  margin: 0 2rem;
+}
+
+ul li a {
+  text-decoration: none;
+  font-size: 20px;
+  opacity: 0.85;
+}
+
+.container {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+
+
+
+.container .content {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content .title {
+  font-size: 82px;
+  margin-top: 5rem;
+  color: #fff;
+}
+.content .description {
+  margin-top: 2rem;
+  color: #fff;
+  opacity: 0.9;
+  width: 90%;
+  font-size: 22px;
+  line-height: 1.8;
+}
+
+.container .actions {
+  width: 100%;
+  display: flex;
+}
+
+.actions a {
+  text-decoration: none;
+  outline: none;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  border-radius: 35px;
+  margin: 2rem 1rem;
+  background-color: #1DA977;
+  border: none;
+  box-shadow: 0px 2px 2px #4cac7e41;
+  color: #fff;
+  font-size: 20px;
+  font-family: inherit;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.actions a:hover {
+  
+  transform: translateY(5px);
+  box-shadow: 0px 4px 6px #07e2783b;
+
+}
+
+.footer {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+@media(max-width: 1500px) {
+  .img {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .img img {
+    width: 80%;
+  }
+  .content .description {
+    width: 100%;
+    font-size: 20px;
+  }
 }

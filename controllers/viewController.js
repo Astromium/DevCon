@@ -4,7 +4,7 @@ const Report = require('../models/reportModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getLandingPage = (req, res, next) => {
-  res.status(200).render('landing', {
+  res.status(200).render('index', {
     title: 'DevCon',
   });
 };
