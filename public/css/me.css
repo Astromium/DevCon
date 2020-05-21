@@ -353,7 +353,7 @@ select #option {
 
 .post .settings {
   position: absolute;
-  top: 2.9rem;
+  top: 3.9rem;
   right: 1rem;
   background: #0c0e1c;
   color: #fff;
@@ -942,5 +942,8 @@ select #option {
 @media (max-width: 1400px) {
   #notif-panel {
     width: 30%;
+  }
+  .post .settings {
+    top: 6rem;
   }
 }
