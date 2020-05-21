@@ -485,10 +485,19 @@ header .search input {
 .post .content {
   margin-top: 1rem;
   width: 100%;
+  overflow-wrap: break-word;
   color: #0c0e1c;
   display: flex;
   flex-direction: column;
   font-size: 20px;
+}
+
+.content h3,
+.content h1,
+.content h2,
+.content h4,
+.content h5 {
+  font-weight: 600;
 }
 
 .content img {
@@ -513,6 +522,20 @@ header .search input {
 .content code::-webkit-scrollbar-thumb {
   background: #1da977;
   border-radius: 10px;
+}
+
+.content p {
+  width: 100%;
+}
+
+#content ul {
+  list-style: square;
+  margin-left: 1.5rem;
+}
+
+#content ul li {
+  width: fit-content;
+  padding: 0;
 }
 
 @import url(print.css);
