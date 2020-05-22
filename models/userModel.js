@@ -92,6 +92,15 @@ const userSchema = new mongoose.Schema({
       }
     }
   ],
+  messages: [
+    {
+      from: {
+        name: String,
+        photo: String
+      },
+      messageBody: String
+    }
+  ],
   youtube: String,
   twitter: String,
   facebook: String,
@@ -114,7 +123,7 @@ const userSchema = new mongoose.Schema({
   // for startups
   location: String,
 
-  cv: String
+  cv: String,
 });
 
 // document middlewares

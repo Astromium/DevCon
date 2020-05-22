@@ -3,6 +3,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
+const Job = require('../models/jobModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const slugify = require('slugify');
@@ -383,5 +384,81 @@ exports.getUsersStats = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     stats: filteredStats
+  })
+})
+
+exports.applyForJob = catchAsync(async (req, res, next) => {
+  const currentUser = await User.findById(req.user.id);
+  const job = await Job.findById(req.params.id);
+  job.applicants.unshift(currentUser._id);
+  await job.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'You have succesfully applied for this job'
+  })
+})
+
+exports.acceptApplicant = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  const currentUser = await User.findById(req.user.id);
+  // send a notification to the accepted user that he/she has been accepted
+  const notification = {
+    notifType: 'job',
+    user: {
+      name: currentUser.name,
+      photo: currentUser.photo
+    },
+    post: null
+  }
+  user.notifications.unshift(notification);
+
+  // send a message to the accepted user
+  const message = {
+    from: {
+      name: currentUser.name,
+      photo: currentUser.photo
+    },
+    messageBody: req.body.messageBody
+  }
+  user.messages.unshift(message);
+  await user.save({ validateBeforeSave: false });
+  await currentUser.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'User has been accepted'
+  })
+})
+
+exports.declineApplicant = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  const currentUser = await User.findById(req.user.id);
+  // send a notification to the declined user that he/she has been declined
+  const notification = {
+    notifType: 'job',
+    user: {
+      name: currentUser.name,
+      photo: currentUser.photo
+    },
+    post: null
+  }
+  user.notifications.unshift(notification);
+
+  // send a message to the declined user
+  const message = {
+    from: {
+      name: currentUser.name,
+      photo: currentUser.photo
+    },
+    messageBody: req.body.messageBody
+  }
+  user.messages.unshift(message);
+  await user.save({ validateBeforeSave: false });
+  await currentUser.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'User has been declined'
   })
 })
