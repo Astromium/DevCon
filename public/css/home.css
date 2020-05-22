@@ -524,6 +524,20 @@ header .search input {
   border-radius: 10px;
 }
 
+.content p {
+  width: 100%;
+}
+
+#content ul {
+  list-style: square;
+  margin-left: 1.5rem;
+}
+
+#content ul li {
+  width: fit-content;
+  padding: 0;
+}
+
 @import url(print.css);
 @media print {
   a[href^='http']::after {

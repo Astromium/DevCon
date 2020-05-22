@@ -549,6 +549,7 @@ select #option {
   width: 100%;
   overflow-wrap: break-word;
   color: #0c0e1c;
+  overflow-wrap: break-word;
   display: flex;
   flex-direction: column;
   font-size: 20px;
@@ -562,8 +563,11 @@ select #option {
   font-weight: 600;
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e25e83fe3bb7d43c00b8dbeb9356db7a6374350f
 .content img {
   margin: 1rem 0;
   width: 100%;
