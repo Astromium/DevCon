@@ -353,7 +353,7 @@ select #option {
 
 .post .settings {
   position: absolute;
-  top: 2.9rem;
+  top: 3.9rem;
   right: 1rem;
   background: #0c0e1c;
   color: #fff;
@@ -547,11 +547,22 @@ select #option {
 .post .content {
   margin-top: 1rem;
   width: 100%;
+  overflow-wrap: break-word;
   color: #0c0e1c;
   display: flex;
   flex-direction: column;
   font-size: 20px;
 }
+
+.content h3,
+.content h1,
+.content h2,
+.content h4,
+.content h5 {
+  font-weight: 600;
+}
+
+
 
 .content img {
   margin: 1rem 0;
@@ -593,8 +604,14 @@ select #option {
   background-color: rgb(226, 221, 221);
 }
 
+#content ul {
+  list-style: square;
+  margin-left: 1.5rem;
+}
+
 #content ul li {
   width: fit-content;
+  padding: 0;
 }
 
 .content a {
@@ -927,5 +944,8 @@ select #option {
 @media (max-width: 1400px) {
   #notif-panel {
     width: 30%;
+  }
+  .post .settings {
+    top: 6rem;
   }
 }
