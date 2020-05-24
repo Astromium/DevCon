@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const jobSchema = new mongoose.Schema({
+    author: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    },
     title: {
         type: String,
         required: true
@@ -12,14 +16,22 @@ const jobSchema = new mongoose.Schema({
     applicants: [{
         type: mongoose.Schema.ObjectId,
         ref: 'User'
-    }]
+    }],
+    jobLocation: {
+        type: String,
+        required: true
+    }
 })
 
-jobSchema.pre('save', function (next) {
+jobSchema.pre(/^find/, function (next) {
     this.populate({
         path: 'applicants',
         select: 'photo name slug cv',
     });
+    this.populate({
+        path: 'author',
+        select: 'name photo location slug'
+    })
     next();
 })
 

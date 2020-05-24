@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
 const Report = require('../models/reportModel');
+const Job = require('../models/jobModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getLandingPage = (req, res, next) => {
@@ -166,5 +167,16 @@ exports.allStartups = catchAsync(async (req, res, next) => {
     title: 'All Startups',
     users: startups,
     admin
+  })
+})
+
+exports.startupProfile = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  const jobs = await Job.find({ author: `${req.user.id}` });
+
+  res.status(200).render('startups-profile', {
+    title: `DevCon | ${user.name}`,
+    user,
+    jobs
   })
 })

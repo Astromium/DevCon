@@ -5,6 +5,7 @@ exports.createJob = catchAsync(async (req, res, next) => {
     let jobBody = {};
     if (req.body.title) jobBody.title = req.body.title;
     if (req.body.description) jobBody.description = req.body.description;
+    jobBody.author = req.user.id;
 
     const job = await Job.create(jobBody);
 

@@ -1,0 +1,154 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/night-owl.min.css")
+  link(rel='stylesheet' href='/css/me.css')
+  title #{title}
+
+header
+  .logo
+    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #1DA977;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/startups/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #1DA977;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+    li 
+      p#notification-toggle-btn(style='color: #fff')
+        i.far.fa-bell
+
+.container
+    nav.left-nav
+        ul
+            li.is-active
+                a(href='/startups/me')
+                    i.fas.fa-user
+                    | &nbsp;&nbsp; Profile
+            li
+                a(href='/popular-posts')
+                    i.fas.fa-users
+                    | &nbsp;&nbsp; Popular Posts
+            li
+                a(href='/bookmarks')
+                    i.far.fa-bookmark
+                    | &nbsp;&nbsp; Bookmarks
+            li
+                a(href='/chat')
+                    i.far.fa-comments
+                    | &nbsp; Messages
+
+    main.main
+        .info
+            img(src=`/img/users/${user.photo}` alt='avatar' id='user-photo')
+            .stats
+                h2 #{user.name}
+                h4 #{user.location}
+                .nums 
+                    p#followers-btn
+                        | #{user.followers.length}
+                        span(style='font-weight: normal;')  Followers
+                    p#following-btn
+                        | #{user.following.length}
+                        span(style='font-weight: normal;')  Following
+                .socials(style='width: 100%; display: flex; justify-content: flex-start')
+                    - if(user.facebook)
+                        a(href=`${user.facebook}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
+                            i.fab.fa-facebook
+                    -if(user.linkedin)
+                        a(href=`${user.linkedin}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
+                            i.fab.fa-linkedin 
+                    - if(user.twitter)
+                        a(href=`${user.twitter}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
+                            i.fab.fa-twitter   
+                    - if(user.youtube)
+                        a(href=`${user.youtube}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
+                            i.fab.fa-youtube
+                    - if(user.dribbble)
+                        a(href=`${user.dribbble}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
+                            i.fab.fa-dribbble
+                    - if(user.devto)
+                        a(href=`${user.devto}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')  
+                            i.fab.fa-dev  
+                    - if(user.github)
+                        a(href=`${user.github}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;') 
+                            i.fab.fa-github 
+                    - if(user.personal)
+                        a(href=`${user.personal}` target='_blank' style='font-size: 22px; color: #1DA977; margin-right: 1rem;')
+                            i.fas.fa-laptop-code  
+                                                    
+            a.btn(href='/startups/settings') Edit Profile
+        .change-photo(style='display: flex; align-items: center; margin-top: 1rem; margin-left: 0.5rem') 
+            input#photo(type='file' name='photo' accept='image/*' style='display: none' )
+            label(for='photo' style='cursor: pointer; color: #1DA977; margin-top: 0.5rem; font-size: 19px;') Change Photo 
+            button.btn#save(style='margin: 0 1rem; padding: 0.5rem 2rem;') Save Photo
+
+        .createJob
+            h2 Create a Job offer
+            .job-form 
+                label.form__label(for='title') Job Title
+                input#title.form__input(type='text'  required='')  
+                label.form__label(for='description') Job Description
+                textarea#description.form__input(type='text'  required='') 
+            .btn#submit-job Submit    
+
+        .jobs 
+            // todo   
+            each job in jobs  
+                .job 
+                    .top 
+                        .left-side 
+                            img(src=`/img/users/${user.photo}`) 
+                        .right-side 
+                            p.job-title Front End Web Developer 
+                            p.job-location 
+                                i.fas.fa-map-marker-alt &nbsp;&nbsp;
+                                |&nbsp; Djelfa, Algeria
+                            p.job-applicants 22 Applicants    
+                    .bot 
+                        p.job-desc Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+                        .view-apps#view View Applicants
+                        .applicants#applicants 
+                            each applicant in job.applicants
+                                .applicant 
+                                    img(src=`/img/users/${applicant.photo}` style='width: 40px; height: 40px; border-radius: 50%')
+                                    a.applicant-name(href=`/users/${applicant.slug}`) #{applicant.name}
+                                    a.cv(href='/documents/${applicant.cv}' download) 
+                                        i.fas.fa-file-alt
+                                        |&nbsp; CV
+                                    .actions 
+                                        p.accept 
+                                            i.fas.fa-check-circle
+                                            |&nbsp; Accept 
+                                        p.decline
+                                            i.fas.fa-times-circle 
+                                            |&nbsp; Decline
+
+                                                   
+
+
+
+
+
+
+script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js")
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')  
+script(defer='' src='/js/startupsProfile.js')      

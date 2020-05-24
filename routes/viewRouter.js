@@ -17,7 +17,8 @@ const {
   getAllReports,
   getPost,
   allUsers,
-  allStartups
+  allStartups,
+  startupProfile
 } = require('../controllers/viewController');
 const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
@@ -39,6 +40,7 @@ router.get('/dashboard/allReports', protect, restricTo('admin'), getAllReports);
 router.get('/dashboard/allUsers', protect, restricTo('admin'), allUsers);
 router.get('/dashboard/allStartups', protect, restricTo('admin'), allStartups);
 router.get('/startups/welcome', protect, welcomeStartup);
+router.get('/startups/me', protect, startupProfile)
 router.get('/post/:id', protect, editPost);
 router.get('/posts/:id', protect, getPost);
 router.get('/users/:slug', protect, userProfile);
