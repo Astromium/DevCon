@@ -18,31 +18,29 @@ const multerStorageDocument = multer.diskStorage({
     const ext = file.originalname.split('.')[1];
     let name = '';
     if (ext) {
-
       name = `userCV-${req.user.id}-${Date.now()}.${ext}`;
-    }
-    else {
+    } else {
       name = `userCV-${req.user.id}-${Date.now()}`;
     }
     cb(null, name);
-  }
+  },
 });
 
-// document filter 
+// document filter
 const multerDocumentFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('application')) {
-    cb(null, true)
+    cb(null, true);
   } else {
-    cb(new AppError('Please Upload only .docx or .pptx or .pdf files'), false)
+    cb(new AppError('Please Upload only .docx or .pptx or .pdf files'), false);
   }
-}
+};
 
 const documentUpload = multer({
   storage: multerStorageDocument,
-  fileFilter: multerDocumentFilter
-})
+  fileFilter: multerDocumentFilter,
+});
 
-exports.uploadUserCv = documentUpload.single('cv')
+exports.uploadUserCv = documentUpload.single('cv');
 
 const multerStorage = multer.memoryStorage();
 
@@ -51,7 +49,6 @@ const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-
     cb(new AppError('Not an image please upload only images', 400), false);
   }
 };
@@ -159,7 +156,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
 exports.deleteUser = catchAsync(async (req, res, next) => {
   await User.findByIdAndDelete(req.params.id);
   res.status(200).json({
-    status: 'success'
+    status: 'success',
   });
 });
 
@@ -299,11 +296,11 @@ exports.followUser = catchAsync(async (req, res, next) => {
   const notification = {
     user: {
       name: currentUser.name,
-      photo: currentUser.photo
+      photo: currentUser.photo,
     },
     notifType: 'follow',
-    post: null
-  }
+    post: null,
+  };
   followedUser.notifications.unshift(notification);
   await currentUser.save({ validateBeforeSave: false });
   await followedUser.save({ validateBeforeSave: false });
@@ -355,7 +352,6 @@ exports.search = catchAsync(async (req, res, next) => {
   });
 });
 
-
 exports.uploadCv = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   if (req.file) {
@@ -366,26 +362,26 @@ exports.uploadCv = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    message: 'Document Uploaded'
-  })
-})
+    message: 'Document Uploaded',
+  });
+});
 
 exports.getUsersStats = catchAsync(async (req, res, next) => {
   const stats = await User.aggregate([
     {
       $group: {
         _id: '$role',
-        num: { $sum: 1 }
-      }
-    }
+        num: { $sum: 1 },
+      },
+    },
   ]);
-  const filteredStats = stats.filter(doc => doc._id !== 'admin');
+  const filteredStats = stats.filter((doc) => doc._id !== 'admin');
 
   res.status(200).json({
     status: 'success',
-    stats: filteredStats
-  })
-})
+    stats: filteredStats,
+  });
+});
 
 exports.applyForJob = catchAsync(async (req, res, next) => {
   const currentUser = await User.findById(req.user.id);
@@ -395,70 +391,76 @@ exports.applyForJob = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    message: 'You have succesfully applied for this job'
-  })
-})
+    message: 'You have succesfully applied for this job',
+  });
+});
 
 exports.acceptApplicant = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   const currentUser = await User.findById(req.user.id);
+  const job = await Job.findById(req.body.job);
   // send a notification to the accepted user that he/she has been accepted
   const notification = {
     notifType: 'job',
     user: {
       name: currentUser.name,
-      photo: currentUser.photo
+      photo: currentUser.photo,
     },
-    post: null
-  }
+    post: null,
+  };
   user.notifications.unshift(notification);
 
   // send a message to the accepted user
   const message = {
     from: {
       name: currentUser.name,
-      photo: currentUser.photo
+      photo: currentUser.photo,
     },
-    messageBody: req.body.messageBody
-  }
+    messageBody: req.body.messageBody,
+  };
   user.messages.unshift(message);
+  job.accepted.unshift(user._id);
+  await job.save({ validateBeforeSave: false });
   await user.save({ validateBeforeSave: false });
   await currentUser.save({ validateBeforeSave: false });
 
   res.status(200).json({
     status: 'success',
-    message: 'User has been accepted'
-  })
-})
+    message: 'User has been accepted',
+  });
+});
 
 exports.declineApplicant = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.id);
+  const job = await Job.findById(req.body.job);
   const currentUser = await User.findById(req.user.id);
   // send a notification to the declined user that he/she has been declined
   const notification = {
     notifType: 'job',
     user: {
       name: currentUser.name,
-      photo: currentUser.photo
+      photo: currentUser.photo,
     },
-    post: null
-  }
+    post: null,
+  };
   user.notifications.unshift(notification);
 
   // send a message to the declined user
   const message = {
     from: {
       name: currentUser.name,
-      photo: currentUser.photo
+      photo: currentUser.photo,
     },
-    messageBody: req.body.messageBody
-  }
+    messageBody: req.body.messageBody,
+  };
   user.messages.unshift(message);
+  job.declined.unshift(user._id);
+  await job.save({ validateBeforeSave: false });
   await user.save({ validateBeforeSave: false });
   await currentUser.save({ validateBeforeSave: false });
 
   res.status(200).json({
     status: 'success',
-    message: 'User has been declined'
-  })
-})
+    message: 'User has been declined',
+  });
+});

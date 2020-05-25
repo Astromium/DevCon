@@ -103,7 +103,9 @@ header
             h2 Create a Job offer
             .job-form 
                 label.form__label(for='title') Job Title
-                input#title.form__input(type='text'  required='')  
+                input#title.form__input(type='text'  required='')
+                label.form__label(for='location') Job Location
+                input#location.form__input(type='text'  required='')   
                 label.form__label(for='description') Job Description
                 textarea#description.form__input(type='text'  required='') 
             .btn#submit-job Submit    
@@ -116,29 +118,37 @@ header
                         .left-side 
                             img(src=`/img/users/${user.photo}`) 
                         .right-side 
-                            p.job-title Front End Web Developer 
+                            p.job-title #{job.title} 
                             p.job-location 
                                 i.fas.fa-map-marker-alt &nbsp;&nbsp;
-                                |&nbsp; Djelfa, Algeria
-                            p.job-applicants 22 Applicants    
+                                |&nbsp; #{job.jobLocation}
+                            p.job-applicants #{job.applicants.length} Applicants    
                     .bot 
-                        p.job-desc Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
-                        .view-apps#view View Applicants
-                        .applicants#applicants 
+                        p.job-desc #{job.description}
+                        .view-apps(id=`show-${job._id}` onclick='showApplicants(this.id)') View Applicants
+                        .applicants(id=`applicants-${job._id}`) 
                             each applicant in job.applicants
                                 .applicant 
                                     img(src=`/img/users/${applicant.photo}` style='width: 40px; height: 40px; border-radius: 50%')
                                     a.applicant-name(href=`/users/${applicant.slug}`) #{applicant.name}
-                                    a.cv(href='/documents/${applicant.cv}' download) 
+                                    a.cv(href=`/documents/${applicant.cv}` download) 
                                         i.fas.fa-file-alt
                                         |&nbsp; CV
                                     .actions 
-                                        p.accept 
+                                        - let acceptDisplayStyle = 'block'
+                                        - let acceptText = 'Accept'
+                                        - let declineText = 'Decline'
+                                        - let declineDisplayStyle = 'block'
+                                        - if(job.accepted.includes(applicant._id)) acceptText = 'Accepted'
+                                        - if(job.accepted.includes(applicant._id)) declineDisplayStyle = 'none'
+                                        - if(job.declined.includes(applicant._id)) acceptDisplayStyle = 'none'
+                                        - if(job.declined.includes(applicant._id)) declineText = 'Declined'
+                                        p.accept(id=`accept-${applicant._id}-${job._id}` onclick='acceptApplicant(this.id)' data-state=`${acceptText}` style=`display: ${acceptDisplayStyle}`)
                                             i.fas.fa-check-circle
-                                            |&nbsp; Accept 
-                                        p.decline
+                                            |&nbsp; #{acceptText} 
+                                        p.decline(id=`decline-${applicant._id}-${job._id}` onclick='declineApplicant(this.id)' data-state=`${declineText}` style=`display: ${declineDisplayStyle}`)
                                             i.fas.fa-times-circle 
-                                            |&nbsp; Decline
+                                            |&nbsp; #{declineText}
 
                                                    
 

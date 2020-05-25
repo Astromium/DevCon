@@ -137,7 +137,7 @@ exports.getAllReports = catchAsync(async (req, res, next) => {
   res.status(200).render('allReports', {
     title: 'All Reports',
     reports,
-    admin
+    admin,
   });
 });
 
@@ -156,7 +156,7 @@ exports.allUsers = catchAsync(async (req, res, next) => {
   res.status(200).render('users', {
     title: 'All Users',
     users,
-    admin
+    admin,
   });
 });
 
@@ -166,17 +166,26 @@ exports.allStartups = catchAsync(async (req, res, next) => {
   res.status(200).render('allStartups', {
     title: 'All Startups',
     users: startups,
-    admin
-  })
-})
+    admin,
+  });
+});
 
 exports.startupProfile = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
-  const jobs = await Job.find({ author: `${req.user.id}` });
+  const jobs = await Job.find({ author: `${req.user.id}` }).sort('-createdAt');
 
   res.status(200).render('startups-profile', {
     title: `DevCon | ${user.name}`,
     user,
-    jobs
-  })
-})
+    jobs,
+  });
+});
+
+exports.startupSettings = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).render('startups-settings', {
+    title: `${user.name} | Settings`,
+    user,
+  });
+});

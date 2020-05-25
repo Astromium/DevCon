@@ -32,10 +32,12 @@ const login = async (email, password) => {
         },
       });
       if (res.data.status == 'success') {
-
         if (res.data.data.user.role === 'admin') {
           showAlert('success', 'Logged in succesfully');
           window.setTimeout(() => location.assign('/dashboard'), 1500);
+        } else if (res.data.data.user.role === 'startup') {
+          showAlert('success', 'Logged in succesfully');
+          window.setTimeout(() => location.assign('/startups/me'), 1500);
         } else {
           showAlert('success', 'Logged in succesfully');
           window.setTimeout(() => location.assign('/home'), 1500);

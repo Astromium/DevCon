@@ -459,6 +459,17 @@ h2 {
   border-radius: 50px;
 }
 
+#desc {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 20px;
+  font-family: inherit;
+  resize: vertical;
+  opacity: 0.95;
+  border: 0.5px solid #1da977;
+}
+
 @media (max-width: 1400px) {
   #notif-panel {
     width: 30%;
