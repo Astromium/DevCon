@@ -91,25 +91,50 @@ const showApplicants = (id) => {
     .classList.toggle('show');
 };
 
-const acceptApplicant = async (id) => {
+const toggleAcceptApplicant = (id) => {
   const acceptBtn = document.getElementById(id);
+  if (acceptBtn.getAttribute('data-state') === 'Accept') {
+    const applicantId = id.split('-')[1];
+    const jobId = id.split('-')[2];
+    const messageContainer = document.getElementById(`messageContainer-${applicantId}-${jobId}`).classList.toggle('show');
+  } else {
+    return
+  }
+
+}
+
+const resetAcceptApplicant = id => {
+  const applicantId = id.split('-')[1];
+  const jobId = id.split('-')[2];
+  const messageContainer = document.getElementById(`messageContainer-${applicantId}-${jobId}`).classList.toggle('show');
+}
+
+const acceptApplicant = async (id) => {
   const userId = id.split('-')[1];
   const jobId = id.split('-')[2];
+  const acceptBtn = document.getElementById(`accept-${userId}-${jobId}`);
   const deleteBtn = document.getElementById(`decline-${userId}-${jobId}`);
-  if (acceptBtn.getAttribute('state') === 'Accept') {
+  const acceptMessage = document.getElementById(`input-${userId}-${jobId}`).value;
+  const messageContainer = document.getElementById(`messageContainer-${userId}-${jobId}`)
+  if (!acceptMessage) {
+    return showToast('Acceptance Message is required !', 'bottom', 'right', '#c0392b')
+  }
+  if (acceptBtn.getAttribute('data-state') === 'Accept') {
     try {
       const res = await axios({
         method: 'POST',
         url: `http://127.0.0.1:3000/api/v1/users/accept/${userId}`,
         data: {
-          messageBody: 'Congratulation! You have been accepted',
+          messageBody: acceptMessage,
           job: jobId,
         },
       });
       if (res.data.status === 'success') {
+        showToast('Applicant Accepted', 'bottom', 'right', '#1DA977')
+        messageContainer.classList.toggle('show');
         deleteBtn.style.display = 'none';
         acceptBtn.innerHTML = "<i class='fas fa-check-circle'></i> Accepted";
-        acceptBtn.setAttribute('state', 'Accepted');
+        acceptBtn.setAttribute('data-state', 'Accepted');
       }
     } catch (err) {
       console.log(err);
@@ -125,7 +150,7 @@ const declineApplicant = async (id) => {
   const userId = id.split('-')[1];
   const jobId = id.split('-')[2];
   const acceptBtn = document.getElementById(`accept-${userId}-${jobId}`);
-  if (deleteBtn.getAttribute('state') === 'Decline') {
+  if (deleteBtn.getAttribute('data-state') === 'Decline') {
     try {
       const res = await axios({
         method: 'POST',
@@ -138,7 +163,7 @@ const declineApplicant = async (id) => {
       if (res.data.status === 'success') {
         acceptBtn.style.display = 'none';
         deleteBtn.innerHTML = "<i class='fas fa-times-circle'></i> Declined";
-        deleteBtn.setAttribute('state', 'Declined');
+        deleteBtn.setAttribute('data-state', 'Declined');
       }
     } catch (err) {
       console.log(err);

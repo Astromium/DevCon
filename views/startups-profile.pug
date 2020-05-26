@@ -128,27 +128,33 @@ header
                         .view-apps(id=`show-${job._id}` onclick='showApplicants(this.id)') View Applicants
                         .applicants(id=`applicants-${job._id}`) 
                             each applicant in job.applicants
-                                .applicant 
-                                    img(src=`/img/users/${applicant.photo}` style='width: 40px; height: 40px; border-radius: 50%')
-                                    a.applicant-name(href=`/users/${applicant.slug}`) #{applicant.name}
-                                    a.cv(href=`/documents/${applicant.cv}` download) 
-                                        i.fas.fa-file-alt
-                                        |&nbsp; CV
-                                    .actions 
-                                        - let acceptDisplayStyle = 'block'
-                                        - let acceptText = 'Accept'
-                                        - let declineText = 'Decline'
-                                        - let declineDisplayStyle = 'block'
-                                        - if(job.accepted.includes(applicant._id)) acceptText = 'Accepted'
-                                        - if(job.accepted.includes(applicant._id)) declineDisplayStyle = 'none'
-                                        - if(job.declined.includes(applicant._id)) acceptDisplayStyle = 'none'
-                                        - if(job.declined.includes(applicant._id)) declineText = 'Declined'
-                                        p.accept(id=`accept-${applicant._id}-${job._id}` onclick='acceptApplicant(this.id)' data-state=`${acceptText}` style=`display: ${acceptDisplayStyle}`)
-                                            i.fas.fa-check-circle
-                                            |&nbsp; #{acceptText} 
-                                        p.decline(id=`decline-${applicant._id}-${job._id}` onclick='declineApplicant(this.id)' data-state=`${declineText}` style=`display: ${declineDisplayStyle}`)
-                                            i.fas.fa-times-circle 
-                                            |&nbsp; #{declineText}
+                                .applicant
+                                    .wrapper 
+                                        img(src=`/img/users/${applicant.photo}` style='width: 40px; height: 40px; border-radius: 50%')
+                                        a.applicant-name(href=`/users/${applicant.slug}`) #{applicant.name}
+                                        a.cv(href=`/documents/${applicant.cv}` download) 
+                                            i.fas.fa-file-alt
+                                            |&nbsp; CV
+                                        .actions 
+                                            - let acceptDisplayStyle = 'block'
+                                            - let acceptText = 'Accept'
+                                            - let declineText = 'Decline'
+                                            - let declineDisplayStyle = 'block'
+                                            - if(job.accepted.includes(applicant._id)) acceptText = 'Accepted'
+                                            - if(job.accepted.includes(applicant._id)) declineDisplayStyle = 'none'
+                                            - if(job.declined.includes(applicant._id)) acceptDisplayStyle = 'none'
+                                            - if(job.declined.includes(applicant._id)) declineText = 'Declined'
+                                            p.accept(id=`accept-${applicant._id}-${job._id}` onclick='toggleAcceptApplicant(this.id)' data-state=`${acceptText}` style=`display: ${acceptDisplayStyle}`)
+                                                i.fas.fa-check-circle
+                                                |&nbsp; #{acceptText} 
+                                            p.decline(id=`decline-${applicant._id}-${job._id}` onclick='declineApplicant(this.id)' data-state=`${declineText}` style=`display: ${declineDisplayStyle}`)
+                                                i.fas.fa-times-circle 
+                                                |&nbsp; #{declineText}
+                                    .message(id=`messageContainer-${applicant._id}-${job._id}`)            
+                                        input.messageInput(id=`input-${applicant._id}-${job._id}` type='text' placeholder='Acceptance Message ...' required)
+                                        .btns(id=`btns-${applicant._id}-${job._id}`) 
+                                            .cta(id=`accept-${applicant._id}-${job._id}` onclick='acceptApplicant(this.id)' data-state=`${acceptText}` style='') Send 
+                                            .cta(id=`cancel-${applicant._id}-${job._id}` onclick='resetAcceptApplicant(this.id)' style='background: #cf391e') Cancel       
 
                                                    
 

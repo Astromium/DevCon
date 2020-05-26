@@ -58,7 +58,7 @@ header
         input#name.form__input(type='text'  required='' value=`${user.name}`)
         label.form__label(for='email') Email Adress
         input#email.form__input(type='email' required='' value=`${user.email}`) 
-        label.form__label(for='occupation') occupation
+        label.form__label(for='occupation') Location
         - let oc = '';
         - if(user.location) oc = user.location;
         input#location.form__input(type='text' required='' value=`${oc}`)

@@ -1123,10 +1123,15 @@ select #option {
   width: 100%;
   padding: 0.8rem 1rem;
   display: flex;
+  flex-direction: column;
+}
+
+.applicant .wrapper {
+  display: flex;
   align-items: center;
 }
 
-.applicant .applicant-name {
+.wrapper .applicant-name {
   text-decoration: none;
   color: #fff;
   opacity: 0.9;
@@ -1134,13 +1139,13 @@ select #option {
   font-weight: normal;
 }
 
-.applicant .cv {
+.wrapper .cv {
   margin-left: 1.5rem;
   text-decoration: none;
   color: #1da977;
 }
 
-.applicant .actions {
+.wrapper .actions {
   margin-left: auto;
   display: flex;
 }
@@ -1159,5 +1164,64 @@ select #option {
   cursor: pointer;
 }
 
+.applicant .message {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
 
+.message.show {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+.message .messageInput {
+  margin-top: 0.8rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 18px;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+
+
+.messageInput:focus {
+  outline-color: #1da977;
+}
+
+.message .btns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btns .cta {
+  background: #1da977;
+  font-size: 18px;
+  padding: 0.3rem 1rem;
+  margin: 0 1rem;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 35px;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+  
+}
+
+
+.cta:hover {
+  transform: translateY(5px);
+}
 
