@@ -77,6 +77,7 @@ submitJob.addEventListener('click', async (e) => {
       });
       if (res.data.status === 'success') {
         showToast('Job Submitted', 'bottom', 'right', '#1DA977');
+        window.setTimeout(() => location.assign('/startups/me'), 1500);
       }
     } catch (err) {
       console.log(err);
@@ -189,3 +190,63 @@ logoutBtn.addEventListener('click', async (e) => {
     console.log(err);
   }
 });
+
+const toggleSettings = (ident) => {
+  const id = ident.split('-')[1];
+  const settingsContainer = document.getElementById(`settings-${id}`);
+  settingsContainer.classList.toggle('show');
+};
+
+const deleteJob = async (ident) => {
+  const id = ident.split('-')[1];
+
+  try {
+    const res = await axios({
+      method: 'DELETE',
+      url: `http://127.0.0.1:3000/api/v1/jobs/${id}`
+    })
+    if (res.data.status === 'success') {
+      showToast('Job Deleted', 'bottom', 'right', '#1DA977');
+      window.setTimeout(() => location.assign('/startups/me'), 1500);
+    }
+  } catch (err) {
+    console.log(err);
+    showToast(`${err.response.data.message}`, 'bottom', 'right', '#c0392b')
+  }
+}
+
+const toggleEditContainer = (id) => {
+  const editContainer = document.getElementById(`edit-${id.split('-')[1]}`).classList.toggle('showEdit');
+}
+
+const saveEdit = async (id) => {
+  const jobId = id.split('-')[1];
+  const title = document.getElementById(`editTitle-${jobId}`).value;
+  const jobLocation = document.getElementById(`editLocation-${jobId}`).value;
+  const description = document.getElementById(`editDesc-${jobId}`).value;
+  if (!title || !jobLocation || !description) {
+    return showToast('Please Fill the Forms', 'bottom', 'right', '#c0392b')
+  } else {
+    try {
+      const job = { title, jobLocation, description }
+      const res = await axios({
+        method: 'PATCH',
+        url: `http://127.0.0.1:3000/api/v1/jobs/${jobId}`,
+        data: job
+      })
+      if (res.data.status === 'success') {
+        showToast('Job Updated', 'bottom', 'right', '#1DA977');
+        window.setTimeout(() => location.assign('/startups/me'), 1500);
+      }
+    } catch (err) {
+      console.log(err);
+      showToast(`${err.response.data.message}`, 'bottom', 'right', '#c0392b');
+    }
+  }
+}
+
+const notifToggle = document.getElementById('notification-toggle-btn');
+notifToggle.addEventListener('click', e => {
+  e.preventDefault();
+  const notifPanel = document.getElementById('notif-panel').classList.toggle('show');
+})

@@ -250,6 +250,7 @@ exports.likePost = catchAsync(async (req, res, next) => {
       },
       notifType: 'like',
       post: post._id,
+      job: null
     };
     // to prevent the duplicate of the notification
     // eg: if i liked a post and then i unliked it
@@ -343,6 +344,7 @@ exports.addComment = catchAsync(async (req, res, next) => {
       },
       notifType: 'comment',
       post: currentPost._id,
+      job: null
     };
     postAuthor.notifications.unshift(notification);
   }

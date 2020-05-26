@@ -80,7 +80,7 @@ const search = document
     e.preventDefault();
     const query = e.target.value;
     const searchContainer = document.getElementById('search-results');
-    searchContainer.addEventListener('click', (e) => {});
+    searchContainer.addEventListener('click', (e) => { });
     while (searchContainer.firstChild) {
       searchContainer.removeChild(searchContainer.lastChild);
     }
@@ -182,3 +182,5 @@ notifToggle.addEventListener('click', (e) => {
     .getElementById('notif-panel')
     .classList.toggle('show');
 });
+
+

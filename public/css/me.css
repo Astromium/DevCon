@@ -12,7 +12,7 @@ body {
 
 body {
   font-family: 'Baloo 2', cursive;
-  background: #fafafa;
+  background: #ececec;
   overflow-x: hidden;
 }
 
@@ -979,8 +979,9 @@ select #option {
   padding: 0.5rem 1.75rem;
   border: none;
   width: 100%;
-  background-color: #fff;
-  background-color: #f2f2f2;
+  /* background-color: #fff;
+  background-color: #f2f2f2; */
+  background-color: #dfdfdf;
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
   -webkit-transition: all 0.3s;
@@ -1025,12 +1026,14 @@ select #option {
 
 .jobs .job {
   margin: 1rem auto;
+  background: #fff;
   width: 80%;
   display: flex;
   padding: 1rem;
   flex-direction: column;
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15),
-    -2px -2px 2px rgba(198, 224, 201, 0.15);
+    -2px -4px 6px rgba(198, 224, 201, 0.15);
+  position: relative;  
 }
 
 .job .top {
@@ -1225,3 +1228,116 @@ select #option {
   transform: translateY(5px);
 }
 
+.job .settings-btn {
+  position: absolute;
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
+  width: 30px;
+}
+
+.job .settings {
+  position: absolute;
+  top: 3.9rem;
+  right: 1rem;
+  background: #0c0e1c;
+  color: #fff;
+  padding: 0 1rem 1rem 1rem;
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(-20%);
+  pointer-events: none;
+  border-radius: 5px;
+}
+
+.job .settings.show {
+  transform: translateY(-10%);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.job .settings .button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: inherit;
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  margin-top: 1rem;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  outline: none;
+}
+.job .settings a:hover {
+  color: #1da977;
+}
+.job .settings .button:hover {
+  color: #1da977;
+}
+
+.job .editContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  overflow-y: auto;
+  z-index: 0;
+  opacity: 0;
+  visibility: hidden;
+  background: #0e1127;
+  transform: translateY(-20%);
+  transition: all 0.3s ease-in-out;
+}
+
+.editContainer.showEdit {
+  z-index: 10000;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+
+.editContainer::-webkit-scrollbar {
+  width: 0.55rem;
+}
+.editContainer::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+.editContainer::-webkit-scrollbar-thumb {
+  background: #1da977;
+  border-radius: 50px;
+}
+
+.editContainer .job-form {
+  background-color: #0e1127;
+  margin: 0 auto;
+  width: 90%;
+  -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  padding: 1rem 1rem;
+  border-radius: 5px;
+  position: relative;
+}
+
+.job-form button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 28px;
+  font-weight: normal;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.726);
+}

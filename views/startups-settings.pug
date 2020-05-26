@@ -36,11 +36,11 @@ header
     ul
       li
         a(href='/startups/me')
-          i.fas.fa-home
+          i.fas.fa-user
           | &nbsp; Profile
       li
         a(href='/popular-posts')
-          i.fas.fa-user
+          i.fas.fa-users
           | &nbsp;&nbsp; Popular Posts
       
       li
@@ -124,19 +124,17 @@ div#notif-panel
           img(src=`/img/users/${notification.user.photo}`)
         .content 
           - let message = ''
-          - if(notification.notifType === 'follow') message = 'started following you'
-          - if(notification.notifType === 'like') message = 'liked your'
-          - if(notification.notifType === 'comment') message = 'commented on your'
+          - if(notification.notifType === 'apply') message = `Applied for your`
           - let url = ''
           - let display = 'none'
-          - if(notification.notifType === 'like' || notification.notifType === 'comment') display = 'inline'
-          - if(notification.notifType === 'like' || notification.notifType === 'comment') url = `/me#${notification.post}`
+          - if(notification.notifType === 'apply') display = 'inline'
+          - if(notification.notifType === 'apply') url = `/startups/me#${notification.job}`
 
           p 
             span(style='font-weight: bold') #{notification.user.name}
             |  #{message}
-            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
-          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}        
+            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  job
+          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}      
      
     
 

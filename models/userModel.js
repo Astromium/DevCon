@@ -89,6 +89,10 @@ const userSchema = new mongoose.Schema({
       createdAt: {
         type: Date,
         default: Date.now
+      },
+      job: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Job'
       }
     }
   ],

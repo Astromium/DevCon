@@ -103,9 +103,9 @@ header
             h2 Create a Job offer
             .job-form 
                 label.form__label(for='title') Job Title
-                input#title.form__input(type='text'  required='')
+                input#title.form__input(type='text'  required='' placeholder='title...')
                 label.form__label(for='location') Job Location
-                input#location.form__input(type='text'  required='')   
+                input#location.form__input(type='text'  required='' placeholder='location...')   
                 label.form__label(for='description') Job Description
                 textarea#description.form__input(type='text'  required='') 
             .btn#submit-job Submit    
@@ -114,6 +114,26 @@ header
             // todo   
             each job in jobs  
                 .job 
+                    .editContainer(id=`edit-${job._id}`) 
+                        .job-form 
+                            button(id=`close-${job._id}` onclick='toggleEditContainer(this.id)') 
+                                i.fas.fa-times
+                            label.form__label(for='title') Job Title
+                            input.form__input(id=`editTitle-${job._id}` type='text'  required='' placeholder='title...' value=`${job.title}`)
+                            label.form__label(for='location') Job Location
+                            input.form__input(id=`editLocation-${job._id}` type='text'  required='' placeholder='location...' value=`${job.jobLocation}`)   
+                            label.form__label(for='description') Job Description
+                            textarea.form__input(id=`editDesc-${job._id}` type='text'  required='') #{job.description} 
+                        .btn(id=`saveEdit-${job._id}` onclick='saveEdit(this.id)') Save Changes
+                    .settings-btn(id=`settingBtn-${job._id}` onClick='toggleSettings(this.id)')
+                        i.fas.fa-ellipsis-h(style='color: #1DA977; cursor: pointer;')
+                    .settings(id=`settings-${job._id}`)
+                        button.button(id=`toggleEdit-${job._id}` style='text-decoration: none' onclick='toggleEditContainer(this.id)')
+                            i.fas.fa-pen
+                            | &nbsp;&nbsp;Edit 
+                        button.button(id=`delete-${job._id}` onClick='deleteJob(this.id)')
+                            i.fas.fa-trash
+                            | &nbsp;&nbsp;Delete 
                     .top 
                         .left-side 
                             img(src=`/img/users/${user.photo}`) 
@@ -154,7 +174,30 @@ header
                                         input.messageInput(id=`input-${applicant._id}-${job._id}` type='text' placeholder='Acceptance Message ...' required)
                                         .btns(id=`btns-${applicant._id}-${job._id}`) 
                                             .cta(id=`accept-${applicant._id}-${job._id}` onclick='acceptApplicant(this.id)' data-state=`${acceptText}` style='') Send 
-                                            .cta(id=`cancel-${applicant._id}-${job._id}` onclick='resetAcceptApplicant(this.id)' style='background: #cf391e') Cancel       
+                                            .cta(id=`cancel-${applicant._id}-${job._id}` onclick='resetAcceptApplicant(this.id)' style='background: #cf391e') Cancel 
+
+div#notif-panel
+  .notif-header
+    p Notifications
+  .notif-container
+    each notification in user.notifications
+
+      .notif
+        .img 
+          img(src=`/img/users/${notification.user.photo}`)
+        .content 
+          - let message = ''
+          - if(notification.notifType === 'apply') message = `Applied for your`
+          - let url = ''
+          - let display = 'none'
+          - if(notification.notifType === 'apply') display = 'inline'
+          - if(notification.notifType === 'apply') url = `/startups/me#${notification.job}`
+
+          p 
+            span(style='font-weight: bold') #{notification.user.name}
+            |  #{message}
+            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  job
+          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
 
                                                    
 

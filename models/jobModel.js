@@ -41,14 +41,14 @@ const jobSchema = new mongoose.Schema({
   },
 });
 
-jobSchema.pre(/^find/, function(next) {
+jobSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'applicants',
     select: 'photo name slug cv',
   });
   this.populate({
     path: 'author',
-    select: 'name photo location slug',
+    select: 'name photo location slug _id',
   });
   next();
 });
