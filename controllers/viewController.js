@@ -189,3 +189,15 @@ exports.startupSettings = catchAsync(async (req, res, next) => {
     user,
   });
 });
+
+exports.popularPosts = catchAsync(async (req, res, next) => {
+  const posts = await Post.find().sort('-numLikes -numComments');
+  const user = await User.findById(req.user.id);
+
+  res.status(200).render('popularPosts', {
+    title: 'DevCon | Popular Posts',
+    posts,
+    user
+  })
+
+})

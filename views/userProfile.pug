@@ -169,7 +169,7 @@ header
                     span.checkmark
 
                   
-                input(type='text' placeholder='something else ? ...' id='something-else')
+                input(type='text' placeholder='something else ? ...' id=`something-else-${post._id}`)
                 button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report
 
             .info
@@ -271,7 +271,7 @@ div#notif-panel
             a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
           p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}                                     
                         
-script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+
 script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js")
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")

@@ -306,8 +306,8 @@ const deletePost = async (ident) => {
 
 const reportPost = async (ident) => {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  const somethingElse = document.getElementById('something-else').value;
   const postId = ident.split('-')[1];
+  const somethingElse = document.getElementById(`something-else-${postId}`).value;
   let reasons = [];
 
   checkboxes.forEach(box => {

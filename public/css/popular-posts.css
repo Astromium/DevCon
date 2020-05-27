@@ -1,0 +1,613 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+  width: 100%;
+}
+
+body {
+  font-family: 'Baloo 2', cursive;
+  background: #ececec;
+  overflow-x: hidden;
+}
+
+body.active {
+  filter: blur(20px);
+}
+
+body::-webkit-scrollbar {
+  width: 0.55rem;
+}
+body::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+body::-webkit-scrollbar-thumb {
+  background: #1da977;
+  border-radius: 50px;
+}
+
+header {
+  top: 0;
+  height: 10vh;
+  width: 100%;
+  background: #0c0e1c;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  position: fixed;
+  z-index: 10;
+}
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header ul {
+  display: flex;
+  list-style: none;
+}
+
+ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ul li a,
+ul li p {
+  color: #fff;
+  text-decoration: none;
+  font-size: 19px;
+  transition: all 0.3s ease-in-out;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+ul li a:hover {
+  color: #fff;
+}
+ul li {
+  padding: 0 2rem;
+}
+
+header .search {
+  width: 500px;
+  position: relative;
+}
+
+header .search input {
+  background-image: url('../illustrations/search.svg');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 40px;
+  background-size: 15px 15px;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  width: 100%;
+  background: #0c0e1c;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: inherit;
+  color: #fff;
+  font-size: 18px;
+  border-bottom: 3px solid #1da977;
+}
+
+.search input:focus {
+  outline: none;
+  border-bottom: 3px solid #1da977;
+}
+
+.search input::placeholder {
+  margin-top: auto;
+  font-family: inherit;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.container {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  position: relative;
+}
+
+.container .left-nav {
+  margin-top: 10vh;
+  height: 90vh;
+  background: #0c0e1c;
+  width: 20%;
+  position: fixed;
+}
+
+.left-nav ul {
+  margin: 1rem 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.left-nav ul li {
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.is-active {
+  border-left: 3px solid #1da977;
+}
+
+.is-active a {
+  color: #1da977;
+}
+.left-nav ul li:hover {
+  border-left: 3px solid #1da977;
+}
+
+.left-nav ul li a {
+  transition: all 0.1s ease-in-out;
+}
+
+.left-nav ul li a:hover {
+  color: #1da977;
+}
+
+.container .feed {
+    width: 80%;
+    margin-top: 10vh;
+    padding: 2rem;
+    margin-left: 20%;
+}
+
+.feed .post {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  border-radius: 15px;
+  padding: 1rem;
+  position: relative;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15),
+    -2px -2px 2px rgba(198, 224, 201, 0.15);
+}
+
+.post .settings-btn {
+  position: absolute;
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
+  width: 30px;
+}
+
+.post .settings {
+  position: absolute;
+  top: 5.9rem;
+  right: 1rem;
+  background: #0c0e1c;
+  color: #fff;
+  padding: 0 1rem 1rem 1rem;
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(-10%);
+  pointer-events: none;
+  border-radius: 5px;
+}
+
+.settings .reportContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.reportContainer h2 {
+  color: #1da977;
+  margin: 1.5rem 0;
+}
+
+.reportContainer .reasons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.reasons .checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a green background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #1da977;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.something-else {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  font-family: inherit;
+}
+
+.reportContainer .btn {
+  outline: none;
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.55rem 1.5rem;
+  border-radius: 35px;
+  margin: 1rem auto;
+  background-color: #1da977;
+  border: none;
+  box-shadow: 0px 2px 2px #4cac7e41;
+  color: #fff;
+  font-size: 20px;
+  font-family: inherit;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(5px);
+  box-shadow: 0px 4px 6px #4cac7e41;
+}
+
+.settings.show {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.post .settings .button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: inherit;
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  margin-top: 1rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  outline: none;
+}
+.post .settings a:hover {
+  color: #1da977;
+}
+.post .settings .button:hover {
+  color: #1da977;
+}
+
+.post .info {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.post .info img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 0.5rem;
+}
+
+.post .info .name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post .info h3 {
+  color: #0c0e1c;
+}
+
+.post .info p {
+  color: #1da977;
+  margin-top: -0.5rem;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.post .content {
+  margin-top: 1rem;
+  width: 100%;
+  overflow-wrap: break-word;
+  color: #0c0e1c;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.content h3,
+.content h1,
+.content h2,
+.content h4,
+.content h5 {
+  font-weight: 600;
+}
+
+.content img {
+  margin: 1rem 0;
+  width: 100%;
+  max-height: 700px;
+  display: block;
+}
+
+.content code {
+  font-size: 18px;
+  font-family: inherit;
+}
+
+.content code::-webkit-scrollbar {
+  width: 0.15rem;
+  height: 0.45rem;
+}
+.content code::-webkit-scrollbar-track {
+  background: #0c0e1c;
+}
+.content code::-webkit-scrollbar-thumb {
+  background: #1da977;
+  border-radius: 10px;
+}
+
+@import url(print.css);
+@media print {
+  a[href^='http']::after {
+    content: attr(href);
+  }
+}
+
+.content .prettyprint {
+  display: block;
+  padding: 1rem;
+  width: 100%;
+  overflow-x: auto;
+  border: none;
+  background-color: rgb(226, 221, 221);
+}
+
+#content ul {
+  list-style: square;
+  margin-left: 1.5rem;
+}
+
+#content ul li {
+  width: fit-content;
+  padding: 0;
+}
+
+.content a {
+  text-decoration: none;
+  color: #1da977;
+  cursor: pointer;
+}
+
+.post .post-image {
+  max-height: 700px;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.post .post-video {
+  max-height: 500px;
+  margin-top: 1.5rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.post .actions {
+  width: 100%;
+}
+
+.actions .action-buttons {
+  margin-top: 0.2rem;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action-buttons li {
+  font-size: 20px;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0.5rem;
+}
+
+.actions .stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: #0c0e1c;
+}
+
+.liked {
+  color: red;
+}
+.unliked {
+  color: #0c0e1ca6;
+}
+
+.marked {
+  color: #f37d30;
+}
+
+.unmarked {
+  color: #0c0e1c;
+}
+
+.post .add-comment {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.add-comment input {
+  width: 90%;
+  display: block;
+  margin-right: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: inherit;
+  padding: 0.5rem 1.75rem;
+  border: none;
+  background-color: #fff;
+  background-color: #0c0e1c;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border-radius: 4px;
+  color: #fff;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.add-comment input:focus {
+  outline: none;
+  border-bottom: 3px solid #55c57a;
+}
+
+.add-comment button {
+  width: 10%;
+  padding: 0.2rem 0.5rem;
+  border-radius: 15px;
+  background: #1da977;
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  height: 80%;
+}
+
+.post .comments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease-in-out;
+  display: none;
+  opacity: 0;
+}
+
+.show {
+  display: block;
+  opacity: 1;
+}
+
+.comments .comment {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.158);
+  margin-top: 1rem;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(241, 240, 240, 0.473);
+}
+
+.comment div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.comment div img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.comment div p {
+  margin-left: 0.7rem;
+  color: #0c0e1c;
+  font-weight: bold;
+}
+
+.comment .comment-content {
+  margin-top: 0.4rem;
+  width: 100%;
+  color: #0c0e1c;
+  margin-left: 0.5rem;
+}

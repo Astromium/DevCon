@@ -308,8 +308,8 @@ const toggleSettings = (ident) => {
 
 const reportPost = async (ident) => {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  const somethingElse = document.getElementById('something-else').value;
   const postId = ident.split('-')[1];
+  const somethingElse = document.getElementById(`something-else-${postId}`).value;
   let reasons = [];
 
   checkboxes.forEach(box => {
@@ -324,13 +324,14 @@ const reportPost = async (ident) => {
     const report = {
       post: postId,
       reportType: 'post',
-      reasons
+      reasons,
+      message: ''
     }
 
     try {
       const res = await axios({
         method: 'POST',
-        url: 'http://127.0.0.1:3000/api/v1/posts/report',
+        url: 'http://127.0.0.1:3000/api/v1/reports',
         data: report
       })
 

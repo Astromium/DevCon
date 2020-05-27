@@ -1,0 +1,191 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/night-owl.min.css")
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel='stylesheet' href='/css/popular-posts.css')
+  title #{title}
+
+header
+  .logo
+    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #1DA977;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #1DA977;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+    li 
+      p#notification-toggle-btn(style='color: #fff')
+        i.far.fa-bell  
+.container 
+    - if(user.role === 'user') 
+        nav.left-nav
+            ul
+                li
+                    a(href='/home')
+                        i.fas.fa-home
+                        | &nbsp; Home
+                li
+                    a(href='/me')
+                        i.fas.fa-user
+                        | &nbsp;&nbsp; Profile
+                li
+                    a(href='/job-offers')
+                        i.fas.fa-users
+                        | &nbsp;&nbsp; Job offers
+                li
+                    a(href='/bookmarks')
+                        i.far.fa-bookmark
+                        | &nbsp;&nbsp; Bookmarks
+                li.is-active
+                    a(href='/popular-posts')
+                        i.fas.fa-users
+                        | &nbsp; Popular Posts
+
+                li
+                    a(href='/chat')
+                        i.far.fa-comments
+                        | &nbsp; Messages
+    - if(user.role === 'startup')
+        nav.left-nav
+            ul
+                li
+                    a(href='/startups/me')
+                        i.fas.fa-user
+                        | &nbsp;&nbsp; Profile
+                li.is-active
+                    a(href='/popular-posts')
+                        i.fas.fa-users
+                        | &nbsp;&nbsp; Popular Posts
+                li
+                    a(href='/bookmarks')
+                        i.far.fa-bookmark
+                        | &nbsp;&nbsp; Bookmarks
+                li
+                    a(href='/chat')
+                        i.far.fa-comments
+                        | &nbsp; Messages  
+
+    .feed
+      each post in posts
+        .post
+            .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+              i.fas.fa-ellipsis-h(style='color: #1DA977;')
+            .settings(id=`settings-${post._id}`)
+              button.button(id=`report-${post._id}` onClick='toggleReportContainer')
+                i.fas.fa-exclamation-triangle(style='font-size: 20px')
+                span(style='font-size: 20px')   Report This Post 
+              .reportContainer#reportContainer
+                h2 Please Select a Problem to continue      
+                .reasons
+                  label.checkbox-container
+                    input(type='checkbox' value='Nudity')
+                    |             Nudity
+                    span.checkmark
+
+                  label.checkbox-container
+                    input(type='checkbox' value='Violence')
+                    |             Violence
+                    span.checkmark
+
+                  label.checkbox-container
+                    input(type='checkbox' value='Harrasment')
+                    |             Harrasment
+                    span.checkmark
+
+                  label.checkbox-container
+                    input(type='checkbox' value='Self-injury')
+                    |             Self-injury
+                    span.checkmark
+
+                  label.checkbox-container
+                    input(type='checkbox' value='Spam')
+                    |             Spam
+                    span.checkmark
+
+                  label.checkbox-container
+                    input(type='checkbox' value='Hate Speech')
+                    |             Hate Speech
+                    span.checkmark
+
+                  label.checkbox-container
+                    input(type='checkbox' value='Terrorism')
+                    |             Terrorisme
+                    span.checkmark
+
+                  label.checkbox-container
+                    input(type='checkbox' value='Inapropriate Content')
+                    |             Inapropriate Content
+                    span.checkmark
+
+                  
+                input.something-else(type='text' placeholder='something else ? ...' id=`something-else-${post._id}`)
+                button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report
+
+            .info
+                a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')
+                    img(src=`./img/users/${post.user.photo}` alt='avatar' width='50px' height='50px')
+                .name
+                    a(href=`/users/${post.user.slug}` style='text-decoration: none; margin-left: 0.5rem')
+                        h3(style='cursor: pointer') #{post.user.name}
+                    p(style='margin-left: 0.5rem') #{new Date(post.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+            
+
+            .content#content
+                - if(post.sanitizedHtml)
+                    != `${post.sanitizedHtml}`
+            - if(post.postType === 'image')  
+                img.post-image(src=`/img/posts/${post.image}` alt='post-image')
+            - if(post.postType === 'video')
+                video.post-video(controls='' preload='metadata')
+                    source(src=`/videos/${post.video}#t=0.5`)    
+            .actions
+                .stats
+                    p(id=`numLikes-${post._id}` style='transition: all 0.1s ease') #{post.numLikes} likes
+                    p(id=`numComments-${post._id}`) #{post.numComments} comments
+                ul.action-buttons
+                    li
+                        - let likeBtnStyle = 'unliked';
+                        - if(post.likes.includes(user._id)) likeBtnStyle = 'liked'
+                        - const id = post._id;
+                            i.fas.fa-heart(style='cursor: pointer; transition: all 0.1s ease' class=`${likeBtnStyle}` id=`${id}` onClick='handleLikeBtnClick(this.id)' data-state=`${likeBtnStyle}`)
+                    li
+                        i.far.fa-comment-dots(style='cursor: pointer; color: #0c0e1c;' id=`${post._id}` onClick='toggleComments(this.id)')
+                    li
+                        - let markBtnStyle = 'unmarked';
+                        - if(user.saved.includes(post._id)) markBtnStyle = 'marked'
+                            i.far.fa-bookmark(style='cursor: pointer;' id=`${post._id}-bookmark` onClick='handleBookmarkClick(this.id)' data-state=`${markBtnStyle}` class=`${markBtnStyle}`)
+            .add-comment
+                input(type='text' placeholder='ADD Comment...' id=`comment-input-${post._id}`)
+                button(id=`addComment-${post._id}` onClick='addComment(this.id)' style='outline: none; cursor: pointer') ADD
+            .comments(id=`comments-${id}` data-state='hidden')
+                each comment in post.comments
+                    .comment
+                        div
+                            img(src=`/img/users/${comment.user.photo}` alt='')
+                            p #{comment.user.name}
+                            p(style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;') #{new Date(comment.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+                        p.comment-content #{comment.text}          
+
+script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js")
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')  
+script(defer='' src='/js/popularPosts.js')                                                  
+    
