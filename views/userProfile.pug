@@ -102,7 +102,7 @@ header
       - let arr = [];
       - let idArr = loggedUser.following.map(doc => arr.unshift(doc._id.toString()));
       - if(arr.includes(user._id.toString())) markup = 'following'                
-      button.btn(href='/settings' id=`follow-${user._id}` onClick=`handleFollowClick(this.id)`) #{markup}                                            
+      button.btn(href='/settings' id=`follow-${user._id}` onClick=`handleFollowClickUser(this.id)`) #{markup}                                            
     br  
     - if(user.cv)
       .cv(style='margin: 2rem 0') 
@@ -228,7 +228,7 @@ header
                 - if(arr.includes(followingUser._id)) f = 'following';
                 - let col = '#000';
                 - if(f === 'follow') color = '#1DA977';
-                    p(id=`following-${followingUser._id}` onClick=`handleFollowClick(this.id)` style=`cursor: pointer; color: ${color}`) #{f}
+                    p(id=`following-${followingUser._id}` onClick=`handleFollowClickUser(this.id)` style=`cursor: pointer; color: ${color}`) #{f}
 
 .followersFollowing#followers
         div(style='display: flex; justify-content: space-between; width: 100%; align-items: center;')
@@ -244,7 +244,7 @@ header
                 - if(arr.includes(followerUser._id)) f = 'following';
                 - let col = '#000';
                 - if(f === 'follow') col = '#1DA977';
-                    p(id=`follower-${followerUser._id}` onClick=`handleFollowClick(this.id)` style=`cursor: pointer; color: ${col}`) #{f}
+                    p(id=`follower-${followerUser._id}` onClick=`handleFollowClickUser(this.id)` style=`cursor: pointer; color: ${col}`) #{f}
 
 div#notif-panel
   .notif-header
@@ -276,5 +276,5 @@ script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
-script(src='/js/userProfile.js')
+script(type='module' src='/js/userProfile.js')
 
