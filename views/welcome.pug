@@ -132,6 +132,15 @@ header
     h3
       | What are your soft skills ( please inculde a comma seperated value )
     textarea#skills(name='' placeholder='eg. HTML,CSS,JS,NODEJS,PYTHON ...')
+
+    h3 Upload Your Cv
+      p#cv-intro(style='font-size: 20px; color; #fff; opacity: 0.9') Uploading your Cv on DevCon is so important to let recruters know what 
+        | are you capable of , it is also required when applying to job offers
+      div(style='display: flex; align-items: center; margin: 2rem 0')
+        label.file(style='font-size: 20px; padding: 0.5rem 1rem; width: fit-content; cursor: pointer; background: #1DA977; color: #fff; border-radius: 5px') Browse Files
+          input#cv(type='file' aria-label='File browser example' style='width: 0')
+        span#file-name(style='font-size: 18px; margin: 0 0 0 1.5rem; color: #1DA977')
+
     h3 Add your personal social accounts
     .socials
       .social
@@ -151,7 +160,7 @@ header
         input#dribbble(type='text' placeholder='Dribble Account Link')
       .social
         i.fab.fa-dev(style='font-size: 28px; color: #1DA977; margin-right: 1rem;')
-        input(type='text' placeholder='Dev.to Account Link' id='dev.to')
+        input(type='text' placeholder='Dev.to Account Link' id='devto')
       .social
         i.fab.fa-github(style='font-size: 28px; color: #1DA977; margin-right: 1rem;')
         input#github(type='text' placeholder='Github Account Link')
@@ -160,7 +169,7 @@ header
         input#personal(type='text' placeholder='Your personal website or portfolio')
     button#save-btn.btn Save Changes
 script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js')
-script(src='/js/welcome.js')
+script(type='module' src='/js/welcome.js')
 script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous")
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')

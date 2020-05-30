@@ -285,6 +285,11 @@ ul li {
   margin: 2rem;
 }
 
+#cv-intro {
+  color: rgb(238, 235, 235);
+  opacity: 0.9;
+}
+
 .social input {
   display: block;
   font-family: inherit;

@@ -55,7 +55,7 @@ const updateUser = async () => {
   }
 
   dataObj.interests = interests;
-  console.log(interests);
+
   try {
     const res = await axios({
       method: 'PATCH',
