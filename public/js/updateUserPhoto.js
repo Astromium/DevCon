@@ -20,7 +20,7 @@ const updateUserPhoto = async () => {
       // so I had to set a timeout to give the image
       // the necessary time to be saved
       window.setTimeout(() => {
-        const newPhoto = `./img/users/${res.data.data.user.photo}`;
+        const newPhoto = `/img/users/${res.data.data.user.photo}`;
         userPhoto.setAttribute('src', newPhoto);
       }, 2000);
 

@@ -31,7 +31,7 @@ header
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
     li 
-      p#notification-toggle-btn(style='color: #fff')
+      p#notification-toggle-btn(style='color: #fff' onclick='notifToggle()')
         i.far.fa-bell  
 .container 
     - if(user.role === 'user') 
@@ -85,58 +85,70 @@ header
     .feed
       each post in posts
         .post
-            .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
-              i.fas.fa-ellipsis-h(style='color: #1DA977;')
-            .settings(id=`settings-${post._id}`)
-              button.button(id=`report-${post._id}` onClick='toggleReportContainer')
-                i.fas.fa-exclamation-triangle(style='font-size: 20px')
-                span(style='font-size: 20px')   Report This Post 
-              .reportContainer#reportContainer
-                h2 Please Select a Problem to continue      
-                .reasons
-                  label.checkbox-container
-                    input(type='checkbox' value='Nudity')
-                    |             Nudity
-                    span.checkmark
+            - if(post.user._id.toString() === user._id.toString())
+              .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+                i.fas.fa-ellipsis-h(style='color: #1DA977;')
+              .settings(id=`settings-${post._id}`)
+                a.button(href=`/post/${post._id}` style='text-decoration: none')
+                    i.fas.fa-pen
+                    | &nbsp;&nbsp;Edit Post
+                button.button(id=`delete-${post._id}` onClick='deletePost(this.id)')
+                    i.fas.fa-trash
+                    | &nbsp;&nbsp;Delete Post
+                
+            - else if(post.user._id.toString() !== user._id.toString())  
+              .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+                i.fas.fa-ellipsis-h(style='color: #1DA977;')
+              .settings(id=`settings-${post._id}`)
+                button.button(id=`report-${post._id}` onClick='toggleReportContainer')
+                  i.fas.fa-exclamation-triangle(style='font-size: 20px')
+                  span(style='font-size: 20px')   Report This Post 
+                .reportContainer#reportContainer
+                  h2 Please Select a Problem to continue      
+                  .reasons
+                    label.checkbox-container
+                      input(type='checkbox' value='Nudity')
+                      |             Nudity
+                      span.checkmark
 
-                  label.checkbox-container
-                    input(type='checkbox' value='Violence')
-                    |             Violence
-                    span.checkmark
+                    label.checkbox-container
+                      input(type='checkbox' value='Violence')
+                      |             Violence
+                      span.checkmark
 
-                  label.checkbox-container
-                    input(type='checkbox' value='Harrasment')
-                    |             Harrasment
-                    span.checkmark
+                    label.checkbox-container
+                      input(type='checkbox' value='Harrasment')
+                      |             Harrasment
+                      span.checkmark
 
-                  label.checkbox-container
-                    input(type='checkbox' value='Self-injury')
-                    |             Self-injury
-                    span.checkmark
+                    label.checkbox-container
+                      input(type='checkbox' value='Self-injury')
+                      |             Self-injury
+                      span.checkmark
 
-                  label.checkbox-container
-                    input(type='checkbox' value='Spam')
-                    |             Spam
-                    span.checkmark
+                    label.checkbox-container
+                      input(type='checkbox' value='Spam')
+                      |             Spam
+                      span.checkmark
 
-                  label.checkbox-container
-                    input(type='checkbox' value='Hate Speech')
-                    |             Hate Speech
-                    span.checkmark
+                    label.checkbox-container
+                      input(type='checkbox' value='Hate Speech')
+                      |             Hate Speech
+                      span.checkmark
 
-                  label.checkbox-container
-                    input(type='checkbox' value='Terrorism')
-                    |             Terrorisme
-                    span.checkmark
+                    label.checkbox-container
+                      input(type='checkbox' value='Terrorism')
+                      |             Terrorisme
+                      span.checkmark
 
-                  label.checkbox-container
-                    input(type='checkbox' value='Inapropriate Content')
-                    |             Inapropriate Content
-                    span.checkmark
+                    label.checkbox-container
+                      input(type='checkbox' value='Inapropriate Content')
+                      |             Inapropriate Content
+                      span.checkmark
 
-                  
-                input.something-else(type='text' placeholder='something else ? ...' id=`something-else-${post._id}`)
-                button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report
+                    
+                  input(type='text' placeholder='something else ? ...' id=`something-else-${post._id}`)
+                  button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report     
 
             .info
                 a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')
@@ -181,11 +193,63 @@ header
                             img(src=`/img/users/${comment.user.photo}` alt='')
                             p #{comment.user.name}
                             p(style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;') #{new Date(comment.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
-                        p.comment-content #{comment.text}          
+                        p.comment-content #{comment.text}     
+
+div#notif-panel
+  .notif-header
+      p Notifications
+  .notif-container
+      each notification in user.notifications
+
+        .notif
+          .img 
+            img(src=`/img/users/${notification.user.photo}`)
+          .content 
+            - let message = ''
+            - if(notification.notifType === 'follow') message = 'started following you'
+            - if(notification.notifType === 'like') message = 'liked your'
+            - if(notification.notifType === 'comment') message = 'commented on your'
+            - if(notification.notifType === 'job') message = `You have recieved a new message from ${notification.user.name}`
+            - let url = ''
+            - let display = 'none'
+            - let pDisplay = 'inline'
+            - if(notification.notifType === 'like' || notification.notifType === 'comment') display = 'inline'
+            - if(notification.notifType === 'like' || notification.notifType === 'comment') url = `/me#${notification.post}`
+            - if(notification.notifType === 'job') pDisplay = 'none'
+
+            p 
+              span(style=`font-weight: bold; display: ${pDisplay}`) #{notification.user.name}
+              |  #{message}
+              a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
+            p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+
+//- - if(user.role === 'startup')
+//-   div#notif-panel
+//-     .notif-header
+//-       p Notifications
+//-     .notif-container
+//-       each notification in user.notifications
+
+//-         .notif
+//-           .img 
+//-             img(src=`/img/users/${notification.user.photo}`)
+//-           .content 
+//-             - let message = ''
+//-             - if(notification.notifType === 'apply') message = `Applied for your`
+//-             - let url = ''
+//-             - let display = 'none'
+//-             - if(notification.notifType === 'apply') display = 'inline'
+//-             - if(notification.notifType === 'apply') url = `/startups/me#${notification.job}`
+
+//-             p 
+//-               span(style='font-weight: bold') #{notification.user.name}
+//-               |  #{message}
+//-               a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  job
+//-             p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}                                       
 
 script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js")
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')  
-script(defer='' src='/js/popularPosts.js')                                                  
+script(defer='' type='module' src='/js/popularPosts.js')                                                  
     
