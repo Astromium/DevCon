@@ -197,7 +197,17 @@ exports.popularPosts = catchAsync(async (req, res, next) => {
   res.status(200).render('popularPosts', {
     title: 'DevCon | Popular Posts',
     posts,
-    user
-  })
+    user,
+  });
+});
 
-})
+exports.jobOffers = catchAsync(async (req, res, next) => {
+  const jobs = await Job.find().sort('-createdAt');
+  const user = await User.findById(req.user.id);
+
+  res.status(200).render('jobOffers', {
+    title: 'DevCon | Job Offers',
+    jobs,
+    user,
+  });
+});

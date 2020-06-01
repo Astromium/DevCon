@@ -5,3 +5,5 @@
 ### Start working on the admin dashboard
 
 ### fix the nodejs value in the checkboxes
+
+### prevent the duplicates in the job applicants

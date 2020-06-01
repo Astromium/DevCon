@@ -387,18 +387,23 @@ exports.applyForJob = catchAsync(async (req, res, next) => {
   const currentUser = await User.findById(req.user.id);
   const job = await Job.findById(req.params.id);
   const author = await User.findById(job.author._id);
+  if (!currentUser.cv) {
+    return next(
+      new AppError('Please Upload Your Cv To Apply For This Job', 401)
+    );
+  }
   job.applicants.unshift(currentUser._id);
   const notification = {
     notifType: 'apply',
     user: {
       name: currentUser.name,
-      photo: currentUser.photo
+      photo: currentUser.photo,
     },
     post: null,
-    job: job._id
-  }
+    job: job._id,
+  };
   author.notifications.unshift(notification);
-  await author.save({ validateBeforeSave: false })
+  await author.save({ validateBeforeSave: false });
   await job.save({ validateBeforeSave: false });
 
   res.status(200).json({
@@ -419,7 +424,7 @@ exports.acceptApplicant = catchAsync(async (req, res, next) => {
       photo: currentUser.photo,
     },
     post: null,
-    job: null
+    job: null,
   };
   user.notifications.unshift(notification);
 
@@ -455,7 +460,7 @@ exports.declineApplicant = catchAsync(async (req, res, next) => {
       photo: currentUser.photo,
     },
     post: null,
-    job: null
+    job: null,
   };
   user.notifications.unshift(notification);
 

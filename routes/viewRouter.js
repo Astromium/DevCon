@@ -20,7 +20,8 @@ const {
   allStartups,
   startupProfile,
   startupSettings,
-  popularPosts
+  popularPosts,
+  jobOffers,
 } = require('../controllers/viewController');
 const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
@@ -33,11 +34,18 @@ router.get('/signup', signup);
 router.get('/startups', startup);
 router.get('/home', protect, restricTo('user'), getFeed, getSuggestions, home);
 router.get('/welcome', protect, restricTo('user'), welcome);
-router.get('/bookmarks', protect, restricTo('user'), getSuggestions, bookmarks);
+router.get(
+  '/bookmarks',
+  protect,
+  restricTo('user', 'startup'),
+  getSuggestions,
+  bookmarks
+);
 router.get('/me', protect, restricTo('user'), me);
 router.get('/settings', protect, restricTo('user'), settings);
 router.get('/markdown', restricTo('user'), markdown);
 router.get('/popular-posts', protect, popularPosts);
+router.get('/job-offers', protect, restricTo('user'), jobOffers);
 router.get('/dashboard', protect, restricTo('admin'), dashboard);
 router.get('/dashboard/allReports', protect, restricTo('admin'), getAllReports);
 router.get('/dashboard/allUsers', protect, restricTo('admin'), allUsers);

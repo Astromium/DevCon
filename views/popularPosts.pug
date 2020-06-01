@@ -12,7 +12,7 @@ head
 
 header
   .logo
-    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
@@ -23,7 +23,9 @@ header
     #search-results
   ul
     li
-      a(href='/settings' style='color: #fff;')
+      - let url = '/settings'
+      - if(user.role === 'startup') url = '/startups/settings'
+      a(href=`${url}` style='color: #fff;')
         i.fas.fa-cog
         | &nbsp;&nbsp;Settings
     li

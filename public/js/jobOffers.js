@@ -1,20 +1,14 @@
 import showToast from '/js/showToast.js';
 import search from '/js/search.js';
-import logout from '/js/logout.js';
-import reportProblem from '/js/reportProblem.js';
 import notifToggle from '/js/notifToggle.js';
-import updateStartup from '/js/updateStartup.js';
+import jobApply from '/js/jobApply.js';
+import logout from '/js/logout.js';
 
 window.showToast = showToast;
 window.search = search;
-window.logout = logout;
-window.reportProblem = reportProblem;
 window.notifToggle = notifToggle;
-window.updateStartup = updateStartup;
-
-const saveBtn = document.getElementById('save');
-
-saveBtn.addEventListener('click', updateStartup);
+window.jobApply = jobApply;
+window.logout = logout;
 
 const searchBtn = document
   .getElementById('search')
@@ -33,9 +27,6 @@ document.querySelector('body').addEventListener('click', (e) => {
 
 const logoutBtn = document.getElementById('logout-btn');
 logoutBtn.addEventListener('click', logout);
-
-const problemReportBtn = document.getElementById('submit-report');
-problemReportBtn.addEventListener('click', reportProblem);
 
 const notifToggleBtn = document.getElementById('notification-toggle-btn');
 notifToggleBtn.addEventListener('click', notifToggle);

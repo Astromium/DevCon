@@ -1,0 +1,120 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='/css/job-offers.css')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  
+  title #{title}
+
+header(data-id=`${user._id}` class='header')
+  .logo
+    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #1DA977;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #1DA977;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+    li 
+      p#notification-toggle-btn(style='color: #fff')
+        i.far.fa-bell    
+.container
+    nav.left-nav
+        ul
+            li
+                a(href='/home')
+                    i.fas.fa-home
+                    | &nbsp; Home
+            li
+                a(href='/me')
+                    i.fas.fa-user
+                    | &nbsp;&nbsp; Profile
+            li.is-active
+                a(href='/job-offers')
+                    i.fas.fa-users
+                    | &nbsp;&nbsp; Job offers
+            li
+                a(href='/bookmarks')
+                    i.far.fa-bookmark
+                    | &nbsp;&nbsp; Bookmarks
+            li
+                a(href='/chat')
+                    i.far.fa-comments
+                    | &nbsp; Messages
+
+    main.main 
+        h2 Job Offers
+        .jobs
+            each job in jobs 
+                .job 
+                    .top 
+                        .left-side 
+                            img(src=`/img/users/${user.photo}` width='100px' height='100px') 
+                            h3 #{job.author.name}
+                        .right-side 
+                            p.job-title #{job.title} 
+                            p.job-location 
+                                i.fas.fa-map-marker-alt &nbsp;&nbsp;
+                                |&nbsp; #{job.jobLocation}
+                            //- if(job.status === 'open')
+                                .btn(id=`apply-${job._id}` onclick='jobApply(this.id)') Apply
+                            - let state = 'not-applied'
+                            - let markup = 'Apply'
+                            - let display = 'none'
+                            - let arr = job.applicants.map(appl => appl._id.toString())
+                            - if(arr.includes(user._id.toString())) state = 'applied'
+                            - if(arr.includes(user._id.toString())) markup = 'Applied'
+                            - if(arr.includes(user._id.toString())) display = 'inline-block'       
+                            button.btn(id=`apply-${job._id}` onclick='jobApply(this.id)' data-state=`${state}`) 
+                                i.fas.fa-check(style=`display: ${display}; margin-right: 0.2rem`) 
+                                | #{markup}
+                            button.btn(id=`save-${job._id}` onclick='saveJob(this.id)' style='background-color: #0c0e1c;') Save    
+                            //- if(job.status === 'closed') 
+                                p Applications Closed    
+                    .bot 
+                        h3 Job Description
+                        p.job-desc #{job.description}
+
+div#notif-panel
+  .notif-header
+    p Notifications
+  .notif-container
+    each notification in user.notifications
+
+      .notif
+        .img 
+          img(src=`/img/users/${notification.user.photo}`)
+        .content 
+          - let message = ''
+          - if(notification.notifType === 'follow') message = 'started following you'
+          - if(notification.notifType === 'like') message = 'liked your'
+          - if(notification.notifType === 'comment') message = 'commented on your'
+          - let url = ''
+          - let display = 'none'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') display = 'inline'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') url = `/me#${notification.post}`
+
+          p 
+            span(style='font-weight: bold') #{notification.user.name}
+            |  #{message}
+            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
+          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")                              
+script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous")
+script(defer='' type='module' src='/js/jobOffers.js')
