@@ -8,4 +8,8 @@
 
 ### prevent the duplicates in the job applicants  (done)
 
+### the style of somethingElse input (done)
+
+### implement the job status (done)
+
 ### remove the static users in the admin dashboard

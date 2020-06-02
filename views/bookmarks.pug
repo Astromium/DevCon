@@ -30,7 +30,10 @@ header
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
     li 
-      p#notification-toggle-btn(style='color: #fff')
+      - let circleDisplay = 'none';
+      - if(user.notifNum < user.notifications.length) circleDisplay = 'block';
+      p#notification-toggle-btn(style='color: #fff; position: relative' data-state='closed' data-notifNum=`${user.notifNum}` data-notifLength=`${user.notifications.length}`)
+        i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
         i.far.fa-bell    
 .container
   nav.left-nav
@@ -123,7 +126,7 @@ header
                   span.checkmark
 
                 
-              input(type='text' placeholder='something else ? ...' id='something-else')
+              input.something-else(type='text' placeholder='something else ? ...' id='something-else')
               button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report
         .info
           a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')

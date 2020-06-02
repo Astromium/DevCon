@@ -206,7 +206,7 @@ exports.getFeed = catchAsync(async (req, res, next) => {
     }
   });
   // get all the job offers and merge them with the posts
-  const jobs = await Job.find().sort('-createdAt');
+  const jobs = await Job.find({ status: 'open' }).sort('-createdAt');
 
   //console.log(arr2);
   // now merge it with the feed array

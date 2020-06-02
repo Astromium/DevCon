@@ -31,7 +31,10 @@ header
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
     li 
-      p#notification-toggle-btn(style='color: #fff')
+      - let circleDisplay = 'none';
+      - if(user.notifNum < user.notifications.length) circleDisplay = 'block';
+      p#notification-toggle-btn(style='color: #fff; position: relative' data-state='closed' data-notifNum=`${user.notifNum}` data-notifLength=`${user.notifications.length}`)
+        i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
         i.far.fa-bell
 
 .container
@@ -133,7 +136,12 @@ header
                             | &nbsp;&nbsp;Edit 
                         button.button(id=`delete-${job._id}` onClick='deleteJob(this.id)')
                             i.fas.fa-trash
-                            | &nbsp;&nbsp;Delete 
+                            | &nbsp;&nbsp;Delete
+                        button.button(id=`closeApplications-${job._id}` onClick='closeApplications(this.id)' style='display: flex; align-items: center' data-status=`${job.status}`) 
+                            i.far.fa-stop-circle(style='width: 20px; height: 20px')
+                            - let closeMarkup = 'Close Applications'
+                            - if(job.status === 'closed') closeMarkup = 'Open Applications'
+                            | &nbsp;&nbsp; #{closeMarkup}     
                     .top 
                         .left-side 
                             img(src=`/img/users/${user.photo}`) 
@@ -142,7 +150,10 @@ header
                             p.job-location 
                                 i.fas.fa-map-marker-alt &nbsp;&nbsp;
                                 |&nbsp; #{job.jobLocation}
-                            p.job-applicants #{job.applicants.length} Applicants    
+                            p.job-applicants #{job.applicants.length} Applicants 
+                            - let closeDisplay = 'none';
+                            - if(job.status === 'closed') closeDisplay = 'block'
+                                p(id=`closeApps-${job._id}` style=`display: ${closeDisplay}; color: red; margin-left: 1rem; font-weight: 600`) Applications Closed   
                     .bot 
                         p.job-desc #{job.description}
                         .view-apps(id=`show-${job._id}` onclick='showApplicants(this.id)') View Applicants

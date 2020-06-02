@@ -39,6 +39,11 @@ const jobSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  status: {
+    type: String,
+    enum: ['open', 'closed'],
+    default: 'open'
+  }
 });
 
 jobSchema.pre(/^find/, function (next) {

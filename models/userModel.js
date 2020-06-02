@@ -128,6 +128,15 @@ const userSchema = new mongoose.Schema({
   location: String,
 
   cv: String,
+
+  notifNum: {
+    type: Number,
+    default: 0
+  },
+  messagesNum: {
+    type: Number,
+    default: 0
+  }
 });
 
 // document middlewares

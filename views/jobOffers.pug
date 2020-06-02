@@ -29,8 +29,11 @@ header(data-id=`${user._id}` class='header')
       p(style='color: #1DA977;' id='logout-btn')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
-    li 
-      p#notification-toggle-btn(style='color: #fff')
+    li
+      - let circleDisplay = 'none';
+      - if(user.notifNum < user.notifications.length) circleDisplay = 'block'; 
+      p#notification-toggle-btn(style='color: #fff; position: relative' data-state='closed' data-notifNum=`${user.notifNum}` data-notifLength=`${user.notifications.length}`)
+        i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
         i.far.fa-bell    
 .container
     nav.left-nav

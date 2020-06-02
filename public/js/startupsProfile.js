@@ -4,6 +4,7 @@ import createJob from '/js/createJob.js';
 import logout from '/js/logout.js';
 import notifToggle from '/js/notifToggle.js';
 import search from '/js/search.js';
+import closeApplications from '/js/closeApplications.js';
 
 window.showToast = showToast;
 window.updateUserPhoto = updateUserPhoto;
@@ -11,6 +12,7 @@ window.createJob = createJob;
 window.logout = logout;
 window.notifToggle = notifToggle;
 window.search = search;
+window.closeApplications = closeApplications;
 
 const saveBtn = document.getElementById('save');
 

@@ -30,6 +30,7 @@ exports.startup = (req, res, next) => {
 
 exports.home = async (req, res, next) => {
   const user = await User.findById(req.user.id);
+  console.log(user.notifNum, user.notifications.length);
   const feed = req.feed;
   const suggestions = req.suggestions;
   res.status(200).render('home', {
