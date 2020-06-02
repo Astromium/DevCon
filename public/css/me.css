@@ -865,7 +865,7 @@ select #option {
 
 #notif-panel {
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   top: 10vh;
   right: 0;
   z-index: 1000;
@@ -1021,6 +1021,7 @@ select #option {
 .createJob .jobs {
   width: 100%;
   align-items: center;
+  background: #fff;
   padding: 1rem;
 }
 

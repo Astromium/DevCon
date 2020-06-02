@@ -395,6 +395,10 @@ exports.applyForJob = catchAsync(async (req, res, next) => {
       new AppError('Please Upload Your Cv To Apply For This Job', 401)
     );
   }
+  let arr = job.applicants.map(appl => appl._id.toString());
+  if (arr.includes(currentUser._id.toString())) {
+    return next(new AppError('You Have Already Applied For This Job !', 401));
+  }
   job.applicants.unshift(currentUser._id);
   const notification = {
     notifType: 'apply',

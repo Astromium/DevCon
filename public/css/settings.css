@@ -384,7 +384,7 @@ h2 {
 
 #notif-panel {
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   top: 10vh;
   right: 0;
   z-index: 1000;
