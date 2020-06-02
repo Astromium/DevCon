@@ -57,118 +57,147 @@ header(data-id=`${user._id}` class='header')
           | &nbsp; Messages
   .feed
     each post in feed
-      .post
-        - if(post.user._id.toString() === user._id.toString())
-          .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
-            i.fas.fa-ellipsis-h(style='color: #1DA977;')
-          .settings(id=`settings-${post._id}`)
-            a.button(href=`/post/${post._id}` style='text-decoration: none')
-                i.fas.fa-pen
-                | &nbsp;&nbsp;Edit Post
-            button.button(id=`delete-${post._id}` onClick='deletePost(this.id)')
-                i.fas.fa-trash
-                | &nbsp;&nbsp;Delete Post
-                
-        - else if(post.user._id.toString() !== user._id.toString())  
-          .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
-            i.fas.fa-ellipsis-h(style='color: #1DA977;')
-          .settings(id=`settings-${post._id}`)
-            button.button(id=`report-${post._id}` onClick='toggleReportContainer')
-              i.fas.fa-exclamation-triangle(style='font-size: 20px')
-              span(style='font-size: 20px')   Report This Post 
-            .reportContainer#reportContainer
-              h2 Please Select a Problem to continue      
-              .reasons
-                label.checkbox-container
-                  input(type='checkbox' value='Nudity')
-                  |             Nudity
-                  span.checkmark
+      - if(post.user)
+        .post
+          - if(post.user._id.toString() === user._id.toString())
+            .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+              i.fas.fa-ellipsis-h(style='color: #1DA977;')
+            .settings(id=`settings-${post._id}`)
+              a.button(href=`/post/${post._id}` style='text-decoration: none')
+                  i.fas.fa-pen
+                  | &nbsp;&nbsp;Edit Post
+              button.button(id=`delete-${post._id}` onClick='deletePost(this.id)')
+                  i.fas.fa-trash
+                  | &nbsp;&nbsp;Delete Post
+                  
+          - else if(post.user._id.toString() !== user._id.toString())  
+            .settings-btn(id=`settingBtn-${post._id}` onClick='toggleSettings(this.id)')
+              i.fas.fa-ellipsis-h(style='color: #1DA977;')
+            .settings(id=`settings-${post._id}`)
+              button.button(id=`report-${post._id}` onClick='toggleReportContainer')
+                i.fas.fa-exclamation-triangle(style='font-size: 20px')
+                span(style='font-size: 20px')   Report This Post 
+              .reportContainer#reportContainer
+                h2 Please Select a Problem to continue      
+                .reasons
+                  label.checkbox-container
+                    input(type='checkbox' value='Nudity')
+                    |             Nudity
+                    span.checkmark
 
-                label.checkbox-container
-                  input(type='checkbox' value='Violence')
-                  |             Violence
-                  span.checkmark
+                  label.checkbox-container
+                    input(type='checkbox' value='Violence')
+                    |             Violence
+                    span.checkmark
 
-                label.checkbox-container
-                  input(type='checkbox' value='Harrasment')
-                  |             Harrasment
-                  span.checkmark
+                  label.checkbox-container
+                    input(type='checkbox' value='Harrasment')
+                    |             Harrasment
+                    span.checkmark
 
-                label.checkbox-container
-                  input(type='checkbox' value='Self-injury')
-                  |             Self-injury
-                  span.checkmark
+                  label.checkbox-container
+                    input(type='checkbox' value='Self-injury')
+                    |             Self-injury
+                    span.checkmark
 
-                label.checkbox-container
-                  input(type='checkbox' value='Spam')
-                  |             Spam
-                  span.checkmark
+                  label.checkbox-container
+                    input(type='checkbox' value='Spam')
+                    |             Spam
+                    span.checkmark
 
-                label.checkbox-container
-                  input(type='checkbox' value='Hate Speech')
-                  |             Hate Speech
-                  span.checkmark
+                  label.checkbox-container
+                    input(type='checkbox' value='Hate Speech')
+                    |             Hate Speech
+                    span.checkmark
 
-                label.checkbox-container
-                  input(type='checkbox' value='Terrorism')
-                  |             Terrorisme
-                  span.checkmark
+                  label.checkbox-container
+                    input(type='checkbox' value='Terrorism')
+                    |             Terrorisme
+                    span.checkmark
 
-                label.checkbox-container
-                  input(type='checkbox' value='Inapropriate Content')
-                  |             Inapropriate Content
-                  span.checkmark
+                  label.checkbox-container
+                    input(type='checkbox' value='Inapropriate Content')
+                    |             Inapropriate Content
+                    span.checkmark
 
-                
-              input(type='text' placeholder='something else ? ...' id=`something-else-${post._id}`)
-              button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report     
-        .info
-          a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')
-            img(src=`./img/users/${post.user.photo}` alt='avatar' width='50px' height='50px')
-          .name
-            a(href=`/users/${post.user.slug}` style='text-decoration: none')
-              h3(style='cursor: pointer') #{post.user.name}
-            p #{new Date(post.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
-        .content#content
-          - if(post.sanitizedHtml)
-            != `${post.sanitizedHtml}`
-        - if(post.postType === 'image')  
-          img.post-image(src=`./img/posts/${post.image}` alt='post-image')
-        - if(post.postType === 'video')
-          video.post-video(controls='' preload='metadata')
-            source(src=`./videos/${post.video}#t=0.5`)  
-        .actions
-          .stats
-            p(id=`numLikes-${post._id}` style='transition: all 0.1s ease') #{post.numLikes} likes
-            p(id=`numComments-${post._id}`) #{post.numComments} comments
-          ul.action-buttons
-            li
-              - let likeBtnStyle = 'unliked';
-              - if(post.likes.includes(user._id)) likeBtnStyle = 'liked'
-              - const id = post._id;
-                i.fas.fa-heart(style='cursor: pointer; transition: all 0.1s ease' class=`${likeBtnStyle}` id=`${id}` onClick='handleLikeBtnClick(this.id)' data-state=`${likeBtnStyle}`)
-            li
-              i.far.fa-comment-dots(style='cursor: pointer; color: #0c0e1c;' id=`${post._id}` onClick='toggleComments(this.id)')
-            li
-              - let markBtnStyle = 'unmarked';
-              - if(user.saved.includes(post._id)) markBtnStyle = 'marked'
-              i.far.fa-bookmark(style='cursor: pointer;' id=`${post._id}-bookmark` onClick='handleBookmarkClick(this.id)' data-state=`${markBtnStyle}` class=`${markBtnStyle}`)
-        .add-comment
-          input(type='text' placeholder='ADD Comment...' id=`comment-input-${post._id}`)
-          button(id=`addComment-${post._id}` data-user=`${user}` onClick='addComment(this.id)' style='outline: none; cursor: pointer') ADD
-        .comments(id=`comments-${id}` data-state='hidden')
-          each comment in post.comments
-            .comment
-              div
-                img(src=`./img/users/${comment.user.photo}` alt='')
-                p #{comment.user.name}
-                p(style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;') #{new Date(comment.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
-              p.comment-content #{comment.text}
-    
+                  
+                input(type='text' placeholder='something else ? ...' id=`something-else-${post._id}`)
+                button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report     
+          .info
+            a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')
+              img(src=`./img/users/${post.user.photo}` alt='avatar' width='50px' height='50px')
+            .name
+              a(href=`/users/${post.user.slug}` style='text-decoration: none')
+                h3(style='cursor: pointer') #{post.user.name}
+              p #{new Date(post.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+          .content#content
+            - if(post.sanitizedHtml)
+              != `${post.sanitizedHtml}`
+          - if(post.postType === 'image')  
+            img.post-image(src=`./img/posts/${post.image}` alt='post-image')
+          - if(post.postType === 'video')
+            video.post-video(controls='' preload='metadata')
+              source(src=`./videos/${post.video}#t=0.5`)  
+          .actions
+            .stats
+              p(id=`numLikes-${post._id}` style='transition: all 0.1s ease') #{post.numLikes} likes
+              p(id=`numComments-${post._id}`) #{post.numComments} comments
+            ul.action-buttons
+              li
+                - let likeBtnStyle = 'unliked';
+                - if(post.likes.includes(user._id)) likeBtnStyle = 'liked'
+                - const id = post._id;
+                  i.fas.fa-heart(style='cursor: pointer; transition: all 0.1s ease' class=`${likeBtnStyle}` id=`${id}` onClick='handleLikeBtnClick(this.id)' data-state=`${likeBtnStyle}`)
+              li
+                i.far.fa-comment-dots(style='cursor: pointer; color: #0c0e1c;' id=`${post._id}` onClick='toggleComments(this.id)')
+              li
+                - let markBtnStyle = 'unmarked';
+                - if(user.saved.includes(post._id)) markBtnStyle = 'marked'
+                i.far.fa-bookmark(style='cursor: pointer;' id=`${post._id}-bookmark` onClick='handleBookmarkClick(this.id)' data-state=`${markBtnStyle}` class=`${markBtnStyle}`)
+          .add-comment
+            input(type='text' placeholder='ADD Comment...' id=`comment-input-${post._id}`)
+            button(id=`addComment-${post._id}` data-user=`${user}` onClick='addComment(this.id)' style='outline: none; cursor: pointer') ADD
+          .comments(id=`comments-${id}` data-state='hidden')
+            each comment in post.comments
+              .comment
+                div
+                  img(src=`./img/users/${comment.user.photo}` alt='')
+                  p #{comment.user.name}
+                  p(style='align-self: flex-end; position: absolute; right:0; font-size: 14px; font-weight: normal;') #{new Date(comment.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+                p.comment-content #{comment.text}
+
+      - if(post.author) 
+        .job 
+          .top 
+              .left-side 
+                  img(src=`/img/users/${post.author.photo}` width='100px' height='100px') 
+                  h3 #{post.author.name}
+
+              .right-side 
+                  p.job-title #{post.title} 
+                  p.job-location 
+                    i.fas.fa-map-marker-alt &nbsp;&nbsp;
+                    | &nbsp; #{post.jobLocation}
+                      
+                  - let state = 'not-applied'
+                  - let markup = 'Apply'
+                  - let display = 'none'
+                  - let arr = post.applicants.map(appl => appl._id.toString())
+                  - if(arr.includes(user._id.toString())) state = 'applied'
+                  - if(arr.includes(user._id.toString())) markup = 'Applied'
+                  - if(arr.includes(user._id.toString())) display = 'inline-block'       
+                  button.btn(id=`apply-${post._id}` onclick='jobApply(this.id)' data-state=`${state}`) 
+                        i.fas.fa-check(style=`display: ${display}; margin-right: 0.2rem`) 
+                        | #{markup}
+                  button.btn(id=`save-${post._id}` onclick='saveJob(this.id)' style='background-color: #0c0e1c;') Save    
+                       
+          .bot 
+              h3 Job Description
+              p.job-desc #{post.description}
     
   nav.right-nav
     .info
-      img(src=`./img/users/${user.photo}` alt='avatar' width='80px' height='80px')
+      img(src=`/img/users/${user.photo}` alt='avatar' width='80px' height='80px')
       h3 #{user.name}
       p Web Developer
     .stats
@@ -182,7 +211,7 @@ header(data-id=`${user._id}` class='header')
       h3 Suggested For You
       each user in suggestions 
         .user
-          img(src=`./img/users/${user.photo}` alt='' height='40px' width='40px')
+          img(src=`/img/users/${user.photo}` alt='' height='40px' width='40px')
           .desc
             h4 #{user.name}
             p Web Developer
@@ -229,7 +258,9 @@ div#notif-panel
 
         
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
-script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
-script(src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js")
-script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous")
+script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js')
+script(src='//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type='module' src='/js/home.js')
+
+

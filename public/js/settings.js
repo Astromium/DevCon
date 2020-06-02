@@ -22,7 +22,7 @@ document.getElementById('cv').onchange = (e) => {
 
 saveBtn.addEventListener('click', updateUser);
 
-const search = document
+const searchBtn = document
   .getElementById('search')
   .addEventListener('keyup', search);
 

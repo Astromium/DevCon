@@ -10,6 +10,7 @@ import deletePost from '/js/deletePost.js';
 import reportPost from '/js/reportPost.js';
 import toggleSettings from '/js/toggleSettings.js';
 import notifToggle from '/js/notifToggle.js';
+import jobApply from '/js/jobApply.js';
 
 // have to add this window.module to make the module defined globally
 window.showToast = showToast;
@@ -23,16 +24,13 @@ window.logout = logout;
 window.deletePost = deletePost;
 window.reportPost = reportPost;
 window.toggleSettings = toggleSettings;
-
-
+window.jobApply = jobApply;
 
 document.addEventListener('DOMContentLoaded', (event) => {
   document.querySelectorAll('pre code').forEach((block) => {
     hljs.highlightBlock(block);
   });
 });
-
-
 
 const searchBtn = document
   .getElementById('search')
@@ -51,8 +49,6 @@ document.querySelector('body').addEventListener('click', (e) => {
 
 const logoutBtn = document.getElementById('logout-btn');
 logoutBtn.addEventListener('click', logout);
-
-
 
 const notifToggleBtn = document.getElementById('notification-toggle-btn');
 notifToggleBtn.addEventListener('click', notifToggle);

@@ -205,10 +205,13 @@ exports.getFeed = catchAsync(async (req, res, next) => {
       arr2.push(post);
     }
   });
+  // get all the job offers and merge them with the posts
+  const jobs = await Job.find().sort('-createdAt');
+
   //console.log(arr2);
   // now merge it with the feed array
   // and remove the duplicates
-  const newFeed = [].concat(...feed, feed2);
+  const newFeed = [].concat(...feed, feed2, ...jobs);
   let arr = [];
   newFeed.forEach((post) => {
     if (!arr.includes(post)) {
