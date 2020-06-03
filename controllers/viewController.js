@@ -99,9 +99,16 @@ exports.userProfile = catchAsync(async (req, res, next) => {
     'following followers'
   );
 
+  let jobs;
+  if (user.role === 'startup') {
+    jobs = await Job.find({ author: `${user._id}`, status: 'open' }).sort('-createdAt');
+  }
+
+
   res.status(200).render('userProfile', {
     title: `DevCon | ${user.name}`,
     user,
+    jobs,
     loggedUser,
   });
 });

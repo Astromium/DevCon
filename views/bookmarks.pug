@@ -36,28 +36,48 @@ header
         i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
         i.far.fa-bell    
 .container
-  nav.left-nav
-    ul
-      li
-        a(href='/home')
-          i.fas.fa-home
-          | &nbsp; Home
-      li
-        a(href='/me')
-          i.fas.fa-user
-          | &nbsp;&nbsp; Profile
-      li
-        a(href='/job-offers')
-          i.fas.fa-users
-          | &nbsp;&nbsp; Job offers
-      li.is-active
-        a(href='/bookmarks')
-          i.far.fa-bookmark
-          | &nbsp;&nbsp; Bookmarks
-      li
-        a(href='/chat')
-          i.far.fa-comments
-          | &nbsp; Messages
+  - if(user.role === 'user')
+    nav.left-nav
+      ul
+        li
+          a(href='/home')
+            i.fas.fa-home
+            | &nbsp; Home
+        li
+          a(href='/me')
+            i.fas.fa-user
+            | &nbsp;&nbsp; Profile
+        li
+          a(href='/job-offers')
+            i.fas.fa-users
+            | &nbsp;&nbsp; Job offers
+        li.is-active
+          a(href='/bookmarks')
+            i.far.fa-bookmark
+            | &nbsp;&nbsp; Bookmarks
+        li
+          a(href='/chat')
+            i.far.fa-comments
+            | &nbsp; Messages
+  - if(user.role === 'startup')
+        nav.left-nav
+            ul
+                li
+                    a(href='/startups/me')
+                        i.fas.fa-user
+                        | &nbsp;&nbsp; Profile
+                li.is-active
+                    a(href='/popular-posts')
+                        i.fas.fa-users
+                        | &nbsp;&nbsp; Popular Posts
+                li
+                    a(href='/bookmarks')
+                        i.far.fa-bookmark
+                        | &nbsp;&nbsp; Bookmarks
+                li
+                    a(href='/chat')
+                        i.far.fa-comments
+                        | &nbsp; Messages          
   .feed
     - if(user.saved.length === 0)
       h2(style='color: #1DA977; margin-top: 1rem')= `You haven't saved anything yet`

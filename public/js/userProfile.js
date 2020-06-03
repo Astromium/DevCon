@@ -9,6 +9,7 @@ import notifToggle from '/js/notifToggle.js';
 import addComment from '/js/addComment.js';
 import logout from '/js/logout.js';
 import reportPost from '/js/reportPost.js';
+import jobApply from '/js/jobApply.js';
 
 window.showToast = showToast;
 window.handleLikeBtnClick = handleLikeBtnClick;
@@ -21,6 +22,7 @@ window.notifToggle = notifToggle;
 window.addComment = addComment;
 window.logout = logout;
 window.reportPost = reportPost;
+window.jobApply = jobApply;
 
 document.addEventListener('DOMContentLoaded', (event) => {
   document.querySelectorAll('pre code').forEach((block) => {
