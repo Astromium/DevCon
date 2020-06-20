@@ -22,6 +22,7 @@ const {
   startupSettings,
   popularPosts,
   jobOffers,
+  room,
 } = require('../controllers/viewController');
 const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
@@ -61,5 +62,6 @@ router.get(
 router.get('/post/:id', protect, editPost);
 router.get('/posts/:id', protect, getPost);
 router.get('/users/:slug', protect, userProfile);
+router.get('/messages/:id', protect, room);
 
 module.exports = router;

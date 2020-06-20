@@ -14,6 +14,8 @@ const postRouter = require('./routes/postRouter');
 const jobRouter = require('./routes/jobRouter');
 const reportRouter = require('./routes/reportRouter');
 const viewRouter = require('./routes/viewRouter');
+const messageRouter = require('./routes/messageRouter');
+const roomRouter = require('./routes/roomRouter');
 
 const app = express();
 
@@ -44,6 +46,8 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/jobs', jobRouter);
 app.use('/api/v1/reports', reportRouter);
+app.use('/api/v1/messages', messageRouter);
+app.use('/api/v1/rooms', roomRouter);
 
 // handle Undefined Routes
 app.all('*', (req, res, next) => {

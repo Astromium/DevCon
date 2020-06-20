@@ -12,6 +12,6 @@
 
 ### implement the job status (done)
 
-### add the job status to the users pages
+### add the job status to the users pages (done)
 
 ### remove the static users in the admin dashboard

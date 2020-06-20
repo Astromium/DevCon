@@ -2,6 +2,8 @@ const User = require('../models/userModel');
 const Post = require('../models/postModel');
 const Report = require('../models/reportModel');
 const Job = require('../models/jobModel');
+const Room = require('../models/roomModel');
+const Message = require('../models/messageModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getLandingPage = (req, res, next) => {
@@ -101,9 +103,10 @@ exports.userProfile = catchAsync(async (req, res, next) => {
 
   let jobs;
   if (user.role === 'startup') {
-    jobs = await Job.find({ author: `${user._id}`, status: 'open' }).sort('-createdAt');
+    jobs = await Job.find({ author: `${user._id}`, status: 'open' }).sort(
+      '-createdAt'
+    );
   }
-
 
   res.status(200).render('userProfile', {
     title: `DevCon | ${user.name}`,
@@ -217,5 +220,48 @@ exports.jobOffers = catchAsync(async (req, res, next) => {
     title: 'DevCon | Job Offers',
     jobs,
     user,
+  });
+});
+
+exports.room = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  const room = await Room.findById(req.params.id)
+    .populate('users')
+    .select('name photo');
+  const messages = await Message.find({ roomId: room._id })
+    .populate('sender', 'name photo')
+    .populate('reciever', 'name photo')
+    .sort('createdAt');
+  // find all the rooms in which the users array
+  // contains the user id
+  const rooms = await Room.find({ users: user._id }).populate(
+    'users',
+    'name photo'
+  );
+
+  // remove the current user from the users array of each room
+  rooms.map((rm) => {
+    let i;
+    rm.users.map((usr, index) => {
+      if (usr.name === user.name) i = index;
+    });
+    rm.users.splice(i, 1);
+  });
+  rooms.forEach((rm) =>
+    rm.users.forEach((usr) =>
+      console.log('\n' + '------ ' + usr.name + ' -----' + '\n' + usr)
+    )
+  );
+  let otherUser = room.users.find(
+    (usr) => usr._id.toString() != user._id.toString()
+  );
+
+  res.render('room', {
+    title: 'chat',
+    messages,
+    roomId: room._id,
+    user,
+    otherUser,
+    rooms,
   });
 });

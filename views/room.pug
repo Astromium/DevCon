@@ -1,0 +1,180 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel='stylesheet' href='/css/room.css')
+  title #{title}
+
+header
+  .logo
+    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #1DA977;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #1DA977;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+    li
+      - let circleDisplay = 'none';
+      - if(user.notifNum < user.notifications.length) circleDisplay = 'block'; 
+      p#notification-toggle-btn(style='color: #fff; position: relative' data-state='closed' data-notifNum=`${user.notifNum}` data-notifLength=`${user.notifications.length}`)
+        i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
+        i.far.fa-bell 
+
+.container
+    .left-nav 
+        h2 Chats
+        .search-msg 
+            i.fas.fa-search(style='color: rgba(255,255,255,.8)')
+            input#message-search(type='text' placeholder='Search Messages...') 
+        .rooms 
+            each room in rooms 
+                a(href=`/messages/${room._id}`).room
+                    img(src=`/img/users/${room.users[0].photo}`)
+                    .info 
+                        h3 #{room.users[0].name}
+    .main
+        .messages
+            .top 
+                img(src=`/img/users/${otherUser.photo}`)
+                .usr-info 
+                    h2 #{otherUser.name}
+            #messages
+                each message in messages 
+                    - let textStyleOptions = 'border-top-right-radius: 15px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px; background-color: #1da977; color: #fff'
+                    - let containerStyleOption = 'justify-content: flex-start; flex-direction: row'
+                    - let imgMargin = 'margin-right: 0.5rem;'
+                    - if(message.sender.name === user.name) textStyleOptions = 'border-top-left-radius: 15px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; background-color: #fff; color: #000'
+                    - if(message.sender.name === user.name) containerStyleOption = 'justify-content: flex-start; flex-direction: row-reverse' 
+                    - if(message.sender.name === user.name) imgMargin='margin-left: 0.5rem;'               
+                    .message(style=`${containerStyleOption}`) 
+                        img(src=`/img/users/${message.sender.photo}` style=`${imgMargin}`)
+                        .msg(style=`${textStyleOptions}`) 
+                            p #{message.message} 
+                             
+
+            .input 
+                input#input(type='text' placeholder='Write Something...')
+                button#send
+                    i.far.fa-paper-plane(style='margin-right: 0.2rem') 
+                    | Send
+audio#sound 
+    source(src='/sounds/message-notification.mp3' type='audio/mpeg')                    
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')  
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')      
+
+script(src="/socket.io/socket.io.js")
+script. 
+    var socket = io()
+    let sender = "#{user._id}"
+    let senderName = "#{user.name}"
+    let senderPhoto = "#{user.photo}"
+    let reciever = "#{otherUser._id}"
+    let recieverName = "#{otherUser.name}"
+    let recieverPhoto = "#{otherUser.photo}"
+    let roomId = "#{roomId}"
+    let userName = "#{user.name}"
+    const notifSound = document.getElementById('sound')
+    var objDiv = document.getElementById("messages");
+    function scrollBottom() {
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    window.onload=scrollBottom()
+
+    document.getElementById('send').addEventListener('click', async (e) => {
+        const message = document.getElementById('input').value;
+        const messageData = {message, sender, reciever, roomId}
+        try {
+            const res = await axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:3000/api/v1/messages',
+                data: messageData
+            })
+            if(res.data.status === 'success') {
+                console.log('message sent');
+                let messageObj = {
+                    message,
+                    sender: {
+                        id: sender,
+                        name: senderName,
+                        photo: senderPhoto
+                    },
+                    reciever: {
+                        id: reciever,
+                        name: recieverName,
+                        photo: recieverPhoto
+                    }
+                }
+                socket.emit('message', messageObj)
+                document.getElementById('input').value = ''
+            }
+        } catch(err) {
+            console.log(err);
+        }
+    })
+
+    socket.on('msg-sound', (msg) => {
+        notifSound.play()
+    })
+
+    socket.on('message', (msg) => {
+        
+        
+        // constructing the message element
+
+        let textStyleOptions = 'border-top-right-radius: 15px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px; background-color: #1da977; color: #fff'
+        let containerStyleOption = 'justify-content: flex-start; flex-direction: row'
+        let imgMargin = 'margin-right: 0.5rem;'
+        if(msg.sender.name === userName) {
+            textStyleOptions = 'border-top-left-radius: 15px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; background-color: #fff; color: #000';
+            containerStyleOption = 'justify-content: flex-start; flex-direction: row-reverse';
+            imgMargin='margin-left: 0.5rem;'
+        } 
+      
+        let parent = document.createElement('div');
+        parent.className = 'message before'
+        parent.style = containerStyleOption
+        
+
+        let img = document.createElement('img');
+        img.setAttribute('src', `/img/users/${msg.sender.photo}`)
+        img.style = imgMargin
+
+        let messageTextContainer = document.createElement('div')
+        messageTextContainer.classList.add('msg')
+        messageTextContainer.style = textStyleOptions
+        messageTextContainer.innerText = msg.message
+
+        parent.appendChild(img)
+        parent.appendChild(messageTextContainer)
+        document.getElementById('messages').appendChild(parent).focus()
+        parent.className = 'message'
+        
+        scrollBottom()
+
+
+        // ---------------------------
+        //- let el = document.createElement('div')
+        //- el.classList.add('message')
+        //- let content = document.createElement('p');
+        //- content.innerText = `${msg.sender.name} : ${msg.message}`;
+        //- el.appendChild(content)
+        //- document.getElementById('messages').appendChild(el)
+    })
+
+
+
