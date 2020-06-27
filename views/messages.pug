@@ -1,0 +1,116 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='/css/messages.css')
+  link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
+  link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/night-owl.min.css")
+  title #{title}
+header(class='header')
+  .logo
+    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    font-weight: bold;')
+      div(style='display: flex; justify-content: center')
+        img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
+        | Dev
+        span(style='color: #1DA977;') Con
+  .search
+    input(type='text' placeholder='Search' id='search')
+    #search-results
+  ul
+    li
+      a(href='/settings' style='color: #fff;')
+        i.fas.fa-cog
+        | &nbsp;&nbsp;Settings
+    li
+      p(style='color: #1DA977;' id='logout-btn')
+        i.fas.fa-sign-out-alt
+        | &nbsp;&nbsp;Logout
+    li
+      - let circleDisplay = 'none';
+      - if(user.notifNum < user.notifications.length) circleDisplay = 'block'; 
+      p#notification-toggle-btn(style='color: #fff; position: relative' data-state='closed' data-notifNum=`${user.notifNum}` data-notifLength=`${user.notifications.length}`)
+        i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
+        i.far.fa-bell 
+
+.container
+    nav.left-nav
+        ul
+            li
+                a(href='/home')
+                    i.fas.fa-home
+                    | &nbsp; Home
+            li
+                a(href='/me')
+                    i.fas.fa-user
+                    | &nbsp;&nbsp; Profile
+            li
+                a(href='/job-offers')
+                    i.fas.fa-users
+                    | &nbsp;&nbsp; Job offers
+            li
+                a(href='/bookmarks')
+                    i.far.fa-bookmark
+                    | &nbsp;&nbsp; Bookmarks
+            li.is-active
+                a(href='/messages')
+                    i.far.fa-comments
+                    | &nbsp; Messages
+
+    .messagesSection
+        .conversations 
+            .title
+                h2 Recent Conversations
+                i.fas.fa-edit(style='font-size: 20px; color: #fff')
+
+            - if(conversations.length === 0) 
+              img(src='/illustrations/empty-convs.svg' style='width: 100%;height: 400px' )    
+            each conv in  conversations   
+                - let sender = conv.sender.name
+                - if(conv.sender.name === user.name) sender = 'You'  
+                - let photo = conv.sender.photo 
+                - if(conv.sender.name === user.name) photo = conv.reciever.photo
+                - let name = conv.sender.name 
+                - if(conv.sender.name === user.name) name = conv.reciever.name 
+                a.conv(href=`/messages/${conv.roomId}`) 
+                    .left
+                        img(src=`/img/users/${photo}`)
+                    .right    
+                        h2 #{name}
+                        p(style='margin: 0 0 0.5rem 0; font-size: 17px')
+                            span(style='color: #1da977') #{sender} 
+                            | : #{conv.message}  
+                        p(style='font-size: 14px') #{new Date(conv.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}    
+        .send-msg 
+          img(src='/illustrations/messages.svg')  
+          h2 Your Messages 
+          p Send a private message to a friend or a user
+          button#send-smg(onClick='toggleMessages()') Send Message
+
+.modal#modal
+.contacts#contacts 
+  .head 
+    i.fas.fa-times(style='font-size: 22px; cursor: pointer' onClick='closeMessages()') 
+    h3 New Message
+  .top 
+    i.fas.fa-search
+    input#search-user(type='text' placeholder='Search Contacts...')
+  .main 
+    h3 Suggested 
+      each room in rooms 
+        a.room(href=`/messages/${room._id}`)
+          .left 
+            img(src=`/img/users/${room.users[0].photo}`)
+          .right 
+            h3 #{room.users[0].name}
+            p #{room.users[0].occupation}   
+
+
+
+
+
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(src='/js/messages.js')

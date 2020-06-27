@@ -4,6 +4,7 @@ const sharp = require('sharp');
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
 const Job = require('../models/jobModel');
+const Room = require('../models/roomModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const slugify = require('slugify');
@@ -305,8 +306,23 @@ exports.followUser = catchAsync(async (req, res, next) => {
     post: null,
   };
   followedUser.notifications.unshift(notification);
+
+  // create a room between the 2 users
+  let users = [req.user.id, userID];
+  let users2 = [userID, req.user.id];
+  const room = await Room.findOne({
+    $or: [{ users: users }, { users: users2 }],
+  });
+  if (room) {
+    console.log(room);
+  } else {
+    let room = await Room.create({ users });
+    console.log(room);
+  }
+
   await currentUser.save({ validateBeforeSave: false });
   await followedUser.save({ validateBeforeSave: false });
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -395,7 +411,7 @@ exports.applyForJob = catchAsync(async (req, res, next) => {
       new AppError('Please Upload Your Cv To Apply For This Job', 401)
     );
   }
-  let arr = job.applicants.map(appl => appl._id.toString());
+  let arr = job.applicants.map((appl) => appl._id.toString());
   if (arr.includes(currentUser._id.toString())) {
     return next(new AppError('You Have Already Applied For This Job !', 401));
   }

@@ -945,6 +945,12 @@ header .search input {
   border-radius: 50px;
 }
 
+.container .messagesSection {
+  width: 80%;
+  margin-left: 20%;
+  margin-top: 10vh;
+}
+
 @media (max-width: 1400px) {
   #notif-panel {
     width: 30%;

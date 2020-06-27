@@ -265,3 +265,57 @@ exports.room = catchAsync(async (req, res, next) => {
     rooms,
   });
 });
+
+exports.messages = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  // find all the rooms in which the users array
+  // contains the user id
+  const rooms = await Room.find({ users: user._id }).populate(
+    'users',
+    'name photo occupation'
+  );
+
+  // remove the current user from the users array of each room
+  rooms.map((rm) => {
+    let i;
+    rm.users.map((usr, index) => {
+      if (usr.name === user.name) i = index;
+    });
+    rm.users.splice(i, 1);
+  });
+  rooms.forEach((rm) =>
+    rm.users.forEach((usr) =>
+      console.log('\n' + '------ ' + usr.name + ' -----' + '\n' + usr)
+    )
+  );
+  console.log(rooms);
+
+  // get all the recent messages
+  const messages = await Message.find({
+    $or: [{ sender: req.user.id }, { reciever: req.user.id }],
+  })
+    .sort('-createdAt')
+    .populate('sender reciever', 'name photo');
+
+  // so what im trying to do here is when I get all the messages
+  // I want to group them by the roomId
+  // and only get the last message in each room
+
+  let arr = [];
+  let arr2 = [];
+  messages.map((msg) => {
+    if (!arr.includes(msg.roomId.toString())) {
+      arr.push(msg.roomId.toString());
+      arr2.push(msg);
+    }
+  });
+
+  console.log(arr, arr2);
+
+  res.status(200).render('messages', {
+    title: 'DevCon | messages',
+    user,
+    conversations: arr2,
+    rooms,
+  });
+});

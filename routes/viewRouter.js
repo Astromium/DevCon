@@ -23,6 +23,7 @@ const {
   popularPosts,
   jobOffers,
   room,
+  messages,
 } = require('../controllers/viewController');
 const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
@@ -43,6 +44,7 @@ router.get(
   bookmarks
 );
 router.get('/me', protect, restricTo('user'), me);
+router.get('/messages', protect, messages);
 router.get('/settings', protect, restricTo('user'), settings);
 router.get('/markdown', restricTo('user'), markdown);
 router.get('/popular-posts', protect, popularPosts);

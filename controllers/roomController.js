@@ -22,17 +22,29 @@ exports.getRoom = catchAsync(async (req, res, next) => {
 
 exports.createRoom = catchAsync(async (req, res, next) => {
   let roomData = {};
-  console.log(req.body);
   if (req.body.users) roomData.users = req.body.users;
 
-  const user = await User.findById(req.body.users[0]).select('name');
-  const room = await Room.create(roomData);
+  const room = await Room.find({ users: req.body.users });
+  if (room) {
+    return res.status(200).json({
+      status: 'success',
+      room,
+    });
+  } else {
+    const newRoom = await Room.create(roomData);
+    return res.status(201).json({
+      status: 'success',
+      room: newRoom,
+    });
+  }
+});
 
-  res.status(201).json({
-    status: 'success',
-    room,
-    user,
-  });
+// when you follow a user , a room will be created between both of the users
+exports.createWithFollow = catchAsync(async (req, res, next) => {
+  let roomData = {};
+  if (req.body.users) roomData.users = req.body.users;
+  await Room.create(roomData);
+  next();
 });
 
 exports.deleteRoom = catchAsync(async (req, res, next) => {
