@@ -88,7 +88,7 @@ header(class='header')
           img(src='/illustrations/messages.svg')  
           h2 Your Messages 
           p Send a private message to a friend or a user
-          button#send-smg(onClick='toggleMessages()') Send Message
+          button#send-msg(onClick='toggleMessages()') Send Message
 
 .modal#modal
 .contacts#contacts 
@@ -98,7 +98,7 @@ header(class='header')
   .top 
     i.fas.fa-search
     input#search-user(type='text' placeholder='Search Contacts...')
-  .main 
+  .main#main 
     h3 Suggested 
       each room in rooms 
         a.room(href=`/messages/${room._id}`)
@@ -106,11 +106,60 @@ header(class='header')
             img(src=`/img/users/${room.users[0].photo}`)
           .right 
             h3 #{room.users[0].name}
-            p #{room.users[0].occupation}   
+            p #{room.users[0].occupation}  
+
+
+div#notif-panel
+  .notif-header
+    p Notifications
+  .notif-container
+    each notification in user.notifications
+
+      .notif
+        .img 
+          img(src=`/img/users/${notification.user.photo}`)
+        .content 
+          - let message = ''
+          - if(notification.notifType === 'follow') message = 'started following you'
+          - if(notification.notifType === 'like') message = 'liked your'
+          - if(notification.notifType === 'comment') message = 'commented on your'
+          - if(notification.notifType === 'job') message = `You have recieved a new message from ${notification.user.name}`
+          - let url = ''
+          - let display = 'none'
+          - let pDisplay = 'inline'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') display = 'inline'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') url = `/me#${notification.post}`
+          - if(notification.notifType === 'job') pDisplay = 'none'
+
+          p 
+            span(style=`font-weight: bold; display: ${pDisplay}`) #{notification.user.name}
+            |  #{message}
+            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
+          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
 
 
 
 
 
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(src='/js/messages.js')
+script(type='module' src='/js/utils.js')
+
+script. 
+  const userId = "#{user._id}"
+  const searchOrCreateRoom = async (id) => {
+    const users = [userId, id];
+    try {
+      const res = await axios({
+        method: 'POST',
+        url: 'http://127.0.0.1:3000/api/v1/rooms',
+        data: {users}
+      })
+      if(res.data.status === 'success') {
+        window.location.assign(`/messages/${res.data.room._id}`)
+      }
+    } catch(err) {
+      console.error(err)
+    }
+  }

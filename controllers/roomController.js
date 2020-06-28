@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getAllRooms = catchAsync(async (req, res, next) => {
-  const rooms = await Room.find();
+  const rooms = await Room.find().populate('users', 'name');
 
   res.status(200).json({
     status: 'success',
@@ -23,8 +23,12 @@ exports.getRoom = catchAsync(async (req, res, next) => {
 exports.createRoom = catchAsync(async (req, res, next) => {
   let roomData = {};
   if (req.body.users) roomData.users = req.body.users;
+  let users1 = [req.body.users[0], req.body.users[1]];
+  let users2 = [req.body.users[1], req.body.users[0]];
 
-  const room = await Room.find({ users: req.body.users });
+  const room = await Room.findOne({
+    $or: [{ users: users1 }, { users: users2 }],
+  });
   if (room) {
     return res.status(200).json({
       status: 'success',
@@ -43,6 +47,9 @@ exports.createRoom = catchAsync(async (req, res, next) => {
 exports.createWithFollow = catchAsync(async (req, res, next) => {
   let roomData = {};
   if (req.body.users) roomData.users = req.body.users;
+  let users1 = [req.body.users[0], req.body.users[1]];
+  let users2 = [req.body.users[1], req.body.users[0]];
+  await Room.findOne({ $or: [{ users: users1 }, { users: users2 }] });
   await Room.create(roomData);
   next();
 });

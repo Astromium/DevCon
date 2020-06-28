@@ -361,7 +361,9 @@ exports.search = catchAsync(async (req, res, next) => {
   // regex that starts with a variable with ignoring the case
   const re = new RegExp('^' + searchQuery, 'i');
 
-  const users = await User.find({ name: re }).select('name photo slug');
+  const users = await User.find({
+    $and: [{ name: re }, { _id: { $ne: req.user.id } }],
+  }).select('name photo slug occupation');
 
   res.status(200).json({
     status: 'success',
