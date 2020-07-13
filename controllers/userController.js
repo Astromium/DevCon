@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 const Post = require('../models/postModel');
 const Job = require('../models/jobModel');
 const Room = require('../models/roomModel');
+const Message = require('../models/messageModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const slugify = require('slugify');
@@ -454,14 +455,25 @@ exports.acceptApplicant = catchAsync(async (req, res, next) => {
   user.notifications.unshift(notification);
 
   // send a message to the accepted user
-  const message = {
-    from: {
-      name: currentUser.name,
-      photo: currentUser.photo,
-    },
-    messageBody: req.body.messageBody,
-  };
-  user.messages.unshift(message);
+  let users1 = [currentUser._id, user._id];
+  let users2 = [user._id, currentUser._id];
+  let roomId;
+  const room = await Room.findOne({
+    $or: [{ users: users1 }, { users: users2 }],
+  });
+  if (room) {
+    roomId = room._id;
+  } else {
+    const newRoom = await Room.create({ users: users1 });
+    roomId = newRoom._id;
+  }
+  await Message.create({
+    roomId,
+    sender: currentUser._id,
+    reciever: user._id,
+    message: req.body.message,
+  });
+
   job.accepted.unshift(user._id);
   await job.save({ validateBeforeSave: false });
   await user.save({ validateBeforeSave: false });

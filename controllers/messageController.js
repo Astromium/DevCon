@@ -8,6 +8,8 @@ exports.createMessage = catchAsync(async (req, res, next) => {
   if (req.body.reciever) messageData.reciever = req.body.reciever;
   if (req.body.message) messageData.message = req.body.message;
 
+  console.log(messageData);
+
   const message = await Message.create(messageData);
   res.status(201).json({
     status: 'success',

@@ -49,8 +49,12 @@ exports.createWithFollow = catchAsync(async (req, res, next) => {
   if (req.body.users) roomData.users = req.body.users;
   let users1 = [req.body.users[0], req.body.users[1]];
   let users2 = [req.body.users[1], req.body.users[0]];
-  await Room.findOne({ $or: [{ users: users1 }, { users: users2 }] });
-  await Room.create(roomData);
+  const room = await Room.findOne({
+    $or: [{ users: users1 }, { users: users2 }],
+  });
+  if (!room) {
+    await Room.create(roomData);
+  }
   next();
 });
 
