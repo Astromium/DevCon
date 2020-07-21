@@ -57,7 +57,9 @@
             >
           </li>
           <li>
-            <a href="/chat"><i class="far fa-comments"></i>&nbsp; Messages</a>
+            <a href="/messages"
+              ><i class="far fa-comments"></i>&nbsp; Messages</a
+            >
           </li>
         </ul>
       </nav>
@@ -158,19 +160,19 @@
       const upload = document.getElementById('photo');
       let editor;
       ClassicEditor.create(document.querySelector('#editor'))
-        .then(newEditor => {
+        .then((newEditor) => {
           editor = newEditor;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
-      btn.addEventListener('click', async e => {
+      btn.addEventListener('click', async (e) => {
         e.preventDefault();
         try {
           const res = await axios({
             method: 'PATCH',
             url: 'http://127.0.0.1:3000/api/v1/users/profile',
-            data: {}
+            data: {},
           });
           if (res.data.status === 200) {
             console.log(res.data);
