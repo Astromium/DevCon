@@ -146,7 +146,7 @@ header
                   span.checkmark
 
                 
-              input.something-else(type='text' placeholder='something else ? ...' id='something-else')
+              input.something-else(type='text' placeholder='something else ? ...' id=`something-else-${post._id}`)
               button.btn(id=`submitReport-${post._id}` onClick='reportPost(this.id)') Submit Report
         .info
           a(href=`/users/${post.user.slug}` style='width: 50px; height: 50px')

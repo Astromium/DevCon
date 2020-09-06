@@ -46,7 +46,7 @@ router.get(
 router.get('/me', protect, restricTo('user'), me);
 router.get('/messages', protect, messages);
 router.get('/settings', protect, restricTo('user'), settings);
-router.get('/markdown', restricTo('user'), markdown);
+router.get('/markdown', protect, restricTo('user'), markdown);
 router.get('/popular-posts', protect, popularPosts);
 router.get('/job-offers', protect, restricTo('user'), jobOffers);
 router.get('/dashboard', protect, restricTo('admin'), dashboard);
