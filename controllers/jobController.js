@@ -51,3 +51,14 @@ exports.getjob = catchAsync(async (req, res, next) => {
     job,
   });
 });
+
+exports.searchJob = catchAsync(async (req, res, next) => {
+  const query = req.params.query
+  const jobs = await Job.find({ $or: [{ 'title': { '$regex': query, '$options': 'i' } }, { 'description': { '$regex': query, '$options': 'i' } }] }).sort('-createdAt')
+
+  res.status(200).json({
+    status: 'success',
+    length: jobs.length,
+    jobs
+  })
+})

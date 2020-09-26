@@ -61,6 +61,12 @@ header(data-id=`${user._id}` class='header')
 
     main.main 
         h2 Job Offers
+        .search-container 
+          input#job-search(type="text" placeholder="Search Jobs...")
+          button#job-search-btn 
+            span 
+              i.fas.fa-search(style="margin-right: 0.5rem") 
+            | Search
         .jobs
             each job in jobs 
                 .job 

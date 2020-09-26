@@ -62,6 +62,7 @@ const upload = multer({
 
 exports.uploadUserPhoto = upload.single('photo');
 
+
 exports.resizeUserPhoto = (req, res, next) => {
   if (!req.file) return next();
 
