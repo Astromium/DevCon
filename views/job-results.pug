@@ -60,14 +60,7 @@ header(data-id=`${user._id}` class='header')
                     | &nbsp; Messages
 
     main.main 
-        h2 Job Offers
-        .search-container 
-          input#job-search(type="text" placeholder="Search Jobs...")
-          button#job-search-btn 
-            span 
-              i.fas.fa-search(style="margin-right: 0.5rem") 
-            | Search
-        .jobs-result#jobs-result    
+        h2 Results for #{query} : #{length}   
         .jobs#jobs
             each job in jobs 
                 .job 

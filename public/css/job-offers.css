@@ -434,3 +434,7 @@ bot {
   cursor: pointer;
   outline: none;
 }
+
+.jobs.hidden {
+  display: none;
+}

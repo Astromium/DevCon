@@ -319,3 +319,16 @@ exports.messages = catchAsync(async (req, res, next) => {
     rooms,
   });
 });
+
+exports.jobSearchResults = catchAsync(async (req, res, next) => {
+  const query = req.params.query
+  const jobs = await Job.find({ $or: [{ 'title': { '$regex': query, '$options': 'i' } }, { 'description': { '$regex': query, '$options': 'i' } }] }).sort('-createdAt')
+  const user = await User.findById(req.user.id);
+  res.status(200).render('job-results', {
+    title: query,
+    jobs,
+    user,
+    length: jobs.length,
+    query
+  })
+})

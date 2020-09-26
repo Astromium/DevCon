@@ -35,21 +35,7 @@ const jobSearchBtn = document.getElementById('job-search-btn')
 
 jobSearchBtn.addEventListener('click', async (e) => {
   const query = document.getElementById('job-search').value;
-  try {
-    if (!query) {
-      return
-    } else {
-      const res = await axios({
-        method: 'GET',
-        url: `http://127.0.0.1:3000/api/v1/jobs/search/${query}`
-      })
-      if (res.data.status === 'success') {
-        console.log(res.data.jobs);
-      }
-    }
-  } catch (err) {
-    console.log(err)
-  }
+  location.assign(`/job-offers/${query}`)
 })
 
 
