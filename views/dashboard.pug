@@ -54,41 +54,40 @@ main.container
              
                
             .report-container
-                each report in reportsArr
-                  
-                   
-                  .report-card
-                      .left
-                          - let reportType = 'post-report-green.svg'
-                          - if(report.reportType === 'bug') reportType = 'bug-report-green.svg'
-                          p(style='color: #1DA977; margin-bottom: 1rem') #{new Date(report.issuedAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
-                          img(src=`/illustrations/${reportType}` width='50px' height='50px')
-                      
-                      .right 
-                          h3.post-type #{report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)} Report
-                          - if(report.reportType === 'post')
-                            - let reasons = report.reasons.map(re => ` ${re} `).join(',')
-                            p.report-body 
-                              | #{report.user.name} has reported a 
-                              a(href=`/posts/${report.post}` target='_blank' style='text-decoration: none; color: #1DA876') post 
-                              br
-                              | Reasons : &nbsp;
-                                  
-                              span(style='color: #1DA977; font-size: 18px') #{reasons}
-                          - if(report.reportType === 'bug')
-                            p.report-body #{report.message}
+                
+                  each report in reports
+                    .report-card
+                        .left
+                            - let reportType = 'post-report-green.svg'
+                            - if(report.reportType === 'bug') reportType = 'bug-report-green.svg'
+                            p(style='color: #1DA977; margin-bottom: 1rem') #{new Date(report.issuedAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+                            img(src=`/illustrations/${reportType}` width='50px' height='50px')
+                        
+                        .right 
+                            h3.post-type #{report.reportType.charAt(0).toUpperCase() + report.reportType.slice(1)} Report
+                            - if(report.reportType === 'post')
+                              - let reasons = report.reasons.map(re => ` ${re} `).join(',')
+                              p.report-body 
+                                | #{report.user.name} has reported a 
+                                a(href=`/posts/${report.post}` target='_blank' style='text-decoration: none; color: #1DA876') post 
+                                br
+                                | Reasons : &nbsp;
+                                    
+                                span(style='color: #1DA977; font-size: 18px') #{reasons}
+                            - if(report.reportType === 'bug')
+                              p.report-body #{report.message}
+                              
+                              p.report-body(style='font-size: 18px; margin-top: 0.5rem') 
+                                | Submitted by 
+                                span(style='color: #1DA876') #{report.user.name}     
+                              //- else if(report.reportType === 'bug')
+                              //-   p.report-body  #{report.message}
+                              //-   br 
+                              //-   | submitted from #{report.user.name}    
+                
                             
-                            p.report-body(style='font-size: 18px; margin-top: 0.5rem') 
-                              | Submitted by 
-                              span(style='color: #1DA876') #{report.user.name}     
-                            //- else if(report.reportType === 'bug')
-                            //-   p.report-body  #{report.message}
-                            //-   br 
-                            //-   | submitted from #{report.user.name}    
-               
-                           
 
-                a(href='/dashboard/allReports' style='text-decoration: none; color: #1DA976; font-size: 25px; margin: 1rem 0') View All                                    
+                  a(href='/dashboard/allReports' style='text-decoration: none; color: #1DA976; font-size: 25px; margin: 1rem 0') View All                                    
         .top
             h2 Top Tags & Users
             canvas#top-tags(height='300px')
