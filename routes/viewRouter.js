@@ -24,10 +24,12 @@ const {
   jobOffers,
   room,
   messages,
-  jobSearchResults
+  jobSearchResults,
+  project
 } = require('../controllers/viewController');
 const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
+const { route } = require('./projectRouter');
 
 const router = express.Router();
 
@@ -67,5 +69,6 @@ router.get('/post/:id', protect, editPost);
 router.get('/posts/:id', protect, getPost);
 router.get('/users/:slug', protect, userProfile);
 router.get('/messages/:id', protect, room);
+router.get('/projects/:id', protect, project);
 
 module.exports = router;

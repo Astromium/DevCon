@@ -1450,3 +1450,70 @@ select #option {
   line-height: 1.8;
   width: 90%;
 }
+
+.main .projects {
+  width: 100%;
+  text-decoration: none;
+  
+}
+
+
+
+.projects .project {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem ;
+  background: rgb(235, 235, 235);
+  transition: all 0.25s ease-in-out;
+  overflow: hidden;
+  text-decoration: none;
+  color: #0c0e1c;
+}
+
+.project .left {
+  padding-top: 1rem;
+}
+.left p {
+  color: #1da977;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.068),
+              -2px -4px 6px rgba(0, 0, 0, 0.068)
+}
+
+.project img {
+  margin-right: 1rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.project h3 a {
+  color: #0c0e1c;
+}
+
+.main .wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper .title {
+  margin-top: 1rem;
+  width: 100%;
+  color: #1da977;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .description {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0 6rem;
+}
+

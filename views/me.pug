@@ -106,7 +106,16 @@ header
     .change-photo(style='display: flex; align-items: center; margin-top: 1rem; margin-left: 0.5rem') 
         input#photo(type='file' name='photo' accept='image/*' style='display: none' )
         label(for='photo' style='cursor: pointer; color: #1DA977; margin-top: 0.5rem; font-size: 19px;') Change Photo 
-        button.btn#save(style='margin: 0 1rem; padding: 0.5rem 2rem;') Save Photo   
+        button.btn#save(style='margin: 0 1rem; padding: 0.5rem 2rem;') Save Photo 
+    h2(style='margin: 2rem 0; color: #1DA977') Your Projects 
+    .projects  
+      each project in projects 
+        a(href=`/projects/${project._id}`).project 
+          img(src=`/img/projects/${project.thumbImage}` width='100px' height='100px')
+          .left 
+            h3 #{project.title}
+            p #{new Date(project.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+
     h2(style='margin: 2rem 0; color: #1DA977') What&apos;s on your mind ?
     .create-post
       h3(style='color: #oe1127; opacity: 0.8') don't know Markdown Syntax ? 

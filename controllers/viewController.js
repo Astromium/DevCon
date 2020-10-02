@@ -5,6 +5,7 @@ const Job = require('../models/jobModel');
 const Room = require('../models/roomModel');
 const Message = require('../models/messageModel');
 const catchAsync = require('../utils/catchAsync');
+const Project = require('../models/projectModel');
 
 exports.getLandingPage = (req, res, next) => {
   res.status(200).render('index', {
@@ -66,9 +67,11 @@ exports.me = async (req, res, next) => {
   const user = await User.findById(req.user.id).populate(
     'posts following followers'
   );
+  const projects = await Project.find({ author: user._id }).sort('-createdAt')
   res.status(200).render('me', {
     title: `DevCon | ${user.name}`,
     user,
+    projects
   });
 };
 
@@ -330,5 +333,15 @@ exports.jobSearchResults = catchAsync(async (req, res, next) => {
     user,
     length: jobs.length,
     query
+  })
+})
+
+exports.project = catchAsync(async (req, res, next) => {
+  const project = await Project.findById(req.params.id)
+  const user = await User.findById(req.user._id)
+  res.status(200).render('project', {
+    title: 'DevCon | Projects',
+    user,
+    project
   })
 })
