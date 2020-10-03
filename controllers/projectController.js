@@ -24,17 +24,21 @@ exports.uploadProjectImages = upload.fields([
 ])
 
 exports.resizeProjectImages = catchAsync(async (req, res, next) => {
-
+    console.log('--------------');
+    console.log(req.files);
+    console.log('--------------');
     if (!req.files.thumbImage || !req.files.images) return next()
 
 
     // 1) Project Thumbnail
     const thumbImageName = `thumb-${req.user._id}-${Date.now()}.jpeg`
+
     await sharp(req.files.thumbImage[0].buffer)
         .resize(500, 500)
         .toFormat('jpeg')
         .jpeg({ quality: 90 })
         .toFile(`public/img/projects/${thumbImageName}`)
+
     req.body.thumbImage = thumbImageName
 
     // 2) processing the images
@@ -50,6 +54,7 @@ exports.resizeProjectImages = catchAsync(async (req, res, next) => {
 
         req.body.images.push(filename);
     }))
+
 
     next()
 })
@@ -69,11 +74,20 @@ exports.getPersonalProjects = catchAsync(async (req, res, next) => {
 
 exports.createProject = catchAsync(async (req, res, next) => {
     const author = req.user._id
+    console.log(req.body);
     const { title, descriptionMarkdown, thumbImage, images } = req.body
     const project = await Project.create({ author, title, descriptionMarkdown, thumbImage, images })
 
     res.status(201).json({
         status: 'success',
         project
+    })
+})
+
+exports.deleteProject = catchAsync(async (req, res, next) => {
+    await Project.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+        status: 'success',
+        data: null
     })
 })

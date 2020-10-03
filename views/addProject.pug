@@ -5,11 +5,10 @@ head
   link(href='https://fonts.googleapis.com/css?family=Baloo+2&display=swap' rel='stylesheet')
   link(rel='shortcut icon' type="image/png" href="/illustrations/logo.svg")
   link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
+  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
   link(rel="stylesheet"
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/night-owl.min.css")
-  link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")    
   link(rel='stylesheet' href='/css/me.css')
-  link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.14/dist/css/splide.min.css")
   title #{title}
   
 header
@@ -37,7 +36,8 @@ header
       - if(user.notifNum < user.notifications.length) circleDisplay = 'block'; 
       p#notification-toggle-btn(style='color: #fff; position: relative' data-state='closed' data-notifNum=`${user.notifNum}` data-notifLength=`${user.notifications.length}`)
         i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
-        i.far.fa-bell    
+        i.far.fa-bell
+
 .container
   nav.left-nav
     ul
@@ -45,7 +45,7 @@ header
         a(href='/home')
           i.fas.fa-home
           | &nbsp; Home
-      li.is-active
+      li
         a(href='/me')
           i.fas.fa-user
           | &nbsp;&nbsp; Profile
@@ -61,49 +61,21 @@ header
         a(href='/messages')
           i.far.fa-comments
           | &nbsp; Messages
-  main.main 
-    .wrapper 
-        .splide
-            .splide__track
-                .splide__list
-                    each image in project.images 
-                        img.splide__slide(src=`/img/projects/${image}`)
-        .title 
-            h1 #{project.title} 
-        .description 
-            != `${project.descriptionHtml}`
-
-             
-
-        .options(style='margin-top: 0.5rem; padding: 0.5rem 2rem; display: flex; flex-direction: row; justify-content: space-around; align-items: center') 
-          .option#delete-btn(style='padding: 0.5rem; display: flex; flex-direction: row; align-items: center; background: red; color: #fff; margin-right: 1.5rem; cursor: pointer; border-radius: 5px') 
-            i.fas.fa-trash(style='margin-right: 0.2rem') 
-            | Delete 
-          a.option(href=`edit-project/${project._id}` style='padding: 0.5rem; text-decoration: none; display: flex; flex-direction: row; align-items: center; background: #1da977; color: #fff; cursor: pointer; border-radius: 5px')
-            i.fas.fa-pen(style='margin-right: 0.2rem') 
-            | Edit 
-
-        .delete#confirm-delete-container(style='width: 50%; display: flex; flex-direction: column; align-items: center; color: #fff; background-color: #0c0e1c; padding: 1rem; border-radius: 15px; opacity: 0')
-          h2 Are you sure you want to delete this project ? 
-          .btns(style='display: flex; width: 100%; flex-direction: row; justify-content: space-around') 
-            .btn(id=`${project._id}` onClick='handleDelete(this.id)')
-              | Confirm
-            .btn#cancel(style='background: none; box-shadow: none') 
-              | Cancel    
-
-             
- 
-
-
-
+  main.main(style='align-items: center') 
+    .login-form(style='width: 80%')
+        h2 Create a Project
+        .form__group
+        label.form__label Project Title *
+        input#title.form__input(type='text'  required='')
+        label.form__label Project Description (Markdown) *
+        textarea#description.form__input(type='text' required='')
+        label.form__label Thumbnail image *
+        input#thumb.form__input(type='file'  required='' accept='image/*')
+        label.form__label Additional images *
+        input#images.form__input(type='file'  required='' accept='image/*' multiple)
+        button#submit-btn.btn Submit
 
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js')
-script(src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.14/dist/js/splide.min.js")
-script(src="/js/project.js")
-
-script. 
-    document.addEventListener('DOMContentLoaded', () => {
-        new Splide('.splide', {type: 'loop',perPage: 1, height: '600px', width: '80%', padding: '0'}).mount();
-    })
+script(src='/js/addProject.js')        

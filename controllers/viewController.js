@@ -345,3 +345,12 @@ exports.project = catchAsync(async (req, res, next) => {
     project
   })
 })
+
+exports.createProject = catchAsync(async (req, res, next) => {
+
+  const user = await User.findById(req.user._id)
+  res.status(200).render('addProject', {
+    title: 'DevCon | Create Project',
+    user,
+  })
+})

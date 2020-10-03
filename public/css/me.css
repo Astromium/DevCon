@@ -1517,3 +1517,8 @@ select #option {
   padding: 0 6rem;
 }
 
+.description a {
+  text-decoration: none;
+  color: #1da977;
+}
+

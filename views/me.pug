@@ -107,7 +107,7 @@ header
         input#photo(type='file' name='photo' accept='image/*' style='display: none' )
         label(for='photo' style='cursor: pointer; color: #1DA977; margin-top: 0.5rem; font-size: 19px;') Change Photo 
         button.btn#save(style='margin: 0 1rem; padding: 0.5rem 2rem;') Save Photo 
-    h2(style='margin: 2rem 0; color: #1DA977') Your Projects 
+    h2(style='margin: 2rem 0; color: #1DA977') Your Projects : #{projects.length}
     .projects  
       each project in projects 
         a(href=`/projects/${project._id}`).project 
@@ -115,6 +115,9 @@ header
           .left 
             h3 #{project.title}
             p #{new Date(project.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+      a.add(href='/add-project' style='color: #1da977; text-decoration: none; display: flex; flex-direction: row; align-items: center; font-size: 18px; cursor: pointer')
+        i(style='margin-right: 0.2rem').fas.fa-plus 
+        p Add Project      
 
     h2(style='margin: 2rem 0; color: #1DA977') What&apos;s on your mind ?
     .create-post
