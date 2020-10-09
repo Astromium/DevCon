@@ -949,7 +949,6 @@ select #option {
   }
 }
 
-
 .main .createJob {
   width: 100%;
   margin-top: 2.5rem;
@@ -1034,7 +1033,7 @@ select #option {
   flex-direction: column;
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15),
     -2px -4px 6px rgba(198, 224, 201, 0.15);
-  position: relative;  
+  position: relative;
 }
 
 .job .top {
@@ -1057,7 +1056,7 @@ select #option {
 .right-side .job-title {
   margin-left: 1rem;
   font-size: 26px;
-  color: #242E4C;
+  color: #242e4c;
   font-weight: 600;
 }
 
@@ -1072,7 +1071,7 @@ select #option {
   margin-left: 1rem;
   font-size: 18px;
   margin-top: 0.2rem;
-  color: #242E4C;
+  color: #242e4c;
 }
 
 .bot {
@@ -1101,7 +1100,8 @@ select #option {
   transition: 0.2s all ease-in-out;
 }
 
-.view-apps:hover, .view-apps:focus {
+.view-apps:hover,
+.view-apps:focus {
   color: rgba(255, 255, 255, 0.877);
   background: #1da978;
 }
@@ -1193,8 +1193,6 @@ select #option {
   transition: all 0.2s ease-in-out;
 }
 
-
-
 .messageInput:focus {
   outline-color: #1da977;
 }
@@ -1221,9 +1219,7 @@ select #option {
   font-family: inherit;
   transition: all 0.1s ease-in-out;
   cursor: pointer;
-  
 }
-
 
 .cta:hover {
   transform: translateY(5px);
@@ -1306,8 +1302,6 @@ select #option {
   transform: translateY(0);
 }
 
-
-
 .editContainer::-webkit-scrollbar {
   width: 0.55rem;
 }
@@ -1342,7 +1336,6 @@ select #option {
   cursor: pointer;
   color: rgba(255, 255, 255, 0.726);
 }
-
 
 .feed .job2 {
   margin: 1rem auto;
@@ -1454,17 +1447,14 @@ select #option {
 .main .projects {
   width: 100%;
   text-decoration: none;
-  
 }
-
-
 
 .projects .project {
   display: flex;
   flex-direction: row;
   width: 60%;
   padding: 1rem 1.5rem;
-  margin-top: 1rem ;
+  margin-top: 1rem;
   background: rgb(235, 235, 235);
   transition: all 0.25s ease-in-out;
   overflow: hidden;
@@ -1482,7 +1472,7 @@ select #option {
 .project:hover {
   transform: translateY(-5px);
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.068),
-              -2px -4px 6px rgba(0, 0, 0, 0.068)
+    -2px -4px 6px rgba(0, 0, 0, 0.068);
 }
 
 .project img {
@@ -1495,14 +1485,14 @@ select #option {
   color: #0c0e1c;
 }
 
-.main .wrapper {
+.main .wrapper2 {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.wrapper .title {
+.wrapper2 .title {
   margin-top: 1rem;
   width: 100%;
   color: #1da977;
@@ -1511,7 +1501,7 @@ select #option {
   align-items: center;
 }
 
-.wrapper .description {
+.wrapper2 .description {
   width: 100%;
   margin-top: 1rem;
   padding: 0 6rem;
@@ -1521,4 +1511,3 @@ select #option {
   text-decoration: none;
   color: #1da977;
 }
-

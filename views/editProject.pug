@@ -63,19 +63,15 @@ header
           | &nbsp; Messages
   main.main(style='align-items: center') 
     .login-form(style='width: 80%')
-        h2(style='margin: 2rem 0; color: #1DA977') Create a Project
+        h1(style='margin: 2rem 0; color: #1DA977') Edit Project
         .form__group
         label.form__label Project Title *
-        input#title.form__input(type='text'  required='')
+        input#title-edit.form__input(type='text'  required='' value=`${project.title}`)
         label.form__label Project Description (Markdown) *
-        textarea#description.form__input(type='text' style='height: 300px;' required='')
-        label.form__label Thumbnail image *
-        input#thumb.form__input(type='file'  required='' accept='image/*')
-        label.form__label Additional images *
-        input#images.form__input(type='file'  required='' accept='image/*' multiple)
-        button#submit-btn.btn Submit
+        textarea#description-edit.form__input(type='text' style='height: 300px;' required='' value=`${project.descriptionMarkdown}`) #{project.descriptionMarkdown}
+        button(id=`update-${project._id}` onClick='updateProject(this.id)').btn Save
 
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js')
-script(src='/js/addProject.js')        
+script(src='/js/editProject.js')        

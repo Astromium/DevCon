@@ -45,7 +45,7 @@ header
         a(href='/home')
           i.fas.fa-home
           | &nbsp; Home
-      li.is-active
+      li
         a(href='/me')
           i.fas.fa-user
           | &nbsp;&nbsp; Profile
@@ -62,7 +62,7 @@ header
           i.far.fa-comments
           | &nbsp; Messages
   main.main 
-    .wrapper 
+    .wrapper2 
         .splide
             .splide__track
                 .splide__list
@@ -74,14 +74,14 @@ header
             != `${project.descriptionHtml}`
 
              
-
-        .options(style='margin-top: 0.5rem; padding: 0.5rem 2rem; display: flex; flex-direction: row; justify-content: space-around; align-items: center') 
-          .option#delete-btn(style='padding: 0.5rem; display: flex; flex-direction: row; align-items: center; background: red; color: #fff; margin-right: 1.5rem; cursor: pointer; border-radius: 5px') 
-            i.fas.fa-trash(style='margin-right: 0.2rem') 
-            | Delete 
-          a.option(href=`edit-project/${project._id}` style='padding: 0.5rem; text-decoration: none; display: flex; flex-direction: row; align-items: center; background: #1da977; color: #fff; cursor: pointer; border-radius: 5px')
-            i.fas.fa-pen(style='margin-right: 0.2rem') 
-            | Edit 
+        -if(user._id.toString() === project.author.toString())
+          .options(style='margin-top: 0.5rem; padding: 0.5rem 2rem; display: flex; flex-direction: row; justify-content: space-around; align-items: center') 
+            .option#delete-btn(style='padding: 0.5rem; display: flex; flex-direction: row; align-items: center; background: red; color: #fff; margin-right: 1.5rem; cursor: pointer; border-radius: 5px') 
+              i.fas.fa-trash(style='margin-right: 0.2rem') 
+              | Delete 
+            a.option(href=`edit/${project._id}` style='padding: 0.5rem; text-decoration: none; display: flex; flex-direction: row; align-items: center; background: #1da977; color: #fff; cursor: pointer; border-radius: 5px')
+              i.fas.fa-pen(style='margin-right: 0.2rem') 
+              | Edit 
 
         .delete#confirm-delete-container(style='width: 50%; display: flex; flex-direction: column; align-items: center; color: #fff; background-color: #0c0e1c; padding: 1rem; border-radius: 15px; opacity: 0')
           h2 Are you sure you want to delete this project ? 

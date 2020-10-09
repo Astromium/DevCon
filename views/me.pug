@@ -224,7 +224,7 @@ header
         each followingUser in user.following
             .user
                 img(src=`./img/users/${followingUser.photo}` alt='' height='40px' width='40px' style='border-radius: 50%')
-                a(href=`/profile/${followingUser.slug}` style='text-decoration: none; color: #000; font-size: 20px; margin-left: 1rem;') #{followingUser.name}
+                a(href=`/users/${followingUser.slug}` style='text-decoration: none; color: #000; font-size: 20px; margin-left: 1rem;') #{followingUser.name}
                 p(style='margin-left: 3rem; color: #1DA977;') following
 
 .followersFollowing#followers

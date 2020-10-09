@@ -90,14 +90,14 @@ header
         .nums
           p
             | #{user.posts.length}
-            span(style='font-weight: normal;')  Posts
+            | Posts
             
           p#followers-btn
             | #{user.followers.length}
-            span(style='font-weight: normal;')  Followers
+            | Followers
           p#following-btn
             | #{user.following.length}
-            span(style='font-weight: normal;')  Following
+            | Following
         .socials(style='width: 100%; display: flex; justify-content: flex-start')
             - if(user.facebook)
                 a(href=`${user.facebook}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
@@ -126,8 +126,12 @@ header
       - let markup = 'follow';
       - let arr = [];
       - let idArr = loggedUser.following.map(doc => arr.unshift(doc._id.toString()));
-      - if(arr.includes(user._id.toString())) markup = 'following'                
-      button.btn(href='/settings' id=`follow-${user._id}` onClick=`handleFollowClickUser(this.id)`) #{markup}                                            
+      - if(arr.includes(user._id.toString())) markup = 'following'     
+      - let state = 'follow'
+      - const arrFollow = loggedUser.following.map(x => x._id.toString());
+      - if(arrFollow.includes(user._id.toString())) state='unfollow'
+      - if(arrFollow.includes(user._id.toString())) markup ='Unfollow'           
+      button.btn(href='/settings' data-state=`${state}` id=`follow-${user._id}` onClick=`handleFollowClickUser(this.id)`) #{markup}                                            
     br  
     - if(user.cv)
       .cv(style='margin: 2rem 0') 
@@ -135,7 +139,20 @@ header
           a(href=`/documents/${user.cv}` download style='text-decoration: none; font-size: 20px; color: #0e1127; font-weight: bold')  
             i.fas.fa-download 
             |&nbsp;&nbsp; Download #{user.name}'s Cv
-    br        
+    br 
+
+    -if(user.role === 'user')
+      -if(projects.length != 0) 
+        h2(style='margin: 2rem 0; color: #1DA977') Featured Projects : #{projects.length}
+        .projects  
+          each project in projects 
+            a(href=`/projects/${project._id}` style='background: #f1f1f1').project 
+              img(src=`/img/projects/${project.thumbImage}` width='100px' height='100px')
+              .left 
+                h3 #{project.title}
+                p #{new Date(project.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}  
+    br 
+                     
     hr#hr  
 
     .feed

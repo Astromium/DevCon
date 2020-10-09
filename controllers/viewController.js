@@ -67,11 +67,11 @@ exports.me = async (req, res, next) => {
   const user = await User.findById(req.user.id).populate(
     'posts following followers'
   );
-  const projects = await Project.find({ author: user._id }).sort('-createdAt')
+  const projects = await Project.find({ author: user._id }).sort('-createdAt');
   res.status(200).render('me', {
     title: `DevCon | ${user.name}`,
     user,
-    projects
+    projects,
   });
 };
 
@@ -103,6 +103,10 @@ exports.userProfile = catchAsync(async (req, res, next) => {
   const loggedUser = await User.findById(req.user.id).populate(
     'following followers'
   );
+  let projects;
+  if (user.role === 'user') {
+    projects = await Project.find({ author: user._id }).sort('-createdAt');
+  }
 
   let jobs;
   if (user.role === 'startup') {
@@ -116,6 +120,7 @@ exports.userProfile = catchAsync(async (req, res, next) => {
     user,
     jobs,
     loggedUser,
+    projects,
   });
 });
 
@@ -324,33 +329,48 @@ exports.messages = catchAsync(async (req, res, next) => {
 });
 
 exports.jobSearchResults = catchAsync(async (req, res, next) => {
-  const query = req.params.query
-  const jobs = await Job.find({ $or: [{ 'title': { '$regex': query, '$options': 'i' } }, { 'description': { '$regex': query, '$options': 'i' } }] }).sort('-createdAt')
+  const query = req.params.query;
+  const jobs = await Job.find({
+    $or: [
+      { title: { $regex: query, $options: 'i' } },
+      { description: { $regex: query, $options: 'i' } },
+    ],
+  }).sort('-createdAt');
   const user = await User.findById(req.user.id);
   res.status(200).render('job-results', {
     title: query,
     jobs,
     user,
     length: jobs.length,
-    query
-  })
-})
+    query,
+  });
+});
 
 exports.project = catchAsync(async (req, res, next) => {
-  const project = await Project.findById(req.params.id)
-  const user = await User.findById(req.user._id)
+  const project = await Project.findById(req.params.id);
+  const user = await User.findById(req.user._id);
   res.status(200).render('project', {
     title: 'DevCon | Projects',
     user,
-    project
-  })
-})
+    project,
+  });
+});
 
 exports.createProject = catchAsync(async (req, res, next) => {
-
-  const user = await User.findById(req.user._id)
+  const user = await User.findById(req.user._id);
   res.status(200).render('addProject', {
     title: 'DevCon | Create Project',
     user,
-  })
-})
+  });
+});
+
+exports.editProject = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+  const project = await Project.findById(req.params.id);
+
+  res.status(200).render('editProject', {
+    title: 'DevCon | Edit Project',
+    user,
+    project,
+  });
+});
