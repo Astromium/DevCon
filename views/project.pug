@@ -9,7 +9,7 @@ head
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/night-owl.min.css")
   link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")    
   link(rel='stylesheet' href='/css/me.css')
-  link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.14/dist/css/splide.min.css")
+  //-link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.14/dist/css/splide.min.css")
   title #{title}
   
 header
@@ -63,33 +63,37 @@ header
           | &nbsp; Messages
   main.main 
     .wrapper2 
-        .splide
-            .splide__track
-                .splide__list
-                    each image in project.images 
-                        img.splide__slide(src=`/img/projects/${image}`)
-        .title 
-            h1 #{project.title} 
-        .description 
-            != `${project.descriptionHtml}`
+        //- .splide
+        //-     .splide__track
+        //-         .splide__list
+        //-             each image in project.images 
+        //-                 img.splide__slide(src=`/img/projects/${image}`)
+        .slide#slide(style='width: 80%; height: 80vh')
+          img#slide-img(src='' width='100%' height='100%') 
+
+        .project-content
+          .title 
+              h1 #{project.title} 
+          .description 
+              != `${project.descriptionHtml}`
 
              
-        -if(user._id.toString() === project.author.toString())
-          .options(style='margin-top: 0.5rem; padding: 0.5rem 2rem; display: flex; flex-direction: row; justify-content: space-around; align-items: center') 
-            .option#delete-btn(style='padding: 0.5rem; display: flex; flex-direction: row; align-items: center; background: red; color: #fff; margin-right: 1.5rem; cursor: pointer; border-radius: 5px') 
-              i.fas.fa-trash(style='margin-right: 0.2rem') 
-              | Delete 
-            a.option(href=`edit/${project._id}` style='padding: 0.5rem; text-decoration: none; display: flex; flex-direction: row; align-items: center; background: #1da977; color: #fff; cursor: pointer; border-radius: 5px')
-              i.fas.fa-pen(style='margin-right: 0.2rem') 
-              | Edit 
+          -if(user._id.toString() === project.author.toString())
+            .options(style='margin: 1rem 0; padding: 0.5rem 2rem; display: flex; flex-direction: row; justify-content: space-around; align-items: center') 
+              .option#delete-btn(style='padding: 0.5rem; display: flex; flex-direction: row; align-items: center; background: red; color: #fff; margin-right: 1.5rem; cursor: pointer; border-radius: 5px') 
+                i.fas.fa-trash(style='margin-right: 0.2rem') 
+                | Delete 
+              a.option(href=`edit/${project._id}` style='padding: 0.5rem; text-decoration: none; display: flex; flex-direction: row; align-items: center; background: #1da977; color: #fff; cursor: pointer; border-radius: 5px')
+                i.fas.fa-pen(style='margin-right: 0.2rem') 
+                | Edit 
 
-        .delete#confirm-delete-container(style='width: 50%; display: flex; flex-direction: column; align-items: center; color: #fff; background-color: #0c0e1c; padding: 1rem; border-radius: 15px; opacity: 0')
-          h2 Are you sure you want to delete this project ? 
-          .btns(style='display: flex; width: 100%; flex-direction: row; justify-content: space-around') 
-            .btn(id=`${project._id}` onClick='handleDelete(this.id)')
-              | Confirm
-            .btn#cancel(style='background: none; box-shadow: none') 
-              | Cancel    
+          .delete#confirm-delete-container(style='width: 50%; display: flex; flex-direction: column; align-items: center; color: #fff; background-color: #0c0e1c; padding: 1rem; border-radius: 15px; display: none')
+            h2 Are you sure you want to delete this project ? 
+            .btns(style='display: flex; width: 100%; flex-direction: row; justify-content: space-around') 
+              .btn(id=`${project._id}` onClick='handleDelete(this.id)')
+                | Confirm
+              .btn#cancel(style='background: none; box-shadow: none') 
+                | Cancel    
 
              
  
@@ -100,10 +104,31 @@ header
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js')
-script(src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.14/dist/js/splide.min.js")
+//-script(src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.14/dist/js/splide.min.js")
 script(src="/js/project.js")
 
 script. 
-    document.addEventListener('DOMContentLoaded', () => {
-        new Splide('.splide', {type: 'loop',perPage: 1, height: '600px', width: '80%', padding: '0'}).mount();
-    })
+    //- document.addEventListener('DOMContentLoaded', () => {
+    //-     new Splide('.splide', {type: 'loop',perPage: 1, height: '600px', width: '80%', padding: '0'}).mount();
+    //- })
+    const images = "#{project.images}"
+    const imagesArr = images.split(',')
+    console.log(imagesArr)
+    var i = 0;
+    var time = 5000;
+    const changeImage = () => {
+      let image = document.getElementById('slide-img')
+      image.style.opacity = 0;
+      document.getElementById('slide-img').src = `/img/projects/${imagesArr[i]}`
+      image.style.opacity = 1
+
+      if(i < imagesArr.length - 1) {
+        i++
+      } else {
+        i = 0
+      }
+
+      setTimeout("changeImage()", time)
+    }
+
+    window.onload = changeImage

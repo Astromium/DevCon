@@ -1455,11 +1455,12 @@ select #option {
   width: 60%;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
-  background: rgb(235, 235, 235);
+  background: #fff;
   transition: all 0.25s ease-in-out;
   overflow: hidden;
   text-decoration: none;
   color: #0c0e1c;
+  border-radius: 15px;
 }
 
 .project .left {
@@ -1492,7 +1493,22 @@ select #option {
   align-items: center;
 }
 
-.wrapper2 .title {
+.wrapper2 .slide img {
+  transition: 0.2s all ease-in-out;
+}
+
+.wrapper2 .project-content {
+  width: 80%;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: #fff;
+}
+
+.project-content .title {
   margin-top: 1rem;
   width: 100%;
   color: #1da977;
@@ -1501,10 +1517,14 @@ select #option {
   align-items: center;
 }
 
-.wrapper2 .description {
-  width: 100%;
+.project-content .description {
+  width: 90%;
   margin-top: 1rem;
-  padding: 0 6rem;
+  padding: 0 4rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  font-size: 18px;
+  background-color: #fff;
 }
 
 .description a {
