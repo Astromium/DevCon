@@ -1493,6 +1493,10 @@ select #option {
   align-items: center;
 }
 
+.wrapper2 .slide {
+  position: relative;
+}
+
 .wrapper2 .slide img {
   transition: 0.2s all ease-in-out;
 }

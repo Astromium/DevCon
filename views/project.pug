@@ -69,7 +69,11 @@ header
         //-             each image in project.images 
         //-                 img.splide__slide(src=`/img/projects/${image}`)
         .slide#slide(style='width: 80%; height: 80vh')
-          img#slide-img(src='' width='100%' height='100%') 
+          .arrow(style='position: absolute; top: 50%; transform: translateY(50%); right: 1rem') 
+            i.fas.fa-arrow-right(onclick='handleArrowClick()' style="color: #fff; font-size: 22px; cursor: pointer")
+          .arrow(style='position: absolute; top: 50%; transform: translateY(50%); left: 1rem') 
+            i.fas.fa-arrow-left(onclick='handleArrowClickLeft()' style="color: #fff; font-size: 22px; cursor: pointer")  
+          img#slide-img(src=`/img/projects/${project.images[0]}` width='100%' height='100%') 
 
         .project-content
           .title 
@@ -116,19 +120,39 @@ script.
     console.log(imagesArr)
     var i = 0;
     var time = 5000;
-    const changeImage = () => {
-      let image = document.getElementById('slide-img')
-      image.style.opacity = 0;
-      document.getElementById('slide-img').src = `/img/projects/${imagesArr[i]}`
-      image.style.opacity = 1
-
+    var image = document.getElementById('slide-img')
+    const handleArrowClick = () => {
       if(i < imagesArr.length - 1) {
         i++
+        image.src = `/img/projects/${imagesArr[i]}`
       } else {
         i = 0
+        image.src = `/img/projects/${imagesArr[i]}`
       }
-
-      setTimeout("changeImage()", time)
     }
 
-    window.onload = changeImage
+    const handleArrowClickLeft = () => {
+      if(i > 0) {
+        i--
+        image.src = `/img/projects/${imagesArr[i]}`
+      } else {
+        i = imagesArr.length - 1
+        image.src = `/img/projects/${imagesArr[i]}`
+      }
+    }
+    //- const changeImage = () => {
+    //-   let image = document.getElementById('slide-img')
+    //-   image.style.opacity = 0;
+    //-   document.getElementById('slide-img').src = `/img/projects/${imagesArr[i]}`
+    //-   image.style.opacity = 1
+
+    //-   if(i < imagesArr.length - 1) {
+    //-     i++
+    //-   } else {
+    //-     i = 0
+    //-   }
+
+    //-   setTimeout("changeImage()", time)
+    //- }
+
+    //- window.onload = changeImage
