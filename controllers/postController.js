@@ -3,6 +3,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 const Post = require('../models/postModel');
 const User = require('../models/userModel');
+const Report = require('../models/reportModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -178,6 +179,14 @@ exports.updatePost = catchAsync(async (req, res, next) => {
 exports.deletePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   const currentUser = await User.findById(req.user.id);
+  if (currentUser.role === 'admin') {
+    await Post.findByIdAndDelete(req.params.id);
+    await Report.deleteOne({ post: req.params.id })
+    res.status(200).json({
+      status: 'success',
+      data: null,
+    });
+  }
   if (post.user._id.toString() === req.user.id.toString()) {
     await Post.findByIdAndDelete(req.params.id);
     const removeIndex = currentUser.posts.indexOf(
@@ -246,11 +255,11 @@ exports.likePost = catchAsync(async (req, res, next) => {
     const notification = {
       user: {
         name: currentUser.name,
-        photo: currentUser.photo
+        photo: currentUser.photo,
       },
       notifType: 'like',
       post: post._id,
-      job: null
+      job: null,
     };
     // to prevent the duplicate of the notification
     // eg: if i liked a post and then i unliked it
@@ -340,11 +349,11 @@ exports.addComment = catchAsync(async (req, res, next) => {
     const notification = {
       user: {
         name: user.name,
-        photo: user.photo
+        photo: user.photo,
       },
       notifType: 'comment',
       post: currentPost._id,
-      job: null
+      job: null,
     };
     postAuthor.notifications.unshift(notification);
   }

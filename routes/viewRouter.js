@@ -28,6 +28,8 @@ const {
   project,
   createProject,
   editProject,
+  userSearchResults,
+  startupSearchResults
 } = require('../controllers/viewController');
 const { protect, restricTo } = require('../controllers/authController');
 const { getFeed, getSuggestions } = require('../controllers/userController');
@@ -59,7 +61,9 @@ router.get('/job-offers/:query', protect, jobSearchResults);
 router.get('/dashboard', protect, restricTo('admin'), dashboard);
 router.get('/dashboard/allReports', protect, restricTo('admin'), getAllReports);
 router.get('/dashboard/allUsers', protect, restricTo('admin'), allUsers);
+router.get('/dashboard/users/:query', protect, restricTo('admin'), userSearchResults)
 router.get('/dashboard/allStartups', protect, restricTo('admin'), allStartups);
+router.get('/dashboard/startups/:query', protect, restricTo('admin'), startupSearchResults);
 router.get('/startups/welcome', protect, restricTo('startup'), welcomeStartup);
 router.get('/startups/me', protect, restricTo('startup'), startupProfile);
 router.get(

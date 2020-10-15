@@ -11,7 +11,7 @@ head
   title #{title}
 header(class='header')
   .logo
-    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
@@ -37,58 +37,80 @@ header(class='header')
         i.far.fa-bell 
 
 .container
+  - if(user.role === 'user')
     nav.left-nav
-        ul
+      ul
+        li
+          a(href='/home')
+            i.fas.fa-home
+            | &nbsp; Home
+        li
+          a(href='/me')
+            i.fas.fa-user
+            | &nbsp;&nbsp; Profile
+        li
+          a(href='/job-offers')
+            i.fas.fa-users
+            | &nbsp;&nbsp; Job offers
+        li
+          a(href='/bookmarks')
+            i.far.fa-bookmark
+            | &nbsp;&nbsp; Bookmarks
+        li.is-active
+          a(href='/messages')
+            i.far.fa-comments
+            | &nbsp; Messages
+  - if(user.role === 'startup')
+      nav.left-nav
+          ul
             li
-                a(href='/home')
-                    i.fas.fa-home
-                    | &nbsp; Home
+              a(href='/startups/me')
+                i.fas.fa-user
+                | &nbsp;&nbsp; Profile
             li
-                a(href='/me')
-                    i.fas.fa-user
-                    | &nbsp;&nbsp; Profile
+              a(href='/popular-posts')
+                i.fas.fa-users
+                | &nbsp;&nbsp; Popular Posts
+
             li
-                a(href='/job-offers')
-                    i.fas.fa-users
-                    | &nbsp;&nbsp; Job offers
-            li
-                a(href='/bookmarks')
-                    i.far.fa-bookmark
-                    | &nbsp;&nbsp; Bookmarks
+              a(href='/bookmarks')
+                i.far.fa-bookmark
+                | &nbsp;&nbsp; Bookmarks
+
             li.is-active
-                a(href='/messages')
-                    i.far.fa-comments
-                    | &nbsp; Messages
+              a(href='/messages')
+                i.far.fa-comments
+                | &nbsp; Messages  
 
-    .messagesSection
-        .conversations 
-            .title
-                h2 Recent Conversations
-                i.fas.fa-edit(style='font-size: 20px; color: #fff')
+  .messagesSection
+      .conversations 
+          .title
+              h2 Recent Conversations
+              i.fas.fa-edit(style='font-size: 20px; color: #fff')
 
-            - if(conversations.length === 0) 
-              img(src='/illustrations/empty-convs.svg' style='width: 100%;height: 400px' )    
-            each conv in  conversations   
-                - let sender = conv.sender.name
-                - if(conv.sender.name === user.name) sender = 'You'  
-                - let photo = conv.sender.photo 
-                - if(conv.sender.name === user.name) photo = conv.reciever.photo
-                - let name = conv.sender.name 
-                - if(conv.sender.name === user.name) name = conv.reciever.name 
-                a.conv(href=`/messages/${conv.roomId}`) 
-                    .left
-                        img(src=`/img/users/${photo}`)
-                    .right    
-                        h2 #{name}
-                        p(style='margin: 0 0 0.5rem 0; font-size: 17px')
-                            span(style='color: #1da977') #{sender} 
-                            | : #{conv.message}  
-                        p(style='font-size: 14px') #{new Date(conv.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}    
-        .send-msg 
-          img(src='/illustrations/messages.svg')  
-          h2 Your Messages 
-          p Send a private message to a friend or a user
-          button#send-msg(onClick='toggleMessages()') Send Message
+          - if(conversations.length === 0) 
+            img(src='/illustrations/empty-convs.svg' style='width: 100%;height: 400px' )    
+          each conv in  conversations   
+              - let sender = conv.sender.name
+              - if(conv.sender.name === user.name) sender = 'You'  
+              - let photo = conv.sender.photo 
+              - if(conv.sender.name === user.name) photo = conv.reciever.photo
+              - let name = conv.sender.name 
+              - if(conv.sender.name === user.name) name = conv.reciever.name 
+              a.conv(href=`/messages/${conv.roomId}`) 
+                  .left
+                      img(src=`/img/users/${photo}`)
+                  .right    
+                      h2 #{name}
+                      p(style='margin: 0 0 0.5rem 0; font-size: 17px')
+                          span(style='color: #1da977') #{sender} 
+                          | : #{conv.message}  
+                      p(style='font-size: 14px') #{new Date(conv.createdAt).toLocaleString('en-us', {day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}    
+      .send-msg 
+        img(src='/illustrations/messages.svg')  
+        h2 Your Messages 
+        p Send a private message to a friend or a user
+        button#send-msg(onClick='toggleMessages()') Send Message
 
 .modal#modal
 .contacts#contacts 

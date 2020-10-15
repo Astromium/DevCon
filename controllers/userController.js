@@ -62,7 +62,6 @@ const upload = multer({
 
 exports.uploadUserPhoto = upload.single('photo');
 
-
 exports.resizeUserPhoto = (req, res, next) => {
   if (!req.file) return next();
 
@@ -157,6 +156,21 @@ exports.updateUser = catchAsync(async (req, res, next) => {
 
 // Admins only
 exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  if (!user.role === 'admin') {
+    return next(
+      new AppError('You dont have the permission to preform this action', 403)
+    );
+  }
+  //? delete all thes user's posts
+  await Post.deleteMany({ user: req.params.id });
+  //? delete all the user's messages
+  await Message.deleteMany({
+    $or: [{ sender: req.params.id }, { reciever: req.params.id }],
+  });
+  //? delete all the rooms containing the user
+  await Room.deleteMany({ users: req.params.id });
+  //? delete the user
   await User.findByIdAndDelete(req.params.id);
   res.status(200).json({
     status: 'success',
@@ -209,12 +223,13 @@ exports.getFeed = catchAsync(async (req, res, next) => {
     }
   });
   // get all the job offers and merge them with the posts
-  const jobs = await Job.find({ status: 'open' }).sort('-createdAt');
+  //! Removed cuz Mr.Ziane said NO
+  //const jobs = await Job.find({ status: 'open' }).sort('-createdAt');
 
   //console.log(arr2);
   // now merge it with the feed array
   // and remove the duplicates
-  const newFeed = [].concat(...feed, feed2, ...jobs);
+  const newFeed = [].concat(...feed, feed2);
   let arr = [];
   newFeed.forEach((post) => {
     if (!arr.includes(post)) {
@@ -281,10 +296,10 @@ exports.getSuggestions = catchAsync(async (req, res, next) => {
   const suggested = await User.find()
     .where('_id')
     .in(filteredFlatten)
-    .select('name photo skills slug')
+    .select('name photo skills slug role')
     .exec();
 
-  req.suggestions = suggested;
+  req.suggestions = suggested.filter(u => u.role !== 'startup');
   next();
 });
 

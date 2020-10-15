@@ -16,3 +16,19 @@ exports.createMessage = catchAsync(async (req, res, next) => {
     message,
   });
 });
+
+exports.getAllMessages = catchAsync(async (req, res, next) => {
+  const messages = await Message.find();
+  res.status(200).json({
+    status: 'success',
+    messages,
+  });
+});
+
+exports.deleteAllMessages = catchAsync(async (req, res, next) => {
+  await Message.deleteMany();
+  res.status(200).json({
+    status: 'success',
+    data: null,
+  });
+});

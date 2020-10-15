@@ -127,19 +127,24 @@ header
         input(type='checkbox' value='ui/ux')
         |             UI / UX
         span.checkmark    
-    h3 Tell us about yourself ( a little resume )
-    textarea#resume(name='' placeholder='eg. your education , current job, experiences ...')
-    h3
-      | What are your soft skills ( please inculde a comma seperated value )
-    textarea#skills(name='' placeholder='eg. HTML,CSS,JS,NODEJS,PYTHON ...')
+    //- h3 Tell us about yourself ( a little resume )
+    //- textarea#resume(name='' placeholder='eg. your education , current job, experiences ...')
+    //- h3
+    //-   | What are your soft skills ( please inculde a comma seperated value )
+    //- textarea#skills(name='' placeholder='eg. HTML,CSS,JS,NODEJS,PYTHON ...')
 
-    h3 Upload Your Cv
+    h3 Occupation 
+    input#occupation.form__input(type='text' placeholder='Eg: Web Developer'  required='')  
+
+    h3(style='margin-top: 1rem') Upload Your Cv
       p#cv-intro(style='font-size: 20px; color; #fff; opacity: 0.9') Uploading your Cv on DevCon is so important to let recruters know what 
         | are you capable of , it is also required when applying to job offers
       div(style='display: flex; align-items: center; margin: 2rem 0')
         label.file(style='font-size: 20px; padding: 0.5rem 1rem; width: fit-content; cursor: pointer; background: #1DA977; color: #fff; border-radius: 5px') Browse Files
           input#cv(type='file' aria-label='File browser example' style='width: 0')
         span#file-name(style='font-size: 18px; margin: 0 0 0 1.5rem; color: #1DA977')
+
+     
 
     h3 Add your personal social accounts
     .socials

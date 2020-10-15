@@ -11,7 +11,7 @@ head
   title DevCon | Home
 header(data-id=`${user._id}` class='header')
   .logo
-    a(href='/' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
@@ -202,7 +202,8 @@ header(data-id=`${user._id}` class='header')
     .info
       img(src=`/img/users/${user.photo}` alt='avatar' width='80px' height='80px')
       h3 #{user.name}
-      p Web Developer
+      - if(user.occupation) 
+        p #{user.occupation}
     .stats
       .keys
         p Following
@@ -212,7 +213,11 @@ header(data-id=`${user._id}` class='header')
         p(id='followers-num') #{user.followers.length}
     .suggested
       h3 Suggested For You
-      each user in suggestions 
+      - let arrSug = []
+      - if(suggestions[0]) arrSug.push(suggestions[0])
+      - if(suggestions[1]) arrSug.push(suggestions[1]) 
+      - if(suggestions[2]) arrSug.push(suggestions[2])
+      each user in arrSug 
         .user
           img(src=`/img/users/${user.photo}` alt='' height='40px' width='40px')
           .desc
@@ -220,9 +225,7 @@ header(data-id=`${user._id}` class='header')
             p Web Developer
             - const id = `${user._id}`
           button(id=`${id}` class='follow' onClick=`handleFollowClick(this.id)`) Follow
-      a(href='suggested.html' style='color: #1DA977; text-decoration: none;align-self: flex-end;')
-        | See More &nbsp;
-        i.fas.fa-angle-double-right
+      
 
 div#notif-panel
   .notif-header

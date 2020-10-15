@@ -35,8 +35,10 @@ const io = require('socket.io')(server);
 io.on('connection', function(socket) {
   console.log('user connected');
   socket.on('message', (msg) => {
+    //socket.emit('message', msg);
     socket.emit('message', msg);
-    socket.broadcast.emit('msg-sound', 'hello');
+    console.log('message emited');
+    socket.emit('msg-sound', 'hello');
   });
 });
 

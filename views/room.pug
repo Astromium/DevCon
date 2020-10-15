@@ -9,22 +9,22 @@ head
 
 header
   .logo
-    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
         | Dev
         span(style='color: #1DA977;') Con
-  .search
-    input(type='text' placeholder='Search' id='search')
-    #search-results
+  //- .search
+  //-   input(type='text' placeholder='Search' id='search')
+  //-   #search-results
   ul
     li
       a(href='/settings' style='color: #fff;')
         i.fas.fa-cog
         | &nbsp;&nbsp;Settings
     li
-      p(style='color: #1DA977;' id='logout-btn')
+      p(style='color: #1DA977;' id='logout-btn' onclick='logout()')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
     li
@@ -72,7 +72,35 @@ header
                     i.far.fa-paper-plane(style='margin-right: 0.2rem') 
                     | Send
 audio#sound 
-    source(src='/sounds/message-notification.mp3' type='audio/mpeg')                    
+    source(src='/sounds/message-notification.mp3' type='audio/mpeg')
+
+div#notif-panel
+  .notif-header
+    p Notifications
+  .notif-container
+    each notification in user.notifications
+
+      .notif
+        .img 
+          img(src=`/img/users/${notification.user.photo}`)
+        .content 
+          - let message = ''
+          - if(notification.notifType === 'follow') message = 'started following you'
+          - if(notification.notifType === 'like') message = 'liked your'
+          - if(notification.notifType === 'comment') message = 'commented on your'
+          - if(notification.notifType === 'job') message = `You have recieved a new message from ${notification.user.name}`
+          - let url = ''
+          - let display = 'none'
+          - let pDisplay = 'inline'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') display = 'inline'
+          - if(notification.notifType === 'like' || notification.notifType === 'comment') url = `/me#${notification.post}`
+          - if(notification.notifType === 'job') pDisplay = 'none'
+
+          p 
+            span(style=`font-weight: bold; display: ${pDisplay}`) #{notification.user.name}
+            |  #{message}
+            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
+          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}                        
 
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')  
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')      
@@ -135,7 +163,8 @@ script.
         
         
         // constructing the message element
-
+        console.log(`message event happend` )
+        console.log(msg)
         let textStyleOptions = 'border-top-right-radius: 15px;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px; background-color: #1da977; color: #fff'
         let containerStyleOption = 'justify-content: flex-start; flex-direction: row'
         let imgMargin = 'margin-right: 0.5rem;'
@@ -175,6 +204,21 @@ script.
         //- el.appendChild(content)
         //- document.getElementById('messages').appendChild(el)
     })
+
+script. 
+    const logout = async () => {
+    try {
+      const res = await axios({
+        method: 'GET',
+        url: 'http://127.0.0.1:3000/api/v1/users/logout',
+      });
+      if (res.data.status === 'success') {
+        window.setTimeout(() => location.assign('/'), 1500);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 
 

@@ -30,4 +30,21 @@ head
 
 
 
-script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')                         
+script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')  
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
+
+script. 
+    const toggleSettings = async (id) => {
+        const postId = id.split('-')[1]
+        try {
+            const res = await axios({
+                method: 'DELETE',
+                url: `http://127.0.0.1:3000/api/v1/posts/${postId}`
+            })
+            if(res.data.status === 'success') {
+                window.setTimeout(() => location.assign('/dashboard'), 1500)
+            }
+        } catch(err) {
+            console.log(err)
+        }
+    }

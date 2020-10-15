@@ -34,6 +34,7 @@ const reportPost = async (ident) => {
 
       if (res.data.status === 'success') {
         showToast(`${res.data.message}`, 'bottom', 'right', '#1DA977');
+        document.getElementById(`settings-${postId}`).classList.toggle('show')
       }
     } catch (err) {
       console.log(err);

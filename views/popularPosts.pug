@@ -202,31 +202,26 @@ header
 
 div#notif-panel
   .notif-header
-      p Notifications
+    p Notifications
   .notif-container
-      each notification in user.notifications
+    each notification in user.notifications
 
-        .notif
-          .img 
-            img(src=`/img/users/${notification.user.photo}`)
-          .content 
-            - let message = ''
-            - if(notification.notifType === 'follow') message = 'started following you'
-            - if(notification.notifType === 'like') message = 'liked your'
-            - if(notification.notifType === 'comment') message = 'commented on your'
-            - if(notification.notifType === 'job') message = `You have recieved a new message from ${notification.user.name}`
-            - let url = ''
-            - let display = 'none'
-            - let pDisplay = 'inline'
-            - if(notification.notifType === 'like' || notification.notifType === 'comment') display = 'inline'
-            - if(notification.notifType === 'like' || notification.notifType === 'comment') url = `/me#${notification.post}`
-            - if(notification.notifType === 'job') pDisplay = 'none'
+      .notif
+        .img 
+          img(src=`/img/users/${notification.user.photo}`)
+        .content 
+          - let message = ''
+          - if(notification.notifType === 'apply') message = `Applied for your`
+          - let url = ''
+          - let display = 'none'
+          - if(notification.notifType === 'apply') display = 'inline'
+          - if(notification.notifType === 'apply') url = `/startups/me#${notification.job}`
 
-            p 
-              span(style=`font-weight: bold; display: ${pDisplay}`) #{notification.user.name}
-              |  #{message}
-              a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  post
-            p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
+          p 
+            span(style='font-weight: bold') #{notification.user.name}
+            |  #{message}
+            a(href=`${url}` style=`display: ${display}; text-decoration: none; color: #1DA977`)  job
+          p(style='font-size: 16px') #{new Date(notification.createdAt).toLocaleString('en-us', { day:'numeric', month:'short', hour:'numeric', minute:'numeric'})}
 
 //- - if(user.role === 'startup')
 //-   div#notif-panel

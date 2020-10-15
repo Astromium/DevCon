@@ -397,6 +397,14 @@ bot {
   }
 }
 
+.is-active {
+  border-left: 3px solid #1da977;
+}
+
+.is-active a {
+  color: #1da977;
+}
+
 .search-container {
   width: 100%;
   justify-content: center;

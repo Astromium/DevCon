@@ -12,7 +12,7 @@ body {
 
 body {
   font-family: 'Baloo 2', cursive;
-  background: #ececec;
+  background: #f5f5f5;
   position: relative;
   overflow-x: hidden;
   z-index: 1;
@@ -178,7 +178,7 @@ header .search input {
 }
 
 .info p {
-  color: #fff;
+  color: #1da977;
 }
 
 .right-nav .stats {
@@ -260,7 +260,9 @@ header .search input {
 .follow:hover {
   color: #fff;
 }
-
+.is-active a {
+  color: #1da977;
+}
 .container .feed {
   margin-top: 10vh;
   width: 50%;
@@ -269,7 +271,7 @@ header .search input {
   min-height: 90vh;
   flex-direction: column;
   align-items: center;
-  background: #ececec;
+  background: #f5f5f5;
 }
 
 .feed .post {
@@ -670,6 +672,12 @@ header .search input {
 #content ul li {
   width: fit-content;
   padding: 0;
+}
+
+.content a {
+  text-decoration: none;
+  color: #1da977;
+  cursor: pointer;
 }
 
 .post .post-image {

@@ -11,7 +11,7 @@ head
   title DevCon | Home
 header
   .logo
-    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
@@ -66,11 +66,11 @@ header
                     a(href='/startups/me')
                         i.fas.fa-user
                         | &nbsp;&nbsp; Profile
-                li.is-active
+                li
                     a(href='/popular-posts')
                         i.fas.fa-users
                         | &nbsp;&nbsp; Popular Posts
-                li
+                li.is-active
                     a(href='/bookmarks')
                         i.far.fa-bookmark
                         | &nbsp;&nbsp; Bookmarks
@@ -214,9 +214,7 @@ header
             p Web Developer
             - const id = `${user._id}`
           button(id=`${id}` class='follow' onClick=`handleFollowClick(this.id)`) Follow
-      a(href='suggested.html' style='color: #1DA977; text-decoration: none;align-self: flex-end;')
-        | See More &nbsp;
-        i.fas.fa-angle-double-right
+      
 
 div#notif-panel
   .notif-header

@@ -29,7 +29,7 @@ header
         
         | &nbsp;&nbsp;Users   
     li
-      p(style='color: #DE4760;' id='logout-btn')
+      p(style='color: #DE4760;' id='logout-btn' onclick='logout()')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
 
@@ -39,19 +39,41 @@ header
       img(src='/illustrations/avatar.svg' width='50px' height='50px' style='border-radius: 50%; margin-left: 1rem') 
 
 main.container 
-     each user in users
-        .user-card
-            img(src=`/img/users/${user.photo}` width='80px' height='80px' style='border-radius: 50%')
-            h3 #{user.name}
-            p #{user.occupation}
-            p(style='color: #DE4760') #{user.posts.length} Posts
-            .actions
-              p(id=`delete-${user._id}` onClick='deleteAccount(this.id)' style='color: #DE4760; font-size: 18px; cursor: pointer') 
-                i.fas.fa-trash(style='margin-right: 0.5rem')
-                | Delete account
+     .search-container 
+          input#user-search(type="text" placeholder="Search Users...")
+          button#user-search-btn(onclick='searchStartup()') 
+            span 
+              i.fas.fa-search(style="margin-right: 0.5rem") 
+            | Search
+     .users       
+      each user in users
+          .user-card
+              img(src=`/img/users/${user.photo}` width='80px' height='80px' style='border-radius: 50%')
+              h3(style='text-align: center; font-size: 24px') #{user.name}
+              
+              
+              .actions
+                p(id=`delete-${user._id}` onClick='deleteAccount(this.id)' style='color: #DE4760; font-size: 18px; cursor: pointer') 
+                  i.fas.fa-trash(style='margin-right: 0.5rem')
+                  | Delete account
 
 
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js') 
 script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(src='/js/users.js')
+
+script. 
+    const logout = async () => {
+    try {
+      const res = await axios({
+        method: 'GET',
+        url: 'http://127.0.0.1:3000/api/v1/users/logout',
+      });
+      if (res.data.status === 'success') {
+        window.setTimeout(() => location.assign('/'), 1500);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };

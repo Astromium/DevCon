@@ -14,7 +14,7 @@ const search = async (e) => {
       });
       if (res.data.status === 'success') {
         const users = res.data.data.users;
-
+        console.log(users);
         searchContainer.style.opacity = 1;
         searchContainer.style.visibility = 'visible';
         searchContainer.style.zIndex = 1000;
@@ -22,7 +22,7 @@ const search = async (e) => {
         users.forEach((user) => {
           const markup = `<div class='user'>
             <img src='/img/users/${user.photo}' height='40px' width='40px' style='border-radius: 50%'/>
-            <a href='/users/${user.slug}' style='text-decoration: none; color: #fff; font-size: 20px; margin-left: 1rem;'>${user.name}</a>
+            <a href="/users/${user.slug}" style='text-decoration: none; color: #fff; font-size: 20px; margin-left: 1rem;'>${user.name}</a>
           </div>`;
           const el = document.createElement('div');
           el.innerHTML = markup;

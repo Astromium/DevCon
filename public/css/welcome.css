@@ -23,7 +23,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #1DA977;
+  background: #1da977;
   border-radius: 50px;
 }
 
@@ -72,6 +72,50 @@ ul li {
   position: relative;
 }
 
+.form__input {
+  display: block;
+  font-family: inherit;
+  font-size: 1.5rem;
+  color: #0c0e1c;
+  padding: 0.5rem 1.75rem;
+  border: none;
+  width: 40%;
+  background-color: #fff;
+  background-color: #f2f2f2;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Pseudo element (a visible thing that isn't really in the DOM).
+        Also needs -ms- */
+}
+.form__input:focus {
+  outline: none;
+  border-bottom: 3px solid #55c57a;
+}
+.form__input:focus:invalid {
+  border-bottom: 3px solid #ff7730;
+}
+.form__input::-webkit-input-placeholder {
+  color: #bbb;
+}
+
+.form__group:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+
+.form__label {
+  display: block;
+  font-size: 1.2rem;
+  opacity: 0.8;
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 .welcome-img {
   width: 60%;
   height: 100%;
@@ -103,7 +147,7 @@ ul li {
 
 .welcome-text h3 {
   font-size: 38px;
-  color: #1DA977;
+  color: #1da977;
 }
 
 .info {
@@ -155,7 +199,7 @@ ul li {
 
 .wrapper h3 {
   font-size: 34px;
-  color: #1DA977;
+  color: #1da977;
 }
 
 .wrapper .checkboxes {
@@ -203,7 +247,7 @@ ul li {
 
 /* When the checkbox is checked, add a green background */
 .container input:checked ~ .checkmark {
-  background-color: #1DA977;
+  background-color: #1da977;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -246,7 +290,7 @@ ul li {
 
 #resume:focus {
   outline: none !important;
-  border: 3px solid #1DA977;
+  border: 3px solid #1da977;
 }
 
 #skills {
@@ -264,7 +308,7 @@ ul li {
 
 #skills:focus {
   outline: none !important;
-  border: 3px solid #1DA977;
+  border: 3px solid #1da977;
 }
 
 .socials {
@@ -326,7 +370,7 @@ ul li {
   padding: 0.75rem 2rem;
   border-radius: 35px;
   margin: 2rem auto;
-  background-color: #1DA977;
+  background-color: #1da977;
   border: none;
   box-shadow: 0px 2px 2px #4cac7e41;
   color: #fff;

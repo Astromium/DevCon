@@ -1,6 +1,7 @@
 const updateUserWelcome = async () => {
-    const resume = document.getElementById('resume').value;
-    const skills = document.getElementById('skills').value;
+    // const resume = document.getElementById('resume').value;
+    // const skills = document.getElementById('skills').value;
+    const occupation = document.getElementById('occupation').value;
     const facebook = document.getElementById('facebook').value;
     const github = document.getElementById('github').value;
     const linkedin = document.getElementById('linkedin').value;
@@ -24,8 +25,9 @@ const updateUserWelcome = async () => {
 
     const dataObj = {};
 
-    resume === '' ? null : (dataObj.resume = resume);
-    skills === '' ? null : (dataObj.skills = skills);
+    // resume === '' ? null : (dataObj.resume = resume);
+    // skills === '' ? null : (dataObj.skills = skills);
+    occupation === '' ? null : (dataObj.occupation = occupation);
     facebook === '' ? null : (dataObj.facebook = facebook);
     github === '' ? null : (dataObj.github = github);
     linkedin === '' ? null : (dataObj.linkedin = linkedin);

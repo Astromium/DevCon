@@ -165,10 +165,10 @@ header .search input {
 }
 
 .container .feed {
-    width: 80%;
-    margin-top: 10vh;
-    padding: 2rem;
-    margin-left: 20%;
+  width: 80%;
+  margin-top: 10vh;
+  padding: 2rem;
+  margin-left: 20%;
 }
 
 .feed .post {
@@ -178,6 +178,7 @@ header .search input {
   margin: 2rem auto;
   border-radius: 15px;
   padding: 1rem;
+  background: #fff;
   position: relative;
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15),
     -2px -2px 2px rgba(198, 224, 201, 0.15);

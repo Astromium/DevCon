@@ -1,17 +1,18 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body {
-    width: 100%;
-    min-height: 100vh;
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
 }
 
 body {
-    font-family: 'Baloo 2', cursive;
-    background-color: #161A33;
+  font-family: 'Baloo 2', cursive;
+  background-color: #161a33;
 }
 
 body::-webkit-scrollbar {
@@ -21,7 +22,7 @@ body::-webkit-scrollbar-track {
   background: #0c0e1c;
 }
 body::-webkit-scrollbar-thumb {
-  background: #1DA977;
+  background: #1da977;
   border-radius: 50px;
 }
 
@@ -93,49 +94,49 @@ header .search input {
   font-family: inherit;
   color: #fff;
   font-size: 18px;
-  border-bottom: 3px solid #DE4760;
+  border-bottom: 3px solid #de4760;
 }
 
 .search input:focus {
   outline: none;
-  border-bottom: 3px solid #DE4760;
+  border-bottom: 3px solid #de4760;
 }
 
 .search input::placeholder {
   margin-top: auto;
   font-family: inherit;
-  color: #DE4760;
+  color: #de4760;
   opacity: 0.8;
 }
 
-.container {
-    width: 100%;
-    padding: 2rem;
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: repeat(4, 1fr);
+.users {
+  width: 100%;
+  padding: 2rem;
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.container .user-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    background-color: #181C38;
-    border-radius: 11px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+.users .user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: #181c38;
+  border-radius: 11px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
 }
 
 .user-card h3 {
-    margin-top: 0.5rem;
-    font-size: 34px;
-    color: #fff;
-    opacity: 0.95;
+  margin-top: 0.5rem;
+  font-size: 34px;
+  color: #fff;
+  opacity: 0.95;
 }
 
 .user-card p {
-    color: #fff;
-    font-size: 20px;
+  color: #fff;
+  font-size: 20px;
 }
 
 .user-card .actions {
@@ -143,4 +144,44 @@ header .search input {
   width: 100%;
   display: flex;
   justify-content: space-around;
+}
+
+.search-container {
+  margin-top: 2rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-container input {
+  width: 50%;
+  height: 60px;
+  border: none;
+  outline: none;
+  background: #fff;
+  font-family: inherit;
+  font-size: 18px;
+  color: #0c0e1c;
+  padding: 0 1rem;
+}
+
+.search-container button {
+  width: 10%;
+  height: 60px;
+  padding: 0 2rem;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: #de4760;
+  font-family: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
 }

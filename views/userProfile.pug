@@ -12,7 +12,7 @@ head
   
 header
   .logo
-    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
@@ -37,7 +37,7 @@ header
         i#circle.fas.fa-circle(style=`display: ${circleDisplay}; width: 10px; height: 10px ;position: absolute; top: -2px; right: -2px; color: #1DA977; z-index: 1000`)
         i.far.fa-bell    
 .container
-  - if(user.role === 'user')
+  - if(loggedUser.role === 'user')
     nav.left-nav
       ul
         li
@@ -60,14 +60,14 @@ header
           a(href='/messages')
             i.far.fa-comments
             | &nbsp; Messages
-  - if(user.role === 'startup')
+  - if(loggedUser.role === 'startup')
       nav.left-nav
           ul
             li
               a(href='/startups/me')
                 i.fas.fa-user
                 | &nbsp;&nbsp; Profile
-            li.is-active
+            li
               a(href='/popular-posts')
                 i.fas.fa-users
                 | &nbsp;&nbsp; Popular Posts
@@ -86,7 +86,8 @@ header
       img(src=`/img/users/${user.photo}` alt='avatar' id='user-photo')
       .stats
         h2 #{user.name}
-        h4 Web Developer
+        - if(user.occupation)
+          h4 #{user.occupation}
         .nums
           p
             | #{user.posts.length}
@@ -100,7 +101,7 @@ header
             | Following
         .socials(style='width: 100%; display: flex; justify-content: flex-start')
             - if(user.facebook)
-                a(href=`${user.facebook}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
+                a(href=`${user.facebook}`  style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
                     i.fab.fa-facebook
             -if(user.linkedin)
                 a(href=`${user.linkedin}` target='_blank' style='font-size: 22px; color: #5be0a0; margin-right: 1rem;')
@@ -314,7 +315,7 @@ header
                 img(src=`/img/users/${followerUser.photo}` alt='' height='40px' width='40px' style='border-radius: 50%')
                 a(href=`/users/${followerUser.slug}` style='text-decoration: none; color: #000; font-size: 20px; margin-left: 1rem;') #{followerUser.name}
                 - let f = 'follow';
-                - const arr = loggedUser.following.map(x => x._id.toString());
+                - const arr = loggedUser.followers.map(x => x._id.toString());
                 - if(followerUser._id.toString() === loggedUser._id.toString()) f = 'You'
                 - if(arr.includes(followerUser._id)) f = 'following';
                 - let col = '#000';

@@ -13,7 +13,7 @@ head
   
 header
   .logo
-    a(href='/landing' style='text-decoration: none; color: #fff; font-size: 24px;\
+    a(href='/home' style='text-decoration: none; color: #fff; font-size: 24px;\
     font-weight: bold;')
       div(style='display: flex; justify-content: center')
         img(src='/illustrations/logo2.svg' width='35px' height='35px' style='margin-right: 5px')
@@ -28,7 +28,7 @@ header
         i.fas.fa-cog
         | &nbsp;&nbsp;Settings
     li
-      p(style='color: #1DA977;' id='logout-btn')
+      p(style='color: #1DA977;' id='logout-btn' onclick='logout()')
         i.fas.fa-sign-out-alt
         | &nbsp;&nbsp;Logout
     li
@@ -78,4 +78,19 @@ header
 script(defer='' src='https://use.fontawesome.com/releases/v5.8.2/js/all.js')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js' integrity='sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=' crossorigin='anonymous')
 script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js')
-script(src='/js/addProject.js')        
+script(src='/js/addProject.js')    
+
+script. 
+    const logout = async () => {
+    try {
+      const res = await axios({
+        method: 'GET',
+        url: 'http://127.0.0.1:3000/api/v1/users/logout',
+      });
+      if (res.data.status === 'success') {
+        window.setTimeout(() => location.assign('/'), 1500);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };

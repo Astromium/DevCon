@@ -116,7 +116,7 @@ header
         .jobs 
             // todo   
             each job in jobs  
-                .job 
+                .job(id=`${job._id}`)
                     .editContainer(id=`edit-${job._id}`) 
                         .job-form 
                             button(id=`close-${job._id}` onclick='toggleEditContainer(this.id)') 

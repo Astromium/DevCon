@@ -69,3 +69,17 @@ const deleteReport = async (id) => {
     showToast(`${err.response.data.message}`, 'bottom', 'left', '#c0392b');
   }
 };
+
+const search = async () => {
+  const query = document.getElementById('user-search').value;
+  if(query) {
+    location.assign(`/dashboard/users/${query}`)
+  }
+}
+
+const searchStartup = async () => {
+  const query = document.getElementById('user-search').value;
+  if(query) {
+    location.assign(`/dashboard/startups/${query}`)
+  }
+}

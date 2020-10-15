@@ -374,3 +374,37 @@ exports.editProject = catchAsync(async (req, res, next) => {
     project,
   });
 });
+
+exports.userSearchResults = catchAsync(async (req, res, next) => {
+  const query = req.params.query;
+  const users = await User.find({
+    name: { $regex: query, $options: 'i' },
+  }).sort('-createdAt').select('name photo occupation slug posts');
+  console.log(users.length);
+  const admin = await User.findById(req.user.id);
+  res.status(200).render('user-results', {
+    title: query,
+    users,
+    admin,
+    length: users.length,
+    query,
+  });
+});
+
+exports.startupSearchResults = catchAsync(async (req, res, next) => {
+  const query = req.params.query;
+  const users = await User.find({
+    name: { $regex: query, $options: 'i' },
+    role: 'startup'
+  }).sort('-createdAt').select('name photo occupation slug posts');
+  console.log(users.length);
+  const admin = await User.findById(req.user.id);
+  res.status(200).render('startup-results', {
+    title: query,
+    users,
+    admin,
+    length: users.length,
+    query,
+  });
+});
+
