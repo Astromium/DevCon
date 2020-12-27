@@ -27,11 +27,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
-
-
-
-
-
 const searchBtn = document
     .getElementById('search')
     .addEventListener('keyup', search);
