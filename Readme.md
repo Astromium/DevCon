@@ -7,20 +7,20 @@ It is for **Developers** to showcase their works and skills and search for job o
 
 #### Login Page
 
-![Login Page](https://github.com/Astromium/DevCon.git/tree/master/preview/login.png)
+![Login Page](https://github.com/Astromium/DevCon.git/blob/master/preview/login.png)
 
 #### Home Page
 
-![Home Page](https://github.com/Astromium/DevCon.git/tree/master/preview/home.png)
+![Home Page](https://github.com/Astromium/DevCon.git/blob/master/preview/home.png)
 
 ### Profile Page
 
-![Profile Page](https://github.com/Astromium/DevCon.git/tree/master/preview/profile.png)
+![Profile Page](https://github.com/Astromium/DevCon.git/blob/master/preview/profile.png)
 
 ### Job Offers
 
-![Job Offers](https://github.com/Astromium/DevCon.git/tree/master/preview/job-offers.png)
+![Job Offers](https://github.com/Astromium/DevCon.git/blob/master/preview/job-offers.png)
 
 ### Admin's Dashboard
 
-![Dashboard](https://github.com/Astromium/DevCon.git/tree/master/preview/dashboard.png)
+![Dashboard](https://github.com/Astromium/DevCon.git/blob/master/preview/dashboard.png)
