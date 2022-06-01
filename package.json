@@ -28,7 +28,7 @@
     "nodemailer": "^6.4.3",
     "pug": "^2.0.4",
     "scroll-out": "^2.2.8",
-    "sharp": "^0.24.1",
+    "sharp": "^0.30.5",
     "slugify": "^1.4.0",
     "socket.io": "^2.3.0",
     "toastify-js": "^1.7.0",
