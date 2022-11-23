@@ -30,7 +30,7 @@
     "scroll-out": "^2.2.8",
     "sharp": "^0.24.1",
     "slugify": "^1.4.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "toastify-js": "^1.7.0",
     "validator": "^12.2.0",
     "xss-clean": "^0.1.1"
